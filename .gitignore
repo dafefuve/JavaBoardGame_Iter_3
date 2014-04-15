@@ -45,10 +45,8 @@ Icon
 .idea/dataSources.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
-<<<<<<< HEAD
-=======
 .idea/modules.xml
->>>>>>> Alex'sBitchinBranch
+.idea/misc.xml
 
 ## File-based project format
 *.ipr
