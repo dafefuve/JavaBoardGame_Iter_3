@@ -38,17 +38,7 @@ Icon
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 ## Directory-based project format
-
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-<<<<<<< HEAD
-=======
-.idea/modules.xml
->>>>>>> Alex'sBitchinBranch
+.idea/
 
 ## File-based project format
 *.ipr
