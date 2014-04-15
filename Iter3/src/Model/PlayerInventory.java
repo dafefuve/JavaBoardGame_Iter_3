@@ -16,10 +16,12 @@ public class PlayerInventory extends Inventory{
         items = initItems;
     }
 
+    @Override
     public void setItem(String item, Integer count){
         items.put(item,count);
     }
 
+    @Override
     public Integer getItem(String item){
         return items.get(item);
     }
