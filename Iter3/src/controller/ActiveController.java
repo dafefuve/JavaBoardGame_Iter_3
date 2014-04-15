@@ -10,6 +10,9 @@ public class ActiveController
     private ResourceController resourceController;
     private ViewController viewController;
 
+   //TODO restructure the constructor that the facade instantiates
+    public ActiveController(){}
+
     public ActiveController( BoardController b,  PlayerController p, ResourceController r, ViewController v )
     {
         boardController = b;
