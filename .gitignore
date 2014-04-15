@@ -45,10 +45,8 @@ Icon
 .idea/dataSources.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
-<<<<<<< HEAD
-=======
 .idea/modules.xml
->>>>>>> Alex'sBitchinBranch
+.idea/misc.xml
 
 ## File-based project format
 *.ipr
@@ -113,9 +111,3 @@ local.properties
 *.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-<<<<<<< HEAD
-hs_err_pid*
-
-=======
-hs_err_pid*
->>>>>>> Alex'sBitchinBranch
