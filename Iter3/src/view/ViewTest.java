@@ -47,6 +47,7 @@ public class ViewTest
     static BufferedImage dirt;
     static BufferedImage water;
     static BufferedImage land;
+    static BufferedImage mainland;
     static int[] irrigationIDs;
 
     public static void main(String[] args)
@@ -67,6 +68,7 @@ public class ViewTest
             dirt = ImageIO.read(new File("Iter3/src/view/images/dirt.jpg"));
             water = ImageIO.read(new File("Iter3/src/view/images/water.jpg"));
             land = ImageIO.read(new File("Iter3/src/view/images/land.png"));
+            mainland = ImageIO.read(new File("Iter3/src/view/images/mainland.jpg"));
         }
         catch(Exception e)
         {
@@ -140,6 +142,29 @@ public class ViewTest
             }
         }
 
+        //Hardcode awkward board shape
+        theBoard[1][4].getBoardHex().resetMountain();
+        theBoard[1][7].getBoardHex().resetMountain();
+        theBoard[1][10].getBoardHex().resetMountain();
+        theBoard[1][13].getBoardHex().resetMountain();
+        theBoard[2][4].getBoardHex().resetMountain();
+        theBoard[2][5].getBoardHex().resetMountain();
+        theBoard[2][7].getBoardHex().resetMountain();
+        theBoard[2][8].getBoardHex().resetMountain();
+        theBoard[2][10].getBoardHex().resetMountain();
+        theBoard[2][11].getBoardHex().resetMountain();
+        theBoard[2][13].getBoardHex().resetMountain();
+        theBoard[2][14].getBoardHex().resetMountain();
+
+
+        //Set lowland tiles
+        for(int i = 3; i < 4; i++)
+        {
+            for(int j = 3; j < 17; j++)
+            {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
 
         boardPanel = new JPanel(){
             @Override
@@ -183,7 +208,7 @@ public class ViewTest
                             g2.drawString(String.valueOf(theBoard[i][j].getBoardHex().getLevel()), theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
 
                         }
-                        else
+                        else if(theBoard[i][j].getBoardHex().getIsMountain() == true)
                         {
                             g2.setPaint(new TexturePaint(dirt, new Rectangle(300,300,300,300)));
                             g2.fillPolygon(theBoard[i][j].getPolygon());
@@ -194,6 +219,17 @@ public class ViewTest
                             g2.setColor(Color.BLACK);
 
                             g2.drawString("fuck", theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
+                        }
+                        else
+                        {
+                            g2.setPaint(new TexturePaint(mainland, new Rectangle(300,300,300,300)));
+                            g2.fillPolygon(theBoard[i][j].getPolygon());
+                            g2.setColor(Color.WHITE);
+                            g2.setStroke(new BasicStroke(1f));
+                            g2.drawPolygon(theBoard[i][j].getPolygon());
+                            g2.setFont(new Font("Courier New", Font.PLAIN, 16));
+                            g2.setColor(Color.BLACK);
+
                         }
 
                         if(theBoard[i][j].getSelected() == true)

@@ -72,6 +72,16 @@ public class BoardHex
         isMountain = true;
     }
 
+    public void resetMountain()
+    {
+        isMountain = false;
+    }
+
+    public void resetLowlands()
+    {
+        isLowlands = false;
+    }
+
     public void setLowlands()
     {
         isLowlands = true;
