@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,7 +42,14 @@ public class ViewTest
 	
 	public static void main(String[] args) 
 	{
-        dirt = ImageIO.read(new File("img/dirt.jpg"));
+        try
+        {
+            dirt = ImageIO.read(new File("img/dirt.jpg"));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 		frame = new JFrame();
 		frame.setContentPane(createContentPane());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,9 +133,17 @@ public class ViewTest
                 		{
                 			g2.setColor(Color.WHITE);
                 		}
-                		
-                		g2.fillPolygon(theBoard[i][j].getPolygon());
-                		//g2.drawPolygon(theBoard[i][j].getPolygon());
+
+                        if(i == 0 && j == 0)
+                        {
+                            g2.setClip(theBoard[0][0].getPolygon());
+                            g2.drawImage(dirt, 30, 30, null );
+                        }
+                        else
+                        {
+                            g2.fillPolygon(theBoard[i][j].getPolygon());
+                            //g2.drawPolygon(theBoard[i][j].getPolygon());
+                        }
                 	}
                 }
             }
