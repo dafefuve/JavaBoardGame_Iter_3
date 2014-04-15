@@ -13,9 +13,23 @@ public class Facade {
     GAMEState replay;
     //game state
     GAMEState gameState;
+    //Controllers
+    ActiveController activeController;
+    FestivalController festivalController;
+    PlanningController planningController;
+    ReplayController replayController;
 
     public Facade(){
-        active = new activeState(this);
+        //controllers
+        activeController = new ActiveController();
+        festivalController = new FestivalController();
+        planningController = new PlanningController();
+        replayController = new ReplayController();
+        //states
+        active = new activeState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
+        festival = new festivalState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
+        planning = new planningState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
+        replay = new replayState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
 
     }
     public void proccessKeyEvent( KeyEvent event)
@@ -29,36 +43,86 @@ public class Facade {
 
 }
 interface GAMEState {
+    boolean changeTurn();
 
 }
 class festivalState implements GAMEState {
+
+    ActiveController activeController;
+    FestivalController festivalController;
+    PlanningController planningController;
+    ReplayController replayController;
     Facade gameFacade;
-    public festivalState(Facade facade)
+    public festivalState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
     {
         gameFacade = facade;
+        activeController = aController;
+        festivalController = fController;
+        planningController = pController;
+        replayController = rController;
+    }
+    @Override
+    public boolean changeTurn() {
+        return false;
     }
 }
 class activeState implements GAMEState {
+    ActiveController activeController;
+    FestivalController festivalController;
+    PlanningController planningController;
+    ReplayController replayController;
     Facade gameFacade;
-    public activeState(Facade facade)
+    public activeState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
     {
         gameFacade = facade;
+        activeController = aController;
+        festivalController = fController;
+        planningController = pController;
+        replayController = rController;
     }
 
+    @Override
+    public boolean changeTurn() {
+        return false;
+    }
 }
 class planningState implements GAMEState {
+    ActiveController activeController;
+    FestivalController festivalController;
+    PlanningController planningController;
+    ReplayController replayController;
     Facade gameFacade;
-    public planningState(Facade facade)
+    public planningState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
     {
         gameFacade = facade;
+        activeController = aController;
+        festivalController = fController;
+        planningController = pController;
+        replayController = rController;
     }
 
+    @Override
+    public boolean changeTurn() {
+        return false;
+    }
 }
 class replayState implements GAMEState {
+    ActiveController activeController;
+    FestivalController festivalController;
+    PlanningController planningController;
+    ReplayController replayController;
     Facade gameFacade;
-    public replayState(Facade facade)
+    public replayState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
     {
         gameFacade = facade;
+        activeController = aController;
+        festivalController = fController;
+        planningController = pController;
+        replayController = rController;
+    }
+
+    @Override
+    public boolean changeTurn() {
+        return false;
     }
 }
-
