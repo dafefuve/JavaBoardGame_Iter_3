@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -80,5 +78,4 @@ public class PlayerPanel extends JPanel
 	    
 	    this.setBorder(new CompoundBorder(border, margin));
 	}
-	
 }

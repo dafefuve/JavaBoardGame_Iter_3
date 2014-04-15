@@ -1,9 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PlayerView extends JPanel
 {
@@ -53,4 +54,17 @@ public class PlayerView extends JPanel
 		players[i].setBackground(Color.decode("#00AF64"));
 		this.repaint();
 	}
+
+    public static void registerChangeTurn(final PlayerView p)
+    {
+        Action myAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                p.changeTurn();
+            }
+        };
+        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), "doSomething");
+
+        p.getActionMap().put("doSomething",
+                myAction);
+    }
 }

@@ -8,17 +8,23 @@ public class ActiveController
     private BoardController boardController;
     private PlayerController playerController;
     private ResourceController resourceController;
+    private ViewController viewController;
 
-    public ActiveController( BoardController b,  PlayerController p, ResourceController r )
+    public ActiveController( BoardController b,  PlayerController p, ResourceController r, ViewController v )
     {
         boardController = b;
         playerController = p;
         resourceController = r;
+        viewController = v;
+
+        //Set up all key bindings -- SUPER OOP
+        viewController.registerChangeTurnAction();
+       //Nvm, I have no idea what I'm doing
     }
 
     public void moveN()
     {
-        
+
     }
 
     public void moveNE()
@@ -54,6 +60,11 @@ public class ActiveController
     public void moveDeveloper()
     {
 
+    }
+
+    public void changeTurn()
+    {
+        viewController.changeTurn();
     }
 
 

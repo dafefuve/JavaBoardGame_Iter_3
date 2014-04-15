@@ -1,7 +1,7 @@
 package view;
 
 /**
- * Created by Daniel on 4/14/2014.
+ * Created by Alex on 4/14/2014.
  */
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -42,8 +42,8 @@ public class ViewTest
     static JPanel player2;
     static JPanel player3;
     static JPanel player4;
-    static JPanel playerPanel;
-    static JScrollPane jsp;
+    public static JPanel playerView;
+    public static JScrollPane jsp;
     static BufferedImage dirt;
     static BufferedImage water;
     static BufferedImage land;
@@ -59,6 +59,7 @@ public class ViewTest
         frame.setVisible(true);
         highlightStartSpace();
         boardPanel.requestFocus();
+        playerView.requestFocus();
     }
 
     public static JPanel createContentPane()
@@ -81,11 +82,11 @@ public class ViewTest
         irrigationIDs[2] = 160;
 
         JPanel mainPanel = new JPanel();
-        playerPanel = new PlayerView(4);
+        playerView = new PlayerView(4);
         //playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.LINE_AXIS));
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(playerPanel);
+        mainPanel.add(playerView);
 
         int xCoord = 45;
         int yCoord = 45;
@@ -283,10 +284,11 @@ public class ViewTest
                     highlightSpace(7);
                 }
                 //else for changing player
+                /*
                 else if(e.getKeyChar() == 'p')
                 {
                     selectPlayer();
-                }
+                }*/
             }
 
             @Override
@@ -316,6 +318,9 @@ public class ViewTest
         mainMainPanel.add(bottomPane);
         //mainPanel.add(bottomPane);
         //mainPanel.setVisible(true);
+        registerChangeTurn();
+        playerView.requestFocusInWindow();
+        playerView.requestFocus();
         return mainMainPanel;
     }
 
@@ -600,7 +605,7 @@ public class ViewTest
 
     public static void selectPlayer()
     {
-        ((PlayerView) playerPanel).changeTurn();
+        ((PlayerView) playerView).changeTurn();
     }
 
     public static void displayAlert(String message, String title)
@@ -631,5 +636,10 @@ public class ViewTest
     {
         theBoard[0][0].getBoardHex().setSelected(true);
         boardPanel.repaint();
+    }
+
+    public static void registerChangeTurn()
+    {
+        ((PlayerView)playerView).registerChangeTurn((PlayerView)playerView);
     }
 }
