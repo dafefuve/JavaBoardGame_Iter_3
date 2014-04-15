@@ -34,13 +34,13 @@ public class PalaceCardPanel extends JPanel
 		try
 		{
 			//Initialize images
-			drumCard = ImageIO.read(new File("../img/drumcard.png"));
-			puppetCard = ImageIO.read(new File("../img/puppetcard.png"));
-			maskCard = ImageIO.read(new File("../img/maskcard.png"));
-			drumPuppetCard = ImageIO.read(new File("../img/drumpuppet.png"));
-			puppetMaskCard = ImageIO.read(new File("../img/puppetmaskcard.png"));
-			drumMaskCard = ImageIO.read(new File("../img/drummaskcard.png"));
-			deck = ImageIO.read(new File("../img/deck.png"));
+			drumCard = ImageIO.read(new File("img/drumcard.png"));
+			puppetCard = ImageIO.read(new File("img/puppetcard.png"));
+			maskCard = ImageIO.read(new File("img/maskcard.png"));
+			drumPuppetCard = ImageIO.read(new File("img/drumpuppet.png"));
+			puppetMaskCard = ImageIO.read(new File("img/puppetmaskcard.png"));
+			drumMaskCard = ImageIO.read(new File("img/drummaskcard.png"));
+			deck = ImageIO.read(new File("img/deck.png"));
 			
 		}
 		catch(Exception e)

@@ -1,17 +1,10 @@
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -44,9 +37,11 @@ public class ViewTest
 	static JPanel player4;
 	static JPanel playerPanel;
 	static JScrollPane jsp;
+    static Image dirt;
 	
 	public static void main(String[] args) 
 	{
+        dirt = ImageIO.read(new File("img/dirt.jpg"));
 		frame = new JFrame();
 		frame.setContentPane(createContentPane());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
