@@ -39,14 +39,7 @@ Icon
 
 ## Directory-based project format
 
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/modules.xml
-.idea/misc.xml
+.idea/
 
 ## File-based project format
 *.ipr
