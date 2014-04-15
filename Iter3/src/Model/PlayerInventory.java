@@ -31,13 +31,22 @@ public class PlayerInventory extends Inventory{
     }
 
     public PalaceCard removePalaceCard(PalaceCard card){
-        hand.remove(card);
-        return card;
+        if(!hand.isEmpty()){
+            hand.remove(card);
+            return card;
+        }
+        return null;
     }
 
     public List<PalaceCard> getHand(){
         return hand;
     }
+
+    //this is necessary to set a hand
+    public void setHand(List<PalaceCard> hand){
+        this.hand = hand;
+    }
+
 
 
 
