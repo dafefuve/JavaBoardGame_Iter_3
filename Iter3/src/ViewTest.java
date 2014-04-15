@@ -134,16 +134,16 @@ public class ViewTest
                 			g2.setColor(Color.WHITE);
                 		}
 
-                        if(i == 0 && j == 0)
+                        /*if(i == 0 && j == 0)
                         {
                             g2.setClip(theBoard[0][0].getPolygon());
                             g2.drawImage(dirt, 30, 30, null );
-                        }
-                        else
-                        {
+                        }*/
+
+
                             g2.fillPolygon(theBoard[i][j].getPolygon());
                             //g2.drawPolygon(theBoard[i][j].getPolygon());
-                        }
+
                 	}
                 }
             }
