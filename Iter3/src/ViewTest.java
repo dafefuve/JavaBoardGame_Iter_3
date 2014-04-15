@@ -134,15 +134,20 @@ public class ViewTest
                 			g2.setColor(Color.WHITE);
                 		}
 
-                        /*if(i == 0 && j == 0)
+                        if(i == 0 && j == 0)
                         {
                             g2.setClip(theBoard[0][0].getPolygon());
                             g2.drawImage(dirt, 30, 30, null );
-                        }*/
-
-
+                            g2.setClip(null);
+                            g2.dispose();
+                        }
+                        else
+                        {
                             g2.fillPolygon(theBoard[i][j].getPolygon());
                             //g2.drawPolygon(theBoard[i][j].getPolygon());
+                        }
+
+
 
                 	}
                 }
@@ -152,7 +157,7 @@ public class ViewTest
 		boardPanel.setBorder(new EmptyBorder(50, 50, 50, 50) );
 		boardPanel.setMinimumSize(new Dimension(900,800));
 		boardPanel.setPreferredSize(new Dimension(900,800));
-		boardPanel.setBackground(Color.decode("#80C7FF"));
+		//boardPanel.setBackground(Color.decode("#80C7FF"));
 		boardPanel.setFocusable(true);
 		
 		jsp = new JScrollPane(boardPanel);
