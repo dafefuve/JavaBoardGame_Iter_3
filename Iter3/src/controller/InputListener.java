@@ -10,6 +10,7 @@ public class InputListener implements KeyListener
 {
     private Facade facade;
     private ViewController viewController;
+    private boolean changeState;
 
     public InputListener(String[] playerNames)
     {
@@ -20,8 +21,17 @@ public class InputListener implements KeyListener
     }
     @Override
     public void keyTyped(KeyEvent e) {
+        if(changeState){
+            facade.changeState(e);
+            changeState = false;
+        }
+        else
+        {
+            facade.proccessKeyEvent(e);
+        }
         //TODO
         //facade.processKeyEvent(e);
+
     }
 
     @Override
@@ -31,6 +41,11 @@ public class InputListener implements KeyListener
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if(e.getKeyCode() == KeyEvent.VK_F1){
+            changeState = true;
+        }
+        else{
+            changeState = false;
+        }
     }
 }
