@@ -3,20 +3,15 @@ package view;
 /**
  * Created by Daniel on 4/14/2014.
  */
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -49,6 +44,10 @@ public class ViewTest
     static JPanel player4;
     static JPanel playerPanel;
     static JScrollPane jsp;
+    static BufferedImage dirt;
+    static BufferedImage water;
+    static BufferedImage land;
+    static int[] irrigationIDs;
 
     public static void main(String[] args)
     {
@@ -63,6 +62,22 @@ public class ViewTest
 
     public static JPanel createContentPane()
     {
+        try
+        {
+            dirt = ImageIO.read(new File("Iter3/src/view/images/dirt.jpg"));
+            water = ImageIO.read(new File("Iter3/src/view/images/water.jpg"));
+            land = ImageIO.read(new File("Iter3/src/view/images/land.png"));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        irrigationIDs = new int[3];
+        irrigationIDs[0] = 99;
+        irrigationIDs[1] = 108;
+        irrigationIDs[2] = 160;
+
         JPanel mainPanel = new JPanel();
         playerPanel = new PlayerView(4);
         //playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.LINE_AXIS));
@@ -107,6 +122,24 @@ public class ViewTest
             yCoord = firstY;
         }
 
+        //Set highland tiles
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 19; j++)
+            {
+                theBoard[i][j].getBoardHex().setMountain();
+            }
+        }
+
+        //Set lowland tiles
+        for(int i = 8; i < 15; i++)
+        {
+            for(int j = 0; j < 19; j++)
+            {
+                theBoard[i][j].getBoardHex().setLowlands();
+            }
+        }
+
 
         boardPanel = new JPanel(){
             @Override
@@ -120,32 +153,64 @@ public class ViewTest
                         RenderingHints.KEY_COLOR_RENDERING,
                         RenderingHints.VALUE_COLOR_RENDER_QUALITY);
                 g2.setColor(Color.BLACK);
-                g2.setStroke(new BasicStroke(2));
+                g2.setStroke(new BasicStroke(20));
                 g2.setPaint(Color.BLACK);
 
                 for(int i = 0; i < 15; i++)
                 {
                     for(int j = 0; j < 19; j++)
                     {
-                        if(theBoard[i][j].getSelected() == true)
+
+
+                        if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
+                                || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]
+                                || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[2] )
                         {
-                            g2.setColor(Color.ORANGE);
+
+                            g2.setPaint(new TexturePaint(water, new Rectangle(300,300,300,300)));
+
+                            g2.fillPolygon(theBoard[i][j].getPolygon());
+                        }
+                        else if(theBoard[i][j].getBoardHex().getIsLowlands() == true)
+                        {
+                            g2.setPaint(new TexturePaint(land, new Rectangle(700,700,700,700)));
+
+                            g2.fillPolygon(theBoard[i][j].getPolygon());
+                            g2.setColor(Color.WHITE);
+                            g2.setStroke(new BasicStroke(1f));
+                            g2.drawPolygon(theBoard[i][j].getPolygon());
+                            //g2.drawPolygon(theBoard[i][j].getPolygon());
+                            g2.drawString(String.valueOf(theBoard[i][j].getBoardHex().getLevel()), theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
+
                         }
                         else
                         {
+                            g2.setPaint(new TexturePaint(dirt, new Rectangle(300,300,300,300)));
+                            g2.fillPolygon(theBoard[i][j].getPolygon());
                             g2.setColor(Color.WHITE);
+                            g2.setStroke(new BasicStroke(1f));
+                            g2.drawPolygon(theBoard[i][j].getPolygon());
+                            g2.setFont(new Font("Courier New", Font.PLAIN, 16));
+                            g2.setColor(Color.BLACK);
+
+                            g2.drawString("fuck", theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
                         }
 
-                        g2.fillPolygon(theBoard[i][j].getPolygon());
-                        //g2.drawPolygon(theBoard[i][j].getPolygon());
+                        if(theBoard[i][j].getSelected() == true)
+                        {
+                            g2.setColor(Color.ORANGE);
+                            g2.fillPolygon(theBoard[i][j].getBoardHex().getPolygon());
+                        }
+
                     }
                 }
+
             }
         };
 
         boardPanel.setBorder(new EmptyBorder(50, 50, 50, 50) );
-        boardPanel.setMinimumSize(new Dimension(900,800));
-        boardPanel.setPreferredSize(new Dimension(900,800));
+        boardPanel.setMinimumSize(new Dimension(900,850));
+        boardPanel.setPreferredSize(new Dimension(900,850));
         boardPanel.setBackground(Color.decode("#80C7FF"));
         boardPanel.setFocusable(true);
 
@@ -253,7 +318,7 @@ public class ViewTest
                 newRow = currentRow - 1;
                 newCol = currentCol + 1;
 
-                if(newRow < 0 || newCol >= 15)
+                if(newRow < 0 || newCol >= 19)
                 {
                     displayAlert("You cannot move out of bounds!", null);
                     return;
@@ -279,7 +344,7 @@ public class ViewTest
                 newRow = currentRow;
                 newCol = currentCol + 1;
 
-                if(newRow < 0 || newCol >= 15)
+                if(newRow < 0 || newCol >= 19)
                 {
                     displayAlert("You cannot move out of bounds!", null);
                     return;
