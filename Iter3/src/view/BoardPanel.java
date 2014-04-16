@@ -40,7 +40,7 @@ public class BoardPanel extends JPanel
        initializeHexes();
        setUpMainLand();
        setUpKeyListener();
-       highlightStartSpace();
+       highlightDoubleStartSpace();
 
        //hacky temporary solution
        panel = this;
@@ -207,7 +207,7 @@ public class BoardPanel extends JPanel
                }
                else if(e.getKeyChar() == '3')
                {
-                   highlightSpace(3);
+                   highlightDoubleSpace(3);
                }
                else if(e.getKeyChar() == '2')
                {
@@ -215,16 +215,15 @@ public class BoardPanel extends JPanel
                }
                else if(e.getKeyChar() == '1')
                {
-                   highlightSpace(1);
+                   highlightDoubleSpace(1);
                }
                else if(e.getKeyChar() == '7')
                {
-                   highlightSpace(7);
+                   highlightDoubleSpace(7);
                }
                else if(e.getKeyChar() == 'w')
                {
-                  JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(panel);
-                   //((ViewTest)topFrame).showPauseMenu();
+
                }
                //else for changing player
                 /*
@@ -717,6 +716,54 @@ public class BoardPanel extends JPanel
                 }
             }
 
+            if(currentCol2 % 2 == 0)
+            {
+                newRow2 = currentRow2;
+                newCol2 = currentCol2 + 1;
+
+                if(newCol2 >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    currentCol = newCol;
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow2 = currentRow2 + 1;
+                newCol2 = currentCol2 + 1;
+
+                if(newRow2 >= 15 || newCol2 >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    currentCol2 = newCol2;
+                    currentRow2 = newRow2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
+            }
+
             this.requestFocus();
 
         }
@@ -798,6 +845,58 @@ public class BoardPanel extends JPanel
                     this.repaint();
                 }
             }
+
+            if(currentCol2 % 2 == 0)
+            {
+                newRow2 = currentRow2;
+                newCol2 = currentCol2 - 1;
+
+                if(newCol2 < 0 || newRow2 >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current col
+                    currentCol2 = newCol2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow2 = currentRow2 + 1;
+                newCol2 = currentCol2 - 1;
+
+                if(newCol2 < 0 || newRow2 >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current row and col
+                    currentCol2 = newCol2;
+                    currentRow2 = newRow2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
             this.requestFocus();
         }
         else if(key == 7)
@@ -853,6 +952,58 @@ public class BoardPanel extends JPanel
                     this.repaint();
                 }
             }
+
+            if(currentCol2 % 2 == 0)
+            {
+                newRow2 = currentRow2 - 1;
+                newCol2 = currentCol2 - 1;
+
+                if(newRow2 < 0 || newCol2 < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current col and row
+                    currentRow2 = newRow2;
+                    currentCol2 = newCol2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow2 = currentRow2;
+                newCol2 = currentCol2 - 1;
+
+                if(newRow2 < 0 || newCol2 < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current col since row didn't change
+                    currentCol2 = newCol2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
             this.requestFocus();
 
         }
@@ -864,6 +1015,14 @@ public class BoardPanel extends JPanel
         theBoard[0][0].setSelected(true);
         this.repaint();
     }
+
+    public void highlightDoubleStartSpace()
+    {
+        theBoard[0][0].setSelected(true);
+        theBoard[1][0].setSelected(true);
+        this.repaint();
+    }
+
     public void displayAlert(String message, String title)
     {
         JOptionPane.showMessageDialog(this.getTopLevelAncestor(),
