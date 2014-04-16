@@ -26,6 +26,7 @@ public class BoardPanel extends JPanel
    private static int currentRow = 0;
    private static int currentCol = 0;
    private JScrollPane jsp;
+   private JPanel panel;
 
    public BoardPanel()
    {
@@ -33,8 +34,11 @@ public class BoardPanel extends JPanel
        setUpIrrigationCoordinates();
 
        initializeHexes();
+       setUpMainLand();
        setUpKeyListener();
 
+       //hacky temporary solution
+       panel = this;
 
        this.setBorder(new EmptyBorder(50, 50, 50, 50) );
        this.setMinimumSize(new Dimension(900,850));
@@ -107,42 +111,6 @@ public class BoardPanel extends JPanel
            xCoord = 45;
            yCoord = firstY;
        }
-
-       //Set highland tiles
-       for (int i = 0; i < 8; i++) {
-           for (int j = 0; j < 19; j++) {
-               theBoard[i][j].getBoardHex().setMountain();
-           }
-       }
-
-       //Set lowland tiles
-       for (int i = 8; i < 15; i++) {
-           for (int j = 0; j < 19; j++) {
-               theBoard[i][j].getBoardHex().setLowlands();
-           }
-       }
-
-       //Hardcode awkward board shape
-       theBoard[1][4].getBoardHex().resetMountain();
-       theBoard[1][7].getBoardHex().resetMountain();
-       theBoard[1][10].getBoardHex().resetMountain();
-       theBoard[1][13].getBoardHex().resetMountain();
-       theBoard[2][4].getBoardHex().resetMountain();
-       theBoard[2][5].getBoardHex().resetMountain();
-       theBoard[2][7].getBoardHex().resetMountain();
-       theBoard[2][8].getBoardHex().resetMountain();
-       theBoard[2][10].getBoardHex().resetMountain();
-       theBoard[2][11].getBoardHex().resetMountain();
-       theBoard[2][13].getBoardHex().resetMountain();
-       theBoard[2][14].getBoardHex().resetMountain();
-
-
-       //Set lowland tiles
-       for (int i = 3; i < 4; i++) {
-           for (int j = 3; j < 17; j++) {
-               theBoard[i][j].getBoardHex().resetMountain();
-           }
-       }
    }
 
    @Override
@@ -182,8 +150,6 @@ public class BoardPanel extends JPanel
                    g2.setColor(Color.WHITE);
                    g2.setStroke(new BasicStroke(1f));
                    g2.drawPolygon(theBoard[i][j].getPolygon());
-                   //g2.drawPolygon(theBoard[i][j].getPolygon());
-                   g2.drawString(String.valueOf(theBoard[i][j].getBoardHex().getLevel()), theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
 
                }
                else if(theBoard[i][j].getBoardHex().getIsMountain() == true)
@@ -193,10 +159,6 @@ public class BoardPanel extends JPanel
                    g2.setColor(Color.WHITE);
                    g2.setStroke(new BasicStroke(1f));
                    g2.drawPolygon(theBoard[i][j].getPolygon());
-                   g2.setFont(new Font("Courier New", Font.PLAIN, 16));
-                   g2.setColor(Color.BLACK);
-
-                   g2.drawString("fuck", theBoard[i][j].getBoardHex().getCenterX(), theBoard[i][j].getBoardHex().getCenterY());
                }
                else
                {
@@ -205,8 +167,9 @@ public class BoardPanel extends JPanel
                    g2.setColor(Color.WHITE);
                    g2.setStroke(new BasicStroke(1f));
                    g2.drawPolygon(theBoard[i][j].getPolygon());
-                   g2.setFont(new Font("Courier New", Font.PLAIN, 16));
-                   g2.setColor(Color.BLACK);
+
+                   //Draw the level string
+                   drawLevel(g2, theBoard[i][j].getBoardHex());
 
                }
 
@@ -251,6 +214,11 @@ public class BoardPanel extends JPanel
                else if(e.getKeyChar() == '7')
                {
                    highlightSpace(7);
+               }
+               else if(e.getKeyChar() == 'w')
+               {
+                  JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(panel);
+                   //((ViewTest)topFrame).showPauseMenu();
                }
                //else for changing player
                 /*
@@ -573,6 +541,113 @@ public class BoardPanel extends JPanel
             JScrollBar verticalBar = jsp.getVerticalScrollBar();
             verticalBar.setValue(0);
         }
+
+    }
+
+    public void drawLevel(Graphics2D g, BoardHex hex)
+    {
+        g.setFont(new Font("Helvetica", Font.BOLD, 16));
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(hex.getLevel()), hex.getCenterX(), hex.getCenterY());
+    }
+
+    public void setUpMainLand()
+    {
+        //Set highland tiles
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 19; j++) {
+                theBoard[i][j].getBoardHex().setMountain();
+            }
+        }
+
+        //Set lowland tiles
+        for (int i = 8; i < 15; i++) {
+            for (int j = 0; j < 19; j++) {
+                theBoard[i][j].getBoardHex().setLowlands();
+            }
+        }
+
+        //Hardcode awkward board shape
+        theBoard[1][4].getBoardHex().resetMountain();
+        theBoard[1][7].getBoardHex().resetMountain();
+        theBoard[1][10].getBoardHex().resetMountain();
+        theBoard[1][13].getBoardHex().resetMountain();
+        theBoard[2][4].getBoardHex().resetMountain();
+        theBoard[2][5].getBoardHex().resetMountain();
+        theBoard[2][7].getBoardHex().resetMountain();
+        theBoard[2][8].getBoardHex().resetMountain();
+        theBoard[2][10].getBoardHex().resetMountain();
+        theBoard[2][11].getBoardHex().resetMountain();
+        theBoard[2][13].getBoardHex().resetMountain();
+        theBoard[2][14].getBoardHex().resetMountain();
+
+
+        //Set mainland tiles
+        for (int i = 3; i < 4; i++) {
+            for (int j = 3; j < 17; j++) {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
+
+        for (int i = 4; i < 5; i++) {
+            for (int j = 1; j < 18; j++) {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
+
+        for (int i = 5; i < 6; i++) {
+            for (int j = 2; j < 18; j++) {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
+
+        for (int i = 6; i < 7; i++) {
+            for (int j = 1; j < 18; j++) {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
+
+        for (int i = 7; i < 8; i++) {
+            for (int j = 2; j < 18; j++) {
+                theBoard[i][j].getBoardHex().resetMountain();
+            }
+        }
+
+        for (int i = 8; i < 9; i++) {
+            for (int j = 3; j < 16; j++) {
+                theBoard[i][j].getBoardHex().resetLowlands();
+            }
+        }
+
+        for (int i = 9; i < 10; i++) {
+            for (int j = 3; j < 17; j++) {
+                theBoard[i][j].getBoardHex().resetLowlands();
+            }
+        }
+
+        for (int i = 10; i < 11; i++) {
+            for (int j = 3; j < 16; j++) {
+                theBoard[i][j].getBoardHex().resetLowlands();
+            }
+        }
+
+        for (int i = 11; i < 12; i++) {
+            for (int j = 4; j < 14; j++) {
+                theBoard[i][j].getBoardHex().resetLowlands();
+            }
+        }
+
+        theBoard[12][5].getBoardHex().resetLowlands();
+        theBoard[12][6].getBoardHex().resetLowlands();
+        theBoard[12][7].getBoardHex().resetLowlands();
+        theBoard[12][9].getBoardHex().resetLowlands();
+        theBoard[12][11].getBoardHex().resetLowlands();
+        theBoard[12][12].getBoardHex().resetLowlands();
+        theBoard[12][13].getBoardHex().resetLowlands();
+        theBoard[13][5].getBoardHex().resetLowlands();
+        theBoard[12][6].getBoardHex().resetLowlands();
+        theBoard[13][11].getBoardHex().resetLowlands();
+        theBoard[13][12].getBoardHex().resetLowlands();
 
     }
 }

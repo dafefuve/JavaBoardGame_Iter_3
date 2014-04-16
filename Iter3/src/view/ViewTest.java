@@ -12,15 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -60,6 +52,8 @@ public class ViewTest
       
         boardPanel.requestFocus();
         playerView.requestFocus();
+
+        showPauseMenu();
     }
 
     public static JPanel createContentPane()
@@ -102,5 +96,55 @@ public class ViewTest
     public static void registerChangeTurn()
     {
         ((PlayerView)playerView).registerChangeTurn((PlayerView)playerView);
+    }
+
+    public static void showPauseMenu()
+    {
+        JFrame pauseFrame = new JFrame();
+        JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel unpauseLabel = new JLabel("Unpause (Press U)");
+        unpauseLabel.setFont(new Font("Helvetica", Font.PLAIN, 18));
+        unpauseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        unpauseLabel.setBorder(new EmptyBorder(20, 20, 20, 20) );
+        panel.add(unpauseLabel);
+
+        JLabel controlsLabel = new JLabel("View controls (Press C)");
+        controlsLabel.setFont(new Font("Helvetica", Font.PLAIN, 18));
+        controlsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        controlsLabel.setBorder(new EmptyBorder(20, 20, 20, 20) );
+        panel.add(controlsLabel);
+
+        JLabel saveAndQuitLabel = new JLabel("Save and quit (Press Q)");
+        saveAndQuitLabel.setFont(new Font("Helvetica", Font.PLAIN, 18));
+        saveAndQuitLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        saveAndQuitLabel.setBorder(new EmptyBorder(20, 20, 20, 20) );
+        panel.add(saveAndQuitLabel);
+
+        frame.getRootPane().setGlassPane(new JComponent() {
+            public void paintComponent(Graphics g) {
+                g.setColor(new Color(0, 0, 0, 100));
+                g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+                super.paintComponent(g);
+            }
+        });
+
+        frame.getRootPane().getGlassPane().setVisible(true);
+        frame.repaint();
+
+        pauseFrame.setContentPane(panel);
+        pauseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pauseFrame.pack();
+        pauseFrame.setVisible(true);
+
+        System.out.println("got here");
+        JOptionPane.showMessageDialog(frame,
+                "You cannot exit the board's bounds.",
+                "Out of Bounds Warning",
+                JOptionPane.WARNING_MESSAGE);
+
+        System.out.println("got here2");
     }
 }

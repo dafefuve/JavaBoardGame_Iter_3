@@ -25,6 +25,8 @@ public class BoardHex
         isLowlands = false;
         isMountain = false;
         isIrrigation = false;
+        x = centerX;
+        y = centerY;
 		ID++;
 
 		//Generate the hexagon
@@ -110,6 +112,11 @@ public class BoardHex
     public int getCenterY()
     {
         return y;
+    }
+
+    public void levelUp()
+    {
+        level++;
     }
 
 
