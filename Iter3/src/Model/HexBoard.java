@@ -12,11 +12,11 @@ import java.util.ListIterator;
 public class HexBoard
 {
     List<Edge> edges;
+    List<Space> spaces;
 
     public HexBoard()
     {
-        edges = new List<Edge>()
-        {
+        edges = new List<Edge>() {
             @Override
             public int size()
             {
@@ -111,6 +111,130 @@ public class HexBoard
                 return null;
             }
         };
+
+        spaces = new List<Space>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Space> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Space space) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Space> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Space> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Space get(int index) {
+                return null;
+            }
+
+            @Override
+            public Space set(int index, Space element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Space element) {
+
+            }
+
+            @Override
+            public Space remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Space> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Space> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Space> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        };
+        for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 19; j++)
+            {
+                spaces.add(new Space(i, j));
+            }
+        }
     }
 
     public void defineEdge(Space s)
@@ -167,8 +291,7 @@ public class HexBoard
     //returns a list of all the edges emanating from a given space
     public List<Edge> getEdgesForSpace(Space oneGivenSpace)
     {
-        List<Edge> edgesForSpace = new List<Edge>()
-        {
+        List<Edge> edgesForSpace = new List<Edge>() {
             @Override
             public int size() {
                 return 0;
@@ -418,5 +541,10 @@ public class HexBoard
     public List<Edge> getEdges()
     {
         return this.edges;
+    }
+
+    public List<Space> getSpaces()
+    {
+        return this.spaces;
     }
 }

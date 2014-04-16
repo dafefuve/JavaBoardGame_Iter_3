@@ -67,5 +67,10 @@ public class Space
     {
         return this.column;
     }
+
+    public int getId()
+    {
+        return this.id;
+    }
 }
 
