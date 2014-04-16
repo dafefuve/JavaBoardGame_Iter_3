@@ -165,7 +165,7 @@ public class HexBoard
     }
 
     //returns a list of all the edges emanating from a given space
-    public List<Edge> getEdges(Space oneGivenSpace)
+    public List<Edge> getEdgesForSpace(Space oneGivenSpace)
     {
         List<Edge> edgesForSpace = new List<Edge>()
         {
@@ -399,7 +399,7 @@ public class HexBoard
             }
         };
 
-        List<Edge> myEdges = this.getEdges(centerSpace);
+        List<Edge> myEdges = this.getEdgesForSpace(centerSpace);
         for (int i = 0; i < myEdges.size(); i++)
         {
             if (myEdges.get(i).getSpaceOne().equals(centerSpace))   //centerSpace is SpaceOne
@@ -413,5 +413,10 @@ public class HexBoard
         }
 
         return neighbors;
+    }
+
+    public List<Edge> getEdges()
+    {
+        return this.edges;
     }
 }
