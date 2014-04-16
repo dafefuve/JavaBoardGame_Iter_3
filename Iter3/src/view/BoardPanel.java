@@ -25,6 +25,10 @@ public class BoardPanel extends JPanel
    private static int currentID = 0;
    private static int currentRow = 0;
    private static int currentCol = 0;
+   private static int currentRow2 = 1;
+   private static int currentCol2 = 0;
+   private static int currentRow3 = 0;
+   private static int currentCol3 = 0;
    private JScrollPane jsp;
    private JPanel panel;
 
@@ -36,6 +40,7 @@ public class BoardPanel extends JPanel
        initializeHexes();
        setUpMainLand();
        setUpKeyListener();
+       highlightStartSpace();
 
        //hacky temporary solution
        panel = this;
@@ -175,7 +180,8 @@ public class BoardPanel extends JPanel
 
                if(theBoard[i][j].getSelected() == true)
                {
-                   g2.setColor(Color.ORANGE);
+                   Color c = new Color(0f,1f,1f,.3f );
+                   g2.setColor(c);
                    g2.fillPolygon(theBoard[i][j].getBoardHex().getPolygon());
                }
 
@@ -193,11 +199,11 @@ public class BoardPanel extends JPanel
                //Move up
                if(e.getKeyChar() == '8')
                {
-                   highlightSpace(8);
+                   highlightDoubleSpace(8);
                }
                else if(e.getKeyChar() == '9')
                {
-                   highlightSpace(9);
+                   highlightDoubleSpace(9);
                }
                else if(e.getKeyChar() == '3')
                {
@@ -205,7 +211,7 @@ public class BoardPanel extends JPanel
                }
                else if(e.getKeyChar() == '2')
                {
-                   highlightSpace(2);
+                   highlightDoubleSpace(2);
                }
                else if(e.getKeyChar() == '1')
                {
@@ -510,6 +516,344 @@ public class BoardPanel extends JPanel
                 }
             }
            this.requestFocus();
+
+        }
+
+    }
+
+    public void highlightDoubleSpace(int key)
+    {
+        int newRow;
+        int newCol;
+        int newRow2;
+        int newCol2;
+
+        //Move up
+        if(key == 8)
+        {
+            newRow = currentRow - 1;
+            newRow2 = currentRow2 - 1;
+            if(newRow < 0 || newRow2 < 0)
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous spaces
+                theBoard[currentRow][currentCol].setSelected(false);
+                theBoard[currentRow2][currentCol2].setSelected(false);
+
+                //Select new spaces
+                currentRow = newRow;
+                currentRow2 = newRow2;
+
+                theBoard[currentRow][currentCol].setSelected(true);
+                theBoard[currentRow2][currentCol2].setSelected(true);
+
+                adjustScroll();
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
+
+        }
+        //Move NE
+        else if(key == 9)
+        {
+            if(currentCol % 2 == 0)
+            {
+                newRow = currentRow - 1;
+                newCol = currentCol + 1;
+
+                if(newRow < 0 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current col and row
+                    currentRow = newRow;
+                    currentCol = newCol;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow = currentRow;
+                newCol = currentCol + 1;
+
+                if(newRow < 0 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current col since row didn't change
+                    currentCol = newCol;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
+
+            if(currentCol2 % 2 == 0)
+            {
+                newRow2 = currentRow2 - 1;
+                newCol2 = currentCol2 + 1;
+
+                if(newRow2 < 0 || newCol2 >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current col and row
+                    currentRow2 = newRow2;
+                    currentCol2 = newCol2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow2 = currentRow2;
+                newCol2 = currentCol2 + 1;
+
+                if(newRow2 < 0 || newCol2 >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow2][currentCol2].setSelected(false);
+
+                    //Update current col since row didn't change
+                    currentCol2 = newCol2;
+
+                    //Select new space
+                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
+            this.requestFocus();
+
+        }
+        //Move SW
+        else if(key == 3)
+        {
+            if(currentCol % 2 == 0)
+            {
+                newRow = currentRow;
+                newCol = currentCol + 1;
+
+                if(newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    theBoard[currentRow][currentCol].setSelected(false);
+                    currentCol = newCol;
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow = currentRow + 1;
+                newCol = currentCol + 1;
+
+                if(newRow >= 15 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    currentCol = newCol;
+                    currentRow = newRow;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
+            }
+
+            this.requestFocus();
+
+        }
+        else if(key == 2)
+        {
+            newRow = currentRow + 1;
+            newRow2 = currentRow2 + 1;
+            if(newRow >= 15 || newRow2 >= 15)
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous space
+                theBoard[currentRow][currentCol].setSelected(false);
+                theBoard[currentRow2][currentCol2].setSelected(false);
+                //Select new space
+                currentRow = newRow;
+                currentRow2 = newRow2;
+
+                theBoard[currentRow][currentCol].setSelected(true);
+                theBoard[currentRow2][currentCol2].setSelected(true);
+                adjustScroll();
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
+        }
+        else if(key == 1)
+        {
+            if(currentCol % 2 == 0)
+            {
+                newRow = currentRow;
+                newCol = currentCol - 1;
+
+                if(newCol < 0 || newRow >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current col
+                    currentCol = newCol;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow = currentRow + 1;
+                newCol = currentCol - 1;
+
+                if(newCol < 0 || newRow >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current row and col
+                    currentCol = newCol;
+                    currentRow = newRow;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
+            this.requestFocus();
+        }
+        else if(key == 7)
+        {
+            if(currentCol % 2 == 0)
+            {
+                newRow = currentRow - 1;
+                newCol = currentCol - 1;
+
+                if(newRow < 0 || newCol < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current col and row
+                    currentRow = newRow;
+                    currentCol = newCol;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
+            }
+            else
+            {
+                newRow = currentRow;
+                newCol = currentCol - 1;
+
+                if(newRow < 0 || newCol < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    theBoard[currentRow][currentCol].setSelected(false);
+
+                    //Update current col since row didn't change
+                    currentCol = newCol;
+
+                    //Select new space
+                    theBoard[currentRow][currentCol].setSelected(true);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
+            }
+            this.requestFocus();
 
         }
 
