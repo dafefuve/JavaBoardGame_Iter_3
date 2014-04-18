@@ -20,5 +20,6 @@ public class moveDeveloperCommand extends Command {
 
 	}
 	public String toString(){
+        return null;
 	}
 }

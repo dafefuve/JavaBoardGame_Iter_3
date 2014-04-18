@@ -1,5 +1,5 @@
 package controller;
-import src.Model;
+
 /*
  * Created by Will
  */
@@ -27,6 +27,6 @@ public class DrawPalaceCardCommand extends Command {
 	}
 
 	public String toString(){
-
+        return null;
 	}
 }
