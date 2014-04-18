@@ -18,23 +18,21 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class MainMenu {
-    static JPanel panel;
-    static JFrame frame;
-    static JPanel mainView;
-    public static void main(String[] args)
-    {
+public class MainMenu extends JFrame{
+    private JPanel panel;
+    private JPanel mainView;
 
-        frame = new JFrame();
-        frame.setContentPane(createContentPane());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setPreferredSize(new Dimension(400,400));
-        frame.setMinimumSize(new Dimension(400,400));
-        frame.setVisible(true);
+    public MainMenu()
+    {
+        this.setContentPane(createContentPane());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setPreferredSize(new Dimension(400,400));
+        this.setMinimumSize(new Dimension(400,400));
+        this.setVisible(true);
     }
 
-    public static JPanel createContentPane()
+    public JPanel createContentPane()
     {
         panel = new JPanel();
         panel.addKeyListener(new KeyListener() {
@@ -44,8 +42,8 @@ public class MainMenu {
                 // TODO Auto-generated method stub
                 if(e.getKeyChar() == 'n')
                 {
-                    frame.setVisible(false); //you can't see me!
-                    frame.dispose();
+                    getRootPane().setVisible(false); //you can't see me!
+                    //((JFrame)getRootPane()).dispose();
 
                     JFrame frame = new JFrame();
                     frame.setContentPane(ViewTest.createContentPane());
@@ -56,12 +54,12 @@ public class MainMenu {
                 else if(e.getKeyChar() == 'l')
                 {
                     final JFileChooser jfc = new JFileChooser();
-                    int retVal = jfc.showOpenDialog(frame);
+                    int retVal = jfc.showOpenDialog(getRootPane());
                 }
                 else if(e.getKeyChar() == 'q')
                 {
-                    frame.setVisible(false); //you can't see me!
-                    frame.dispose();
+                    getRootPane().setVisible(false); //you can't see me!
+                    //JFrame(getRootPane()).dispose();
                 }
             }
 
