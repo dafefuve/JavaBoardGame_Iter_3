@@ -15,7 +15,7 @@ public class ViewController {
     {
 
     }
-    public void bindKeyListener(InputListener listener )
+    //public void bindKeyListener(InputListener listener )
     {
 
     }
