@@ -26,6 +26,6 @@ public class DrawCardCommand extends Command {
 	}
 
 	public String toString(){
-
+        return null;
 	}
 }

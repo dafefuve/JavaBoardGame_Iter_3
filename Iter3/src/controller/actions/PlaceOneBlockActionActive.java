@@ -1,4 +1,7 @@
-package controller;
+package controller.actions;
+
+import controller.Command;
+import controller.Facade;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +13,7 @@ public class PlaceOneBlockActionActive extends AbstractAction
 {
     private Facade facade;
 
-    public PlaceOneBlockAction(Facade facade)
+    public PlaceOneBlockActionActive(Facade facade)
     {
         this.facade = facade;
     }
@@ -18,7 +21,7 @@ public class PlaceOneBlockActionActive extends AbstractAction
     public void actionPerformed(ActionEvent e)
     {
         Facade.getViewController().placeOneBlock();
-        Command c = Facade.getCommandController().placeOneBlock();
+        Command c = Facade.getCommandController().placeOneBlockCommand();
         CommandStack.add(c);
         Facade.getCommandController().execute(c);
 

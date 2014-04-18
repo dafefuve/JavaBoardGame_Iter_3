@@ -20,5 +20,6 @@ public class placeOneBlockCommand extends Command {
 
 	}
 	public String toString(){
+        return null;
 	}
 }
