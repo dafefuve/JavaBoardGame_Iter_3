@@ -23,6 +23,8 @@ public class HexBoard
                 spaces.add(new Space(i, j));
             }
         }
+
+        this.defineEdge(this.getSpaces().get(0));   //start defining edges starting at Space at (0,0)
     }
 
     public void defineEdge(Space s)
@@ -98,7 +100,7 @@ public class HexBoard
     }
 
     //returns a list of all of the given space's neighbors
-    public ArrayList<Space> getNeighbors(Space centerSpace)
+    public ArrayList<Space> getNeighborsOfSpace(Space centerSpace)
     {
         ArrayList<Space> neighbors = new ArrayList<Space>();
 

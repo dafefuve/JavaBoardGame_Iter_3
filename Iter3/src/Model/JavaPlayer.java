@@ -46,9 +46,7 @@ public class JavaPlayer extends Player{
         return inventory.removePalaceCard(card);
     }
 
-    public List<PalaceCard> getHand(){
-        return inventory.getHand();
-    }
+    public List<PalaceCard> getHand(){ return inventory.getHand();   }
 
     public Inventory getInventory(){
         return inventory;
