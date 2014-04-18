@@ -33,13 +33,4 @@ public class Game {
         this.winner = winner;
     }
 
-    //Todo
-    public void endGame(){
-
-    }
-    //Todo
-    public void calculateWinner(){
-
-    }
-
 }
