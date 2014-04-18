@@ -1,9 +1,9 @@
-/*package view;
+package view;
 
 /**
  * Created by alexbujduveanu on 4/16/14.
  */
-/*
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -18,6 +18,8 @@ public class MainView extends JFrame
     private JPanel playerPanel;
     private JPanel festivalCardPanel;
 
+    private static JFrame mainMenuView;
+
     private JPanel player1;
     private JPanel player2;
     private JPanel player3;
@@ -28,19 +30,19 @@ public class MainView extends JFrame
     private int currentPlayer;
 
 
+    public static void main(String[] args)
+    {
+       createMainMenu();
+    }
 
     public MainView()
     {
+       mainMenuView = new MainMenu();
+    }
 
-        this.setContentPane(createContentPane());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
-        this.setVisible(true);
-
-        boardPanel.requestFocus();
-        playerView.requestFocus();
-
-        //showPauseMenu();
+    public static void createMainMenu()
+    {
+        mainMenuView = new MainMenu();
     }
 
     public JPanel createContentPane()
@@ -74,6 +76,17 @@ public class MainView extends JFrame
         return superPanel;
     }
 
+    public void initializeGameView()
+    {
+        this.setContentPane(createContentPane());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+
+        boardPanel.requestFocus();
+        playerView.requestFocus();
+    }
+
 
 
     public void selectPlayer()
@@ -88,6 +101,7 @@ public class MainView extends JFrame
 
     public static void showPauseMenu()
     {
+        /*
         JFrame pauseFrame = new JFrame();
         JPanel panel = new JPanel();
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
@@ -134,6 +148,6 @@ public class MainView extends JFrame
                 JOptionPane.WARNING_MESSAGE);
 
         System.out.println("got here2");
+        */
     }
 }
-*/
