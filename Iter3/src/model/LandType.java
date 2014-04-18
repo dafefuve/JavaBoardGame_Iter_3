@@ -3,7 +3,7 @@ package model;
 /**
  * Created by Horacio on 4/15/14.
  */
-public abstract class LandType {
+public class LandType {
     private String type;
 
     public LandType(String type){
