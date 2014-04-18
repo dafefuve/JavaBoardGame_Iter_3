@@ -13,7 +13,7 @@ public class GameInventory extends Inventory{
 
     public GameInventory(Stack<PalaceCard> initDeck, Map<String,Integer> initItems) {
         deck = initDeck;
-        discardDeck = null;
+        discardDeck = new Stack<PalaceCard>();
         items = initItems;
         faceUpCard = drawCardFromDeck();
     }
