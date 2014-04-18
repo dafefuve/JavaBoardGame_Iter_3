@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Board
 {
     HexBoard hBoard;
+    //This board consists of a HexBoard and nothing more
+    //All boards have spaces and edges between those spaces
 
     public Board()
     {
@@ -22,21 +24,26 @@ public class Board
 
     public ArrayList<Edge> getEdgesForSpace(Space s)
     {
-        return this.hBoard.getEdgesForSpace(s);
+        return this.getHBoard().getEdgesForSpace(s);
     }
 
     public ArrayList<Space> getNeighborsOfSpace(Space s)
     {
-        return this.hBoard.getNeighborsOfSpace(s);
+        return this.getHBoard().getNeighborsOfSpace(s);
     }
 
     public ArrayList<Edge> getEdges()
     {
-        return this.hBoard.getEdges();
+        return this.getHBoard().getEdges();
     }
 
     public ArrayList<Space> getSpaces()
     {
-        return this.hBoard.getSpaces();
+        return this.getHBoard().getSpaces();
+    }
+
+    public void setSpace(Space s, int index)
+    {
+        this.getHBoard().setSpace(s,index);
     }
 }

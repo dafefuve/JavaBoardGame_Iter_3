@@ -5,9 +5,9 @@ import sun.net.www.content.text.plain;
 /**
  * Created by Daniel on 4/14/2014.
  */
-//todo
 
-public class PalaceCard {
+public class PalaceCard
+{
     private String symbol;
 
     public PalaceCard(String symbol){

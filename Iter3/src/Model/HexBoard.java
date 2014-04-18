@@ -129,4 +129,10 @@ public class HexBoard
     {
         return this.spaces;
     }
+
+    public void setSpace(Space s, int index)
+    {
+        this.spaces.remove(index);
+        this.spaces.add(index, s);
+    }
 }
