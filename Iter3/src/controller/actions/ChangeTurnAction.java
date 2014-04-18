@@ -1,4 +1,6 @@
-package controller;
+package controller.actions;
+
+import controller.Facade;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
