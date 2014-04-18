@@ -125,4 +125,7 @@ class replayState implements GAMEState {
     public boolean changeTurn() {
         return false;
     }
+
+    //TODO
+    //Add getters for each controller, ex getTurnController(), getViewController(), etc etc 
 }
