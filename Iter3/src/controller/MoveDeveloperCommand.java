@@ -15,10 +15,6 @@ public class MoveDeveloperCommand extends Command {
 	public void undo(){
 
 	}
-
-	public void saveToStack(){
-
-	}
 	public String toString(){
         return null;
 	}

@@ -16,14 +16,9 @@ public class DrawFromDeckCommand extends Command {
 	public void execute(){
 		//card = gameInventory.drawCardFromDeck();
 		//playerController.addPalaceCard(card);
-		this.saveToStack();
 	}
 	public void undo(){
 		//playerController.removePalaceCard(card);
-	}
-
-	public void saveToStack(){
-		//c.add(this);
 	}
 
 	public String toString(){

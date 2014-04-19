@@ -25,7 +25,6 @@ public class PlaceDeveloperCommand extends Command {
 		playerController.setItem("developer", count-1);
 		s = boardController.getSelectedSpace();
 		boardController.placeDeveloper(s);
-		saveToStack();
 	}
 	*/
 	}
@@ -37,10 +36,6 @@ public class PlaceDeveloperCommand extends Command {
 		boardController.removeDeveloper(s);
 
 	*/
-	}
-
-	public void saveToStack(){
-
 	}
 
 	public String toString(){

@@ -26,7 +26,6 @@ public class PlaceThreeBlockCommand extends Command {
         gameController.setItem("threeBlock", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeBlock(s);
-        saveToStack();
     }
     */
     }
@@ -36,11 +35,7 @@ public class PlaceThreeBlockCommand extends Command {
         /*gameController.setItem("threeBlock", gameController.getItem("threeBlock")-1);
         boardController.removeBlock(s);*/
     }
-
-
-    public void saveToStack(){
-
-    }
+    
     public String toString(){
         return null;
     }

@@ -26,7 +26,6 @@ public class PlaceRiceTileCommand extends Command {
         gameController.setItem("riceTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
-        saveToStack();
     }
     */
     }
@@ -37,9 +36,6 @@ public class PlaceRiceTileCommand extends Command {
         boardController.removeTile(s);*/
     }
 
-    public void saveToStack(){
-
-    }
     public String toString(){
         return null;
     }

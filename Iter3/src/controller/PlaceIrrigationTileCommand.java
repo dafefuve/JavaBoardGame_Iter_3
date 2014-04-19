@@ -26,7 +26,6 @@ public class PlaceIrrigationTileCommand extends Command {
         gameController.setItem("irrigationTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
-        saveToStack();
     }
     */
     }
@@ -36,10 +35,7 @@ public class PlaceIrrigationTileCommand extends Command {
         /*gameController.setItem("irrigationTile", gameController.getItem("irrigationTile")-1);
         boardController.removeTile(s);*/
     }
-
-    public void saveToStack(){
-
-    }
+    
     public String toString(){
         return null;
     }

@@ -26,7 +26,6 @@ public class PlaceVillageTileCommand extends Command {
         gameController.setItem("villageTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
-        saveToStack();
     }
     */
     }
@@ -37,9 +36,6 @@ public class PlaceVillageTileCommand extends Command {
         boardController.removeTile(s);*/
     }
 
-    public void saveToStack(){
-
-    }
     public String toString(){
         return null;
     }
