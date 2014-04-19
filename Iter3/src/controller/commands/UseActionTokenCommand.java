@@ -1,4 +1,6 @@
-package controller;
+package controller.commands;
+
+import controller.Command;
 
 /*
  * Created by Will

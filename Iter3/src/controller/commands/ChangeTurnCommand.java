@@ -1,4 +1,8 @@
-package controller;
+package controller.commands;
+
+import controller.BoardController;
+import controller.Command;
+
 /*
  * Created by Will
  */

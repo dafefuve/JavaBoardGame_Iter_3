@@ -1,5 +1,7 @@
 package controller;
 
+import controller.commands.*;
+
 /**
  * Created by Horacio on 4/18/14.
  */
