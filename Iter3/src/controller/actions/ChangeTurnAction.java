@@ -1,7 +1,5 @@
 package controller.actions;
 
-import controller.Facade;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -10,6 +8,10 @@ import java.awt.event.ActionEvent;
  */
 public class ChangeTurnAction extends AbstractAction
 {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
     /*
     private Facade facade;
 
