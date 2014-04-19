@@ -10,7 +10,8 @@ import java.util.List;
 public class PlayerController {
     JavaPlayer player;
 
-    public PlayerController(JavaPlayer player){
+    public PlayerController(){
+        //todo find out how to give individual players
         this.player = player;
     }
 

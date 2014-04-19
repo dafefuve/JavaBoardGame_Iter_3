@@ -10,7 +10,8 @@ import java.util.List;
 public class GameController {
     private Game game;
 
-    public GameController(Game game){
+    public GameController(){
+        //todo find the reference to Game
         this.game = game;
     }
 
