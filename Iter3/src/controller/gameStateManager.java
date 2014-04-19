@@ -7,48 +7,53 @@ import java.util.HashMap;
 /**
  * Created by Daniel on 4/17/2014.
  */
-public class gameStateManager {
+public class GameStateManager {
     //Different game states
     gameState active;
     gameState festival;
+    gameState mainMenuState;
+    gameState pause;
     gameState planning;
     gameState replay;
-    gameState mainMenuState;
 
     //current state
     gameState currentState;
 
-    /*
-    active = new activeState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
-    festival = new festivalState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
-    planning = new planningState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
-    replay = new replayState(this, this.activeController, this.festivalController, this.planningController, this.replayController);
-    */
+    //Facade
+    Facade theFacade;
 
-    public gameStateManager()
+    public GameStateManager()
     {
-        //Default starting state is mainmenu
-        currentState = new mainMenuState();
+        //Default starting state is main Menu
+        theFacade = new Facade();
+
+        active = new activeState(this, theFacade);
+        festival = new festivalState(this, theFacade);
+        mainMenuState = new mainMenuState(this, theFacade);
+        pause = new pauseGameState(this, theFacade);
+        planning = new planningState(this, theFacade);
+        replay = new replayState(this, theFacade);
+
+        currentState = mainMenuState;
+
         currentState.bindKeys();
+
     }
 }
 interface gameState {
     //boolean changeTurn();
+    //TODO figure out how to change state and if that is determined by the kay the user presses;
     void bindKeys();
 }
 class activeState implements gameState {
-    ActiveController activeController;
-    FestivalController festivalController;
-    PlanningController planningController;
-    ReplayController replayController;
-    Facade gameFacade;
-    public activeState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
+
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public activeState(GameStateManager manager, Facade facade)
     {
-        gameFacade = facade;
-        activeController = aController;
-        festivalController = fController;
-        planningController = pController;
-        replayController = rController;
+        stateManager = manager;
+        theFacade = facade;
     }
 
     @Override
@@ -85,19 +90,74 @@ class activeState implements gameState {
     }
 }
 
-class planningState implements gameState {
-    ActiveController activeController;
-    FestivalController festivalController;
-    PlanningController planningController;
-    ReplayController replayController;
-    Facade gameFacade;
-    public planningState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
+class festivalState implements gameState {
+
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public festivalState(GameStateManager manager, Facade facade)
     {
-        gameFacade = facade;
-        activeController = aController;
-        festivalController = fController;
-        planningController = pController;
-        replayController = rController;
+        stateManager = manager;
+        theFacade = facade;
+    }
+
+    @Override
+    public void bindKeys()
+    {
+
+    }
+}
+
+class mainMenuState implements gameState{
+
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public mainMenuState(GameStateManager manager, Facade facade)
+    {
+        stateManager = manager;
+        theFacade = facade;
+    }
+    @Override
+    public void bindKeys()
+    {
+        //TODO
+        /*
+        HashMap<KeyStroke, Action> mainMenuActions = new HashMap<KeyStroke, Action>();
+        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction());
+        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0), new LoadGameAction());
+        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new QuitGameAction());
+
+         gameFacade.bindMainMenuKeys(activeActions);
+        */
+    }
+}
+
+class pauseGameState implements gameState{
+
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public pauseGameState(GameStateManager manager, Facade facade)
+    {
+        stateManager = manager;
+        theFacade = facade;
+    }
+
+    @Override
+    public void bindKeys() {
+
+    }
+}
+
+class planningState implements gameState {
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public planningState(GameStateManager manager, Facade facade)
+    {
+        stateManager = manager;
+        theFacade = facade;
     }
 
     @Override
@@ -135,62 +195,18 @@ class planningState implements gameState {
 }
 
 class replayState implements gameState {
-    ActiveController activeController;
-    FestivalController festivalController;
-    PlanningController planningController;
-    ReplayController replayController;
-    Facade gameFacade;
-    public replayState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
+    GameStateManager stateManager;
+    Facade theFacade;
+
+    public replayState(GameStateManager manager, Facade facade)
     {
-        gameFacade = facade;
-        activeController = aController;
-        festivalController = fController;
-        planningController = pController;
-        replayController = rController;
+        stateManager = manager;
+        theFacade = facade;
     }
 
     @Override
     public void bindKeys()
     {
 
-    }
-}
-
-class festivalState implements gameState {
-
-    ActiveController activeController;
-    FestivalController festivalController;
-    PlanningController planningController;
-    ReplayController replayController;
-    Facade gameFacade;
-    public festivalState(Facade facade, ActiveController aController, FestivalController fController, PlanningController pController, ReplayController rController)
-    {
-        gameFacade = facade;
-        activeController = aController;
-        festivalController = fController;
-        planningController = pController;
-        replayController = rController;
-    }
-    @Override
-    public void bindKeys()
-    {
-
-    }
-}
-
-class mainMenuState implements gameState
-{
-    @Override
-    public void bindKeys()
-    {
-        //TODO
-        /*
-        HashMap<KeyStroke, Action> mainMenuActions = new HashMap<KeyStroke, Action>();
-        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction());
-        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0), new LoadGameAction());
-        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new QuitGameAction());
-
-         gameFacade.bindMainMenuKeys(activeActions);
-        */
     }
 }

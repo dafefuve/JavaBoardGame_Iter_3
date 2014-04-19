@@ -18,7 +18,6 @@ public class Facade {
     private PlanningController planningController;
     private PlayerController playerController;
     private ReplayController replayController;
-    private ResourceController resourceController;
     private ViewController viewController;
 
     public Facade(){
@@ -31,7 +30,6 @@ public class Facade {
         planningController = new PlanningController();
         playerController = new PlayerController();
         replayController = new ReplayController();
-        resourceController = new ResourceController();
         viewController = new ViewController();
     }
 
@@ -70,10 +68,6 @@ public class Facade {
 
     public ReplayController getReplayController(){
         return replayController;
-    }
-
-    public ResourceController getResourceController(){
-        return resourceController;
     }
 
     public ViewController getViewController(){
