@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 import controller.Command;
