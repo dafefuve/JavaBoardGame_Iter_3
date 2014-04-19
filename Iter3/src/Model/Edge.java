@@ -27,6 +27,20 @@ public class Edge
         return this.s2;
     }
 
+    public Space getPartnerSpace(Space s)
+    {
+        Space spaceToReturn;
+        if (s.equals(this.getSpaceOne()))
+        {
+            spaceToReturn = this.getSpaceTwo();
+        }
+        else
+        {
+            spaceToReturn = this.getSpaceOne();
+        }
+        return spaceToReturn;
+    }
+
     public int getWeight()
     {
         return this.weight;
