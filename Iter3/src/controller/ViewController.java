@@ -10,6 +10,10 @@ import java.util.HashMap;
  */
 public class ViewController {
     view.MainView mainView;
+    public ViewController()
+    {
+        mainView = new view.MainView();
+    }
     public ViewController(view.MainView mainView)
     {
          this.mainView = mainView;
