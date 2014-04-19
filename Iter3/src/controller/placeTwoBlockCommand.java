@@ -4,9 +4,9 @@ package controller;
  */
 public class PlaceTwoBlockCommand extends Command {
     private BoardController boardController;
-    private GameComtroller gameController;
+    private GameController gameController;
     //private Space s;
-    public PlaceTwoBlockCommand(BoardController boardController, GameComtroller gameController){
+    public PlaceTwoBlockCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
         this.gameController=gameController;
     }

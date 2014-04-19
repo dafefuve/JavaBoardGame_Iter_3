@@ -4,9 +4,9 @@ package controller;
  */
 public class PlaceIrrigationTileCommand extends Command {
     private BoardController boardController;
-    private GameComtroller gameController;
+    private GameController gameController;
     //private Space s;
-    public PlaceIrrigationTileCommand(BoardController boardController, GameComtroller gameController){
+    public PlaceIrrigationTileCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
         this.gameController=gameController;
     }

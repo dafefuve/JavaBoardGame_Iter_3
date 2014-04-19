@@ -4,9 +4,9 @@ package controller;
  */
 public class PlacePalaceTileCommand extends Command {
 	private BoardController boardController;
-    private GameComtroller gameController;
+    private GameController gameController;
     //private Space s;
-	public PlacePalaceTileCommand(BoardController boardController, GameComtroller gameController){
+	public PlacePalaceTileCommand(BoardController boardController, GameController gameController){
 		this.boardController=boardController;
         this.gameController=gameController;
 	}

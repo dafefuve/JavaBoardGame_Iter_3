@@ -4,9 +4,9 @@ package controller;
  */
 public class PlaceOneBlockCommand extends Command {
  	private BoardController boardController;
-    private GameComtroller gameController;
+    private GameController gameController;
     //private Space s;
-    public PlaceOneBlockCommand(BoardController boardController, GameComtroller gameController){
+    public PlaceOneBlockCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
         this.gameController=gameController;
     }

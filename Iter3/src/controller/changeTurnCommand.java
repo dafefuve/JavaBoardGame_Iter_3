@@ -20,5 +20,6 @@ public class ChangeTurnCommand extends Command {
 
 	}
 	public String toString(){
-	}
+	    return "TODO this needs to be done change turn command";
+    }
 }

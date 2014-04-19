@@ -7,17 +7,17 @@ public class ActiveController
 {
     private BoardController boardController;
     private PlayerController playerController;
-    private ResourceController resourceController;
+    //private ResourceController resourceController;
     private ViewController viewController;
 
    //TODO restructure the constructor that the facade instantiates
     public ActiveController(){}
 
-    public ActiveController( BoardController b,  PlayerController p, ResourceController r, ViewController v )
+    public ActiveController( BoardController b,  PlayerController p/*, TODO check: ResourceController r*/, ViewController v )
     {
         boardController = b;
         playerController = p;
-        resourceController = r;
+        //resourceController = r;
         viewController = v;
 
         //Set up all key bindings -- SUPER OOP

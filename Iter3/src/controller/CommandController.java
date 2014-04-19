@@ -5,54 +5,74 @@ package controller;
  */
 public class CommandController {
 
-    public placeOneBlockCommand placeOneBlockCommand(BoardController boardController){
-        placeOneBlockCommand command = new placeOneBlockCommand(boardController);
-        return command;
+    public PlaceOneBlockCommand placeOneBlockCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceOneBlockCommand command = new PlaceOneBlockCommand(boardController);
+        // return command;
+        return null;
     }
 
-    public placeTwoBlockCommand placeTwoBlockCommand(BoardController boardController){
-        placeTwoBlockCommand command = new placeTwoBlockCommand(boardController);
-        return command;
+    public PlaceTwoBlockCommand placeTwoBlockCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceTwoBlockCommand command = new PlaceTwoBlockCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placeThreeBlockCommand placeThreeBlockCommand(BoardController boardController){
-        placeThreeBlockCommand command = new placeThreeBlockCommand(boardController);
-        return command;
+    public PlaceThreeBlockCommand placeThreeBlockCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceThreeBlockCommand command = new PlaceThreeBlockCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placeVillageTileCommand placeVillageTileCommand(BoardController boardController){
-        placeVillageTileCommand command = new placeVillageTileCommand(boardController);
-        return command;
+    public PlaceVillageTileCommand placeVillageTileCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceVillageTileCommand command = new PlaceVillageTileCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placeIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){
-        placeIrrigationTileCommand command = new placeIrrigationTileCommand(boardController);
-        return command;
+    public PlaceIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceIrrigationTileCommand command = new PlaceIrrigationTileCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placeRiceTileCommand placeRiceTileCommand(BoardController boardController){
-        placeRiceTileCommand command = new placeRiceTileCommand(boardController);
-        return command;
+    public PlaceRiceTileCommand placeRiceTileCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceRiceTileCommand command = new PlaceRiceTileCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placeDeveloperCommand placeDeveloperCommand(BoardController boardController){
-        placeDeveloperCommand command = new placeDeveloperCommand(boardController);
-        return command;
+    public PlaceDeveloperCommand placeDeveloperCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlaceDeveloperCommand command = new PlaceDeveloperCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public placePalaceTileCommand placePalaceTileCommand(BoardController boardController){
-        placePalaceTileCommand command = new placePalaceTileCommand(boardController);
-        return command;
+    public PlacePalaceTileCommand placePalaceTileCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //PlacePalaceTileCommand command = new PlacePalaceTileCommand(boardController);
+        //return command;
+        return null;
     }
 
-    public moveDeveloperCommand moveDeveloperCommand(BoardController boardController){
-        moveDeveloperCommand command = new moveDeveloperCommand(boardController);
-        return command;
+    public MoveDeveloperCommand moveDeveloperCommand(BoardController boardController){
+        //TODO this needs to be done, constructor needs the proper call
+        //MoveDeveloperCommand command = new MoveDeveloperCommand(boardController);
+        //return command;
+        return null;
     }
 
     public DrawFromDeckCommand DrawFromDeckCommand(BoardController boardController){
-        DrawFromDeckCommand command = new DrawFromDeckCommand();
-        return command;
+        //TODO this needs to be done, constructor needs the proper call
+        // DrawFromDeckCommand command = new DrawFromDeckCommand();
+        //return command;
+        return null;
     }
 
     //todo drawCardCommand
