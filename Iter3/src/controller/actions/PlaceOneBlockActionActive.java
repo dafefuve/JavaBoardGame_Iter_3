@@ -1,6 +1,7 @@
 package controller.actions;
 
 import controller.Command;
+import controller.CommandStackController;
 import controller.Facade;
 
 import javax.swing.*;
@@ -20,10 +21,10 @@ public class PlaceOneBlockActionActive extends AbstractAction
 
     public void actionPerformed(ActionEvent e)
     {
-        Facade.getViewController().placeOneBlock();
-        Command c = Facade.getCommandController().placeOneBlockCommand();
-        CommandStack.add(c);
-        Facade.getCommandController().execute(c);
+        //Facade.getViewController().placeOneBlock();
+        Command c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
+        facade.getCommandStackController().push(c);
+        facade.getCommandController().execute(c);
 
 
         // If we are in Planning mode, then we would not execute, but instead we would push to the planning mode's stack

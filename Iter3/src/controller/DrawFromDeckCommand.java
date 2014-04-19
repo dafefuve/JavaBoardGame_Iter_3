@@ -3,11 +3,11 @@ package controller;
 /*
  * Created by Will
  */
-public class DrawPalaceCardCommand extends Command {
+public class DrawFromDeckCommand extends Command {
 	//private GameController gameController;
 	//private PlayerController playerController;
 	//private PalaceCard card;
-	public DrawPalaceCardCommand(){
+	public DrawFromDeckCommand(){
 		//GameController gameInventory 
 		//this.playerController=playerController;
 		//this.gameController=gameController;

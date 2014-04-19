@@ -8,11 +8,10 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Horacio on 4/18/14.
  */
-public class PlaceTwoBlockActionActive {
-
+public class PlaceRiceTileActionActive {
     private Facade facade;
 
-    public PlaceTwoBlockActionActive(Facade facade)
+    public PlaceRiceTileActionActive(Facade facade)
     {
         this.facade = facade;
     }
@@ -20,7 +19,7 @@ public class PlaceTwoBlockActionActive {
     public void actionPerformed(ActionEvent e)
     {
         //facade.getViewController().placeOneBlock();
-        Command c = facade.getCommandController().placeTwoBlockCommand(facade.getBoardController());
+        Command c = facade.getCommandController().placeRiceTileCommand(facade.getBoardController());
         facade.getCommandStackController().push(c);
         facade.getCommandController().execute(c);
     }

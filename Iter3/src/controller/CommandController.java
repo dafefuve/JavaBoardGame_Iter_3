@@ -50,8 +50,8 @@ public class CommandController {
         return command;
     }
 
-    public DrawPalaceCardCommand DrawPalaceCardCommand(BoardController boardController){
-        DrawPalaceCardCommand command = new DrawPalaceCardCommand();
+    public DrawFromDeckCommand DrawFromDeckCommand(BoardController boardController){
+        DrawFromDeckCommand command = new DrawFromDeckCommand();
         return command;
     }
 
