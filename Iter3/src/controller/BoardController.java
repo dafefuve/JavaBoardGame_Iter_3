@@ -126,6 +126,33 @@ public class BoardController
         return shortestPath;
     }
 
+    public int getAPforShortestPath(Space start, Space end)
+    {
+        int ap = 0;
+
+        ArrayList<Space> theShortestPath = this.getShortestPath(start, end);
+        for (int i = 0; i < theShortestPath.size()-1; i++)
+        {
+            String firstSpaceLandType = theShortestPath.get(i).getTopTileComponent().getLandType();
+            String secondSpaceLandType = theShortestPath.get(i+1).getTopTileComponent().getLandType();
+
+            if (firstSpaceLandType.equals(secondSpaceLandType))
+            {
+                ap+=0;  //Just to indicate that there is no AP cost in moving between same land types
+            }
+            else if (firstSpaceLandType.equals("Mountain") || secondSpaceLandType.equals("Mountain"))
+            {
+                ap+=2;   //indicates 2 AP cost in going from Mountain to Central Java
+            }
+            else
+            {
+                ap+=1;  //indicates 1 AP cost in moving between different land types
+            }
+        }
+
+        return ap;
+    }
+
     public HexBoard getHexBoard()
     {
         return this.hexBoard;
