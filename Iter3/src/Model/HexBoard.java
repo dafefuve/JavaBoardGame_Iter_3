@@ -10,6 +10,7 @@ public class HexBoard
 {
     ArrayList<Edge> edges;
     ArrayList<Space> spaces;
+    ArrayList<GraphDistance> distances;
 
     public HexBoard()
     {
@@ -120,6 +121,22 @@ public class HexBoard
         return neighbors;
     }
 
+    public GraphDistance getDistanceForEdge(Edge e)
+    {
+        boolean foundDistance = false; int i = 0;
+        GraphDistance gd = new GraphDistance(0, e);
+        while (!foundDistance)
+        {
+            if (this.getDistances().get(i).getCorrespondingEdge().equals(e))
+            {
+                gd = this.getDistances().get(i);
+                foundDistance = true;
+            }
+            i++;
+        }
+        return gd;
+    }
+
     public ArrayList<Edge> getEdges()
     {
         return this.edges;
@@ -128,6 +145,11 @@ public class HexBoard
     public ArrayList<Space> getSpaces()
     {
         return this.spaces;
+    }
+
+    public ArrayList<GraphDistance> getDistances()
+    {
+        return this.distances;
     }
 
     public void setSpace(Space s, int index)

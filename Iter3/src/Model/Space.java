@@ -44,6 +44,11 @@ public class Space
         land.push(tileComponent);
     }
 
+    public TileComponent getTopTileComponent()
+    {
+        return this.land.get(this.land.size());
+    }
+
     public Integer getLevel(){
         if(!land.empty())
             return land.size();
