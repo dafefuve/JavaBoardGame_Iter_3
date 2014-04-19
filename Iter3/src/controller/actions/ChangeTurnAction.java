@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
  */
 public class ChangeTurnAction extends AbstractAction
 {
+    /*
     private Facade facade;
 
     public ChangeTurnAction(Facade facade)
@@ -22,4 +23,5 @@ public class ChangeTurnAction extends AbstractAction
         Facade.getViewController().changeTurn();
         Facade.getTurnController().changeTurn();
     }
+    */
 }
