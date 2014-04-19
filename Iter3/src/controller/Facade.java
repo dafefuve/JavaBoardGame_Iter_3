@@ -1,6 +1,8 @@
 package controller;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 /**
  * Created by Daniel on 4/15/2014.
@@ -76,6 +78,24 @@ public class Facade {
 
     public ViewController getViewController(){
         return viewController;
+    }
+
+    public void bindMainMenuKeys(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //Pass key bindings to the view controller which will add them to the main view
+        viewController.recieveMainMenuKeyBindings(keyBindings);
+    }
+
+    public void bindActiveKeys(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //Pass key bindings to the view controller which will add them to the main view
+        viewController.recieveActiveKeyBindings(keyBindings);
+    }
+
+    public void bindPlanningKeys(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //Pass key bindings to the view controller which will add them to the main view
+        viewController.recievePlanningKeyBindings(keyBindings);
     }
 
     /*TODO need to reconsider this methods

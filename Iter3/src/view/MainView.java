@@ -150,4 +150,19 @@ public class MainView extends JFrame
         System.out.println("got here2");
         */
     }
+
+    public void registerMainMenuKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //DO SOMETHING
+    }
+
+    public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //DO SOMETHING
+    }
+
+    public void registerPlanningKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        //DO SOMETHING
+    }
 }

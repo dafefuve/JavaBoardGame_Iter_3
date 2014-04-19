@@ -2,15 +2,19 @@ package controller;
 
 import view.ViewTest;
 
+import javax.swing.*;
+import java.util.HashMap;
+
 /**
  * Created by alexbujduveanu on 4/15/14.
  */
 public class ViewController {
-    //MainView mainView;
-    //public ViewController(//MainView mainView)
-   // {
-  //      this.mainView = mainView;
-   // }
+    view.MainView mainView;
+    public ViewController(view.MainView mainView)
+    {
+         this.mainView = mainView;
+    }
+
     public void initializeView(String[] players)
     {
 
@@ -26,5 +30,20 @@ public class ViewController {
     public void changeTurn()
     {
 
+    }
+
+    public void recieveMainMenuKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        mainView.registerMainMenuKeyBindings(keyBindings);
+    }
+
+    public void recieveActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        mainView.registerActiveKeyBindings(keyBindings);
+    }
+
+    public void recievePlanningKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    {
+        mainView.registerPlanningKeyBindings(keyBindings);
     }
 }
