@@ -2,10 +2,10 @@ package controller;
 /*
  * Created by Will
  */
-public class changeTurnCommand extends Command {
+public class ChangeTurnCommand extends Command {
 	private BoardController boardController;
 
-	public changeTurnCommand(){
+	public ChangeTurnCommand(){
 		//this.boardController=boardController;
 	}
 

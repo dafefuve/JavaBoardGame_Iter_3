@@ -2,10 +2,10 @@ package controller;
 /*
  * Created by Will
  */
-public class moveDeveloperCommand extends Command {
+public class MoveDeveloperCommand extends Command {
 	private BoardController boardController;
 
-	public moveDeveloperCommand(BoardController boardController){
+	public MoveDeveloperCommand(BoardController boardController){
 		this.boardController=boardController;
 	}
 

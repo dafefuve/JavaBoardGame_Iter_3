@@ -2,7 +2,7 @@ package controller;
 /*
  * Created by Will
  */
-public class placeThreeBlockCommand extends Command {
+public class PlaceThreeBlockCommand extends Command {
 	private BoardController boardController;
     private GameComtroller gameController;
     //private Space s;

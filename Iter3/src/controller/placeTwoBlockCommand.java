@@ -2,7 +2,7 @@ package controller;
 /*
  * Created by Will
  */
-public class placeTwoBlockCommand extends Command {
+public class PlaceTwoBlockCommand extends Command {
     private BoardController boardController;
     private GameComtroller gameController;
     //private Space s;

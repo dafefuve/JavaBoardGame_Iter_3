@@ -2,7 +2,7 @@ package controller;
 /*
  * Created by Will
  */
-public class placeVillageTileCommand extends Command {
+public class PlaceVillageTileCommand extends Command {
     private BoardController boardController;
     private GameComtroller gameController;
     //private Space s;
