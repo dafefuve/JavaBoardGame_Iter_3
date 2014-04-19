@@ -80,7 +80,7 @@ class activeState implements gameState {
         //Etc
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(gameFacade));
 
-        gameFacade.bindKeys(activeActions);
+        gameFacade.bindActiveKeys(activeActions);
         */
     }
 }
@@ -128,7 +128,7 @@ class planningState implements gameState {
         //ChangeTurnPlanningAction will prompt user to end the planning mode (i.e., save or discard changes)
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnPlanningAction(gameFacade));
 
-        gameFacade.bindKeys(activeActions);
+        gameFacade.bindPlanningKeys(activeActions);
         */
 
     }
@@ -189,6 +189,8 @@ class mainMenuState implements gameState
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction());
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0), new LoadGameAction());
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new QuitGameAction());
+
+         gameFacade.bindMainMenuKeys(activeActions);
         */
     }
 }
