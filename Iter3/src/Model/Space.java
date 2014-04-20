@@ -44,6 +44,11 @@ public class Space
         land.push(tileComponent);
     }
 
+    public void removeTopTileComponent()
+    {
+        land.pop();
+    }
+
     public TileComponent getTopTileComponent()
     {
         return this.land.get(this.land.size());
