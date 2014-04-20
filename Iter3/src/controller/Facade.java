@@ -54,7 +54,7 @@ public class Facade {
         return festivalController;
     }
 
-    public GameController gameController(){
+    public GameController getGameController(){
         return gameController;
     }
 
