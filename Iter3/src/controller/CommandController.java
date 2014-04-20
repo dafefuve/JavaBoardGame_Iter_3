@@ -6,7 +6,8 @@ import controller.commands.*;
  * Created by Horacio on 4/18/14.
  */
 public class CommandController {
-
+    public CommandController(){
+    }
     public PlaceOneBlockCommand placeOneBlockCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
         //PlaceOneBlockCommand command = new PlaceOneBlockCommand(boardController);
@@ -28,11 +29,11 @@ public class CommandController {
         return null;
     }
 
-    public PlaceVillageTileCommand placeVillageTileCommand(BoardController boardController){
+    public PlaceVillageTileCommand placeVillageTileCommand(BoardController boardController, GameController gameController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceVillageTileCommand command = new PlaceVillageTileCommand(boardController);
-        //return command;
-        return null;
+        PlaceVillageTileCommand command = new PlaceVillageTileCommand(boardController, gameController);
+        return command;
+        //return null;
     }
 
     public PlaceIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){

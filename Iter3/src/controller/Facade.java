@@ -25,13 +25,13 @@ public class Facade {
         activeController = new ActiveController();
         boardController = new BoardController();
         commandStackController = new CommandStackController();
-        commandController = new CommandController();
         festivalController = new FestivalController();
         gameController = new GameController();
         planningController = new PlanningController();
         playerController = new PlayerController();
         replayController = new ReplayController();
         viewController = new ViewController();
+        commandController = new CommandController();
         tempCommand = new TempCommand(this);
     }
 

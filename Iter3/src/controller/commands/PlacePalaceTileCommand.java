@@ -5,6 +5,7 @@ import controller.Command;
 import controller.GameController;
 import model.TileComponent;
 import model.LandType;
+import model.Palace;
 import model.Tile;
 import model.Space;
 
@@ -16,9 +17,11 @@ public class PlacePalaceTileCommand extends Command {
     private GameController gameController;
     //private Space s;
     private int location;
-    public PlacePalaceTileCommand(BoardController boardController, GameController gameController){
+    private int level;
+    public PlacePalaceTileCommand(BoardController boardController, GameController gameController, int level){
         this.boardController=boardController;
         this.gameController=gameController;
+        this.level=level;
     }
 
     public boolean execute(){
@@ -36,6 +39,7 @@ public class PlacePalaceTileCommand extends Command {
             Space s = boardController.getSpaceFromID(location);
             TileComponent tc = new TileComponent(new LandType("palace"), new Tile());
             s.addTileComponent(tc);
+            s.setPalace(new Palace(level));
             return true;
         }
         return false;
