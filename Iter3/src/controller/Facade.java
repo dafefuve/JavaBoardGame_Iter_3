@@ -19,6 +19,7 @@ public class Facade {
     private PlayerController playerController;
     private ReplayController replayController;
     private ViewController viewController;
+    private TempCommand tempCommand;
 
     public Facade(){
         activeController = new ActiveController();
@@ -31,13 +32,12 @@ public class Facade {
         playerController = new PlayerController();
         replayController = new ReplayController();
         viewController = new ViewController();
+        tempCommand = new TempCommand(this);
     }
-
 
     public ActiveController getActiveController(){
         return activeController;
     }
-
     public BoardController getBoardController(){
         return boardController;
     }
@@ -72,6 +72,10 @@ public class Facade {
 
     public ViewController getViewController(){
         return viewController;
+    }
+
+    public TempCommand getTempCommand(){
+        return tempCommand;
     }
 
     public void bindMainMenuKeys(HashMap<KeyStroke, Action> keyBindings)

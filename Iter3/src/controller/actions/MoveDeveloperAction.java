@@ -18,9 +18,8 @@ public class MoveDeveloperAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeOneBlock();
+        //facade.getViewController().moveDeveloper();
         Command c = facade.getCommandController().moveDeveloperCommand(facade.getBoardController());
-        facade.getCommandStackController().push(c);
-        facade.getCommandController().execute(c);
+        facade.getTempCommand().setTempCommand(c);
     }
 }

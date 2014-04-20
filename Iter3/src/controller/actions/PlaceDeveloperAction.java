@@ -8,19 +8,18 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Horacio on 4/18/14.
  */
-public class PlaceDeveloperActionPlanning {
+public class PlaceDeveloperAction {
     private Facade facade;
 
-    public PlaceDeveloperActionPlanning(Facade facade)
+    public PlaceDeveloperAction(Facade facade)
     {
         this.facade = facade;
     }
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeOneBlock();
+        //facade.getViewController().placeDeveloper();
         Command c = facade.getCommandController().placeDeveloperCommand(facade.getBoardController());
-        facade.getCommandStackController().push(c);
-
+        facade.getTempCommand().setTempCommand(c);
     }
 }

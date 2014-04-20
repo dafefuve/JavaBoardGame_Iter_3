@@ -2,18 +2,18 @@ package controller.commands;
 
 import controller.BoardController;
 import controller.Command;
+import model.Developer;
 
 /*
  * Created by Will
  */
 public class MoveDeveloperCommand extends Command {
 	private BoardController boardController;
-	/*
-	private Space a;
-	private Space b;
-	private locationa;
-	private locationb;
-	*/
+
+
+	private int destination;
+
+
 	public MoveDeveloperCommand(BoardController boardController, Developer d){
 		this.boardController=boardController;
 	}
@@ -33,9 +33,9 @@ public class MoveDeveloperCommand extends Command {
         return null;
 	}
 	public void setLocation(int l){
-        locationb=l;
+        destination=l;
     }
     public int getLocation(int l){
-        return locationb;
+        return destination;
     }
 }

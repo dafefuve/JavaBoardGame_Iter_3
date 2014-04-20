@@ -8,19 +8,18 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Horacio on 4/18/14.
  */
-public class PlaceIrrigationTileActionActive {
+public class PlaceIrrigationTileAction {
     private Facade facade;
 
-    public PlaceIrrigationTileActionActive(Facade facade)
+    public PlaceIrrigationTileAction(Facade facade)
     {
         this.facade = facade;
     }
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeOneBlock();
+        //facade.getViewController().placeIrrigationTile();
         Command c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
-        facade.getCommandStackController().push(c);
-        facade.getCommandController().execute(c);
+        facade.getTempCommand().setTempCommand(c);
     }
 }

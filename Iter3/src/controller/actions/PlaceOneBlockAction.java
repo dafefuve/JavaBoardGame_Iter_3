@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 /**
  * Created by alexbujduveanu on 4/17/14.
  */
-public class PlaceOneBlockActionActive extends AbstractAction
+public class PlaceOneBlockAction extends AbstractAction
 {
     private Facade facade;
 
-    public PlaceOneBlockActionActive(Facade facade)
+    public PlaceOneBlockAction(Facade facade)
     {
         this.facade = facade;
     }
@@ -23,8 +23,7 @@ public class PlaceOneBlockActionActive extends AbstractAction
     {
         //Facade.getViewController().placeOneBlock();
         Command c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
-        facade.getCommandStackController().push(c);
-        facade.getCommandController().execute(c);
+        facade.getTempCommand().setTempCommand(c);
 
 
         // If we are in Planning mode, then we would not execute, but instead we would push to the planning mode's stack

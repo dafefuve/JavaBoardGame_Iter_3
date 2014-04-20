@@ -54,4 +54,4 @@ public class PlaceThreeBlockCommand extends Command {
         return location;
     }
 }
-}
+
