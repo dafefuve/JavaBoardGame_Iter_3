@@ -138,8 +138,16 @@ public class BoardPanel extends JPanel
        {
            for(int j = 0; j < 19; j++)
            {
+               //Draw the texture in hex shape
+               BufferedImage texture = board.getStackAt(i, j).peek().getImage();
+               g2.setPaint(new TexturePaint(texture, new Rectangle(300, 300, 300, 300)));
+               g2.fillPolygon(board.getStackAt(i,j).peek().getPolygon());
 
-
+               //Set outline for the shape
+               g2.setColor(Color.WHITE);
+               g2.setStroke(new BasicStroke(1f));
+               g2.drawPolygon(board.getStackAt(i,j).peek().getPolygon());
+               /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
                        || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]
                        || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[2] )
@@ -186,7 +194,7 @@ public class BoardPanel extends JPanel
                    g2.setColor(c);
                    g2.fillPolygon(theBoard[i][j].getBoardHex().getPolygon());
                }
-
+            */
            }
        }
    }

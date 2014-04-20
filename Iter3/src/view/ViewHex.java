@@ -42,4 +42,9 @@ public abstract class ViewHex
     {
         return centerY;
     }
+
+    public Polygon getPolygon()
+    {
+        return hex;
+    }
 }
