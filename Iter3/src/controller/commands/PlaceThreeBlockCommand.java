@@ -32,6 +32,7 @@ public class PlaceThreeBlockCommand extends Command {
         gameController.setItem("threeBlock", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeBlock(s);
+        return true;
     }
     */
         return true;

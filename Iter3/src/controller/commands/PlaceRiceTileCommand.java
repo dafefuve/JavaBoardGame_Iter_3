@@ -32,6 +32,7 @@ public class PlaceRiceTileCommand extends Command {
         gameController.setItem("riceTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
+        return true;
     }
     */
         return true;

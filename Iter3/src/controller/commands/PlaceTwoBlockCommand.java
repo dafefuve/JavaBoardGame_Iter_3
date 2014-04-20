@@ -32,6 +32,7 @@ public class PlaceTwoBlockCommand extends Command {
         gameController.setItem("twoBlock", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeBlock(s);
+        return true;
     }
     */
         return false;

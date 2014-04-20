@@ -11,6 +11,7 @@ public class PlaceDeveloperCommand extends Command {
 	private BoardController boardController;
 	private PlayerController playerController;
 	//private Space s;
+	//SO WE NEED COORDINATES INSTEAD OF A SPACE
 	public PlaceDeveloperCommand(BoardController boardController, PlayerController playerController){
 		this.boardController=boardController;
 		this.playerController=playerController;
@@ -30,6 +31,7 @@ public class PlaceDeveloperCommand extends Command {
 		playerController.setItem("developer", count-1);
 		s = boardController.getSelectedSpace();
 		boardController.placeDeveloper(s);
+		return true;
 	}
 	*/
 		return true;

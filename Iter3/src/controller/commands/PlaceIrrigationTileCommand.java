@@ -33,6 +33,8 @@ public class PlaceIrrigationTileCommand extends Command {
         gameController.setItem("irrigationTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
+        //TODO SCORING
+        return true;
     }
     */
         return true;

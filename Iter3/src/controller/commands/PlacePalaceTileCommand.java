@@ -32,6 +32,7 @@ public class PlacePalaceTileCommand extends Command {
         gameController.setItem("palaceTile", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeTile(s);
+        return true;
     }
     */
        return true;
