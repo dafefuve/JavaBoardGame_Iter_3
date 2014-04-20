@@ -11,11 +11,13 @@ public class ViewBoard
 {
     private Polygon[][] boardPolygons;
     private ViewHexStack[][] boardImages;
+    private boolean[][] selected;
 
     public ViewBoard(int rows, int cols)
     {
         boardPolygons = new Polygon[rows][cols];
         boardImages = new ViewHexStack[rows][cols];
+        selected = new boolean[rows][cols];
         //Used to set up bottom layer of hex tiles, i.e., just the polygons and their coordinates, NO IMAGES yet
         initializeBaseLayer();
         initializeHardCodedTiles();
@@ -63,6 +65,7 @@ public class ViewBoard
                 } else {
                     yCoord = firstY;
                 }
+                selected[i][j] = false;
             }
 
             //firstY = secondY + 26;
@@ -243,5 +246,20 @@ public class ViewBoard
     public ViewHexStack[][] getImages()
     {
         return boardImages;
+    }
+
+    public void setSelectedAt(int i, int j)
+    {
+        selected[i][j] = true;
+    }
+
+    public void setDeselectedAt(int i, int j)
+    {
+        selected[i][j] = false;
+    }
+
+    public boolean getSelectedAt(int i, int j)
+    {
+        return selected[i][j];
     }
 }

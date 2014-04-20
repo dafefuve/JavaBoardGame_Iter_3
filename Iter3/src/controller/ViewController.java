@@ -50,4 +50,9 @@ public class ViewController {
     {
         mainView.registerPlanningKeyBindings(keyBindings);
     }
+
+    public int getCurrentSpace()
+    {
+        return mainView.getCurrentSpace();
+    }
 }

@@ -23,4 +23,6 @@ public class ViewHexStack
     {
         return s.peek();
     }
+
+    public void popFromStack(){s.pop();}
 }

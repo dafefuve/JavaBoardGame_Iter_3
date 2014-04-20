@@ -165,4 +165,10 @@ public class MainView extends JFrame
     {
         //DO SOMETHING
     }
+
+    public int getCurrentSpace()
+    {
+        //todo
+        return 1;
+    }
 }
