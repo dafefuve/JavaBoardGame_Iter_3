@@ -37,9 +37,9 @@ public class PlacePalaceTileCommand extends Command {
         }
         else if(!s.getTopTileComponent().getLandType().equals("village")){
             //TODO make tile components more OOP and less POOP
-            System.out.println("The tile atop the space is not a village")
+            System.out.println("The tile atop the space is not a village");
         }
-        else if(){
+        else if(true){
             //so here we need to check if the current player has the right to build a palace... if they are the player
             //with the highest game piece or the player with the sequence of highest game pieces. Ties do not count
         }
@@ -55,12 +55,10 @@ public class PlacePalaceTileCommand extends Command {
         return false;
     }
     public void undo(){
-        //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
-        //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
         gameController.getInventory().setItem("palaceTile", gameController.getInventory().getItem("palaceTile")+1);
-         playerController.setItem("famePoints",playerController.getItem("famePoints")-level/2);
-        s.removeTopTileComponent();
-        s.setPalace(null);
+        playerController.setItem("famePoints",playerController.getItem("famePoints")-level/2);
+        boardController.getSpaceFromID(location).removeTopTileComponent();
+        boardController.getSpaceFromID(location).setPalace(null);
     }
 
     public String toString(){

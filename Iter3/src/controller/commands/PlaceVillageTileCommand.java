@@ -37,8 +37,6 @@ public class PlaceVillageTileCommand extends Command {
         return false;
     }
     public void undo(){
-        //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
-        //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
         gameController.getInventory().setItem("villageTile", gameController.getInventory().getItem("villageTile")+1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }

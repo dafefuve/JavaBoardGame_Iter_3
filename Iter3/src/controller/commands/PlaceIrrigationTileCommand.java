@@ -30,14 +30,13 @@ public class PlaceIrrigationTileCommand extends Command {
             System.out.println("No irrigation tiles left! Broke the rules!");
             //then do thingie to notify player that they broke the rules
         }
-        else if(){
+        else if(true){
             //Here we will check if the target location is directly on the board, i.e the target space has no other tiles on it
         }
-        else if(){
+        else if(true){
             //It is illegal to place the tiles directly on the borders of the board, and here we check that
         }
         else {
-        //TODO I assume boardController has a sort of placeTile() method
             gameController.getInventory().setItem("irrigationTile", count-1);
             Space s = boardController.getSpaceFromID(location);
             TileComponent tc = new TileComponent(new LandType("irrigation"), new Tile());
@@ -47,8 +46,6 @@ public class PlaceIrrigationTileCommand extends Command {
         return false;
     }
     public void undo(){
-        //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
-        //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
         gameController.getInventory().setItem("irrigationTile", gameController.getInventory().getItem("irrigationTile")+1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
