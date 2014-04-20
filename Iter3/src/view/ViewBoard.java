@@ -33,6 +33,7 @@ public class ViewBoard
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 19; j++) {
                 boardImages[i][j] = new ViewHexStack();
+
                 Polygon hex = new Polygon();
                 for(int k = 0; k<6; k++)
                 {
@@ -40,8 +41,17 @@ public class ViewBoard
                     int y = (int) (yCoord + 30*Math.sin(2*k*Math.PI/6));
                     hex.addPoint(x, y);
                 }
+
+                if(i < 8)
+                {
+                    boardImages[i][j].pushIntoStack(new ViewHexHighland());
+                }
+                else
+                {
+                    boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                }
                 boardPolygons[i][j] = hex;
-                boardImages[i][j].pushIntoStack(new BaseViewHex());
+                //boardImages[i][j].pushIntoStack(new BaseViewHex());
                 xCoord += 45;
 
                 if (j % 2 == 0) {
@@ -60,8 +70,9 @@ public class ViewBoard
         }
     }
 
-    public void initializeHardCodedTiles()
+   public void initializeHardCodedTiles()
     {
+        /*
         //Set highland tiles
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 19; j++) {
@@ -75,7 +86,7 @@ public class ViewBoard
                 boardImages[i][j].pushIntoStack(new ViewHexLowland());
             }
         }
-
+*/
         //Hardcode awkward board shape
         //Note that the stack size is 2 but the 'level' of the tile at this point is only 0
         boardImages[1][4].pushIntoStack(new ViewHexCentralJava());
