@@ -11,7 +11,7 @@ public class ViewHexStack
 
     public ViewHexStack()
     {
-
+        s = new Stack<ViewHex>();
     }
 
     public void pushIntoStack(ViewHex vh)
