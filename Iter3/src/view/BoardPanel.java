@@ -39,10 +39,10 @@ public class BoardPanel extends JPanel
        readTextures();
        setUpIrrigationCoordinates();
 
-       initializeHexes();
-       setUpMainLand();
+       //initializeHexes();
+       //setUpMainLand();
        setUpKeyListener();
-       highlightDoubleStartSpace();
+       //highlightDoubleStartSpace();
 
        //hacky temporary solution
        panel = this;
@@ -85,6 +85,8 @@ public class BoardPanel extends JPanel
         irrigationIDs[2] = 160;
     }
 
+    /*
+
    public void initializeHexes()
    {
        int xCoord = 45;
@@ -119,7 +121,7 @@ public class BoardPanel extends JPanel
            yCoord = firstY;
        }
    }
-
+*/
    @Override
    protected void paintComponent(Graphics g) {
        super.paintComponent(g);
@@ -139,14 +141,14 @@ public class BoardPanel extends JPanel
            for(int j = 0; j < 19; j++)
            {
                //Draw the texture in hex shape
-               BufferedImage texture = board.getStackAt(i, j).peek().getImage();
+               BufferedImage texture = board.getStackAt(i, j).peekIntoStack().getImage();
                g2.setPaint(new TexturePaint(texture, new Rectangle(300, 300, 300, 300)));
-               g2.fillPolygon(board.getStackAt(i,j).peek().getPolygon());
+               g2.fillPolygon(board.getStackAt(i,j).peekIntoStack().getPolygon());
 
                //Set outline for the shape
                g2.setColor(Color.WHITE);
                g2.setStroke(new BasicStroke(1f));
-               g2.drawPolygon(board.getStackAt(i,j).peek().getPolygon());
+               g2.drawPolygon(board.getStackAt(i,j).peekIntoStack().getPolygon());
                /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
                        || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]
@@ -209,27 +211,27 @@ public class BoardPanel extends JPanel
                //Move up
                if(e.getKeyChar() == '8')
                {
-                   highlightDoubleSpace(8);
+                   //highlightDoubleSpace(8);
                }
                else if(e.getKeyChar() == '9')
                {
-                   highlightDoubleSpace(9);
+                  // highlightDoubleSpace(9);
                }
                else if(e.getKeyChar() == '3')
                {
-                   highlightDoubleSpace(3);
+                  // highlightDoubleSpace(3);
                }
                else if(e.getKeyChar() == '2')
                {
-                   highlightDoubleSpace(2);
+                  // highlightDoubleSpace(2);
                }
                else if(e.getKeyChar() == '1')
                {
-                   highlightDoubleSpace(1);
+                   //highlightDoubleSpace(1);
                }
                else if(e.getKeyChar() == '7')
                {
-                   highlightDoubleSpace(7);
+                   //highlightDoubleSpace(7);
                }
                else if(e.getKeyChar() == 'w')
                {
@@ -256,7 +258,7 @@ public class BoardPanel extends JPanel
            }
        });
    }
-
+    /*
     public void highlightSpace(int key)
     {
         int newRow;
@@ -1163,6 +1165,7 @@ public class BoardPanel extends JPanel
         theBoard[13][12].getBoardHex().resetLowlands();
 
     }
+    */
 }
 
 
