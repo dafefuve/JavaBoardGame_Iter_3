@@ -11,6 +11,7 @@ public class PlacePalaceTileCommand extends Command {
 	private BoardController boardController;
     private GameController gameController;
     //private Space s;
+    private int location;
 	public PlacePalaceTileCommand(BoardController boardController, GameController gameController){
 		this.boardController=boardController;
         this.gameController=gameController;
@@ -44,5 +45,11 @@ public class PlacePalaceTileCommand extends Command {
 
     public String toString(){
         return null;
+    }
+    public void setLocation(int l){
+        location=l;
+    }
+    public int getLocation(int l){
+        return location;
     }
 }

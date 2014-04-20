@@ -11,8 +11,10 @@ public class MoveDeveloperCommand extends Command {
 	/*
 	private Space a;
 	private Space b;
+	private locationa;
+	private locationb;
 	*/
-	public MoveDeveloperCommand(BoardController boardController){
+	public MoveDeveloperCommand(BoardController boardController, Developer d){
 		this.boardController=boardController;
 	}
 
@@ -30,4 +32,10 @@ public class MoveDeveloperCommand extends Command {
 	public String toString(){
         return null;
 	}
+	public void setLocation(int l){
+        locationb=l;
+    }
+    public int getLocation(int l){
+        return locationb;
+    }
 }

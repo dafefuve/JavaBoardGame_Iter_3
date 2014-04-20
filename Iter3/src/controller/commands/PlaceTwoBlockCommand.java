@@ -11,6 +11,7 @@ public class PlaceTwoBlockCommand extends Command {
     private BoardController boardController;
     private GameController gameController;
     //private Space s;
+    private int location;
     public PlaceTwoBlockCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
         this.gameController=gameController;
@@ -33,7 +34,7 @@ public class PlaceTwoBlockCommand extends Command {
         boardController.placeBlock(s);
     }
     */
-        return true;
+        return false;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
@@ -48,5 +49,11 @@ public class PlaceTwoBlockCommand extends Command {
     }
     public String toString(){
         return null;
+    }
+    public void setLocation(int l){
+        location=l;
+    }
+    public int getLocation(int l){
+        return location;
     }
 }

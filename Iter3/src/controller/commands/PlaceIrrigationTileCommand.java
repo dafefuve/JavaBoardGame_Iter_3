@@ -11,6 +11,7 @@ public class PlaceIrrigationTileCommand extends Command {
     private BoardController boardController;
     private GameController gameController;
     //private Space s;
+    private int location;
     public PlaceIrrigationTileCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
         this.gameController=gameController;
@@ -20,6 +21,7 @@ public class PlaceIrrigationTileCommand extends Command {
     //TODO a method that finds the space that the cursor is currently hovering over
     //TODO add a method in that places a singular tile onto a space on the board 
     //TODO I assume there is a method in gameController that accesses the communal inventory
+    //TODO Implement scoring rules
     /*
     int count = gameController.getItem("irrigationTile");
     if(count<=0){
@@ -44,5 +46,11 @@ public class PlaceIrrigationTileCommand extends Command {
     
     public String toString(){
         return null;
+    }
+    public void setLocation(int l){
+        location=l;
+    }
+    public int getLocation(int l){
+        return location;
     }
 }

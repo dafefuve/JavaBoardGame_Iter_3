@@ -33,7 +33,7 @@ public class PlaceVillageTileCommand extends Command {
         boardController.placeTile(s);
     }
     */
-        return true;
+        return false;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space

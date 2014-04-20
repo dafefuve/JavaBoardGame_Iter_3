@@ -49,6 +49,11 @@ public class CommandStack {
     }
 
     public void saveFile(String fileName){
+        /*
+        So for cards we're just going to save the two ID strings
+        For spaces we save the coordinates
+        */
+        /*
         Stack<Command> temp = new Stack();
         while(!stack.empty()){
             temp.push(stack.pop());

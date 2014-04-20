@@ -14,7 +14,7 @@ public class UseActionTokenCommand extends Command {
 
     public boolean execute(){
         //playerController.setItem("actionToken", playerController.getItem("actionToken")+1);
-        return true;
+        return false;
     }
     public void undo(){
         //playerController.setItem("actionToken", playerController.getItem("actionToken")-1);
