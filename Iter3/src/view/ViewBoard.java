@@ -14,6 +14,7 @@ public class ViewBoard
 
     public ViewBoard(int rows, int cols)
     {
+        boardPolygons = new Polygon[rows][cols];
         boardImages = new ViewHexStack[rows][cols];
         //Used to set up bottom layer of hex tiles, i.e., just the polygons and their coordinates, NO IMAGES yet
         initializeBaseLayer();
@@ -31,6 +32,7 @@ public class ViewBoard
         //15 rows 19 columns
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 19; j++) {
+                boardImages[i][j] = new ViewHexStack();
                 Polygon hex = new Polygon();
                 for(int k = 0; k<6; k++)
                 {
