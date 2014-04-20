@@ -20,6 +20,7 @@ public class ChangeTurnAction extends AbstractAction
         this.facade = facade;
     }
 
+
     public void actionPerformed(ActionEvent e)
     {
         Facade.getViewController().changeTurn();
