@@ -22,16 +22,12 @@ public class PlaceVillageTileCommand extends Command {
     }
 
     public boolean execute(){
-    //TODO a method that finds the space that the cursor is currently hovering over
-    //TODO add a method in BoardController that places a singular tile onto a space on the board 
-    //TODO I assume there is a method in gameController that accesses the communal inventory
-        int count = gameController.getInventory().getItem("villageTile");
+    int count = gameController.getInventory().getItem("villageTile");
         if(count<=0){
             System.out.println("No village tiles left! Broke the rules!");
             //then do thingie to notify player that they broke the rules
         }
         else {
-        //TODO I assume boardController has a sort of placeTile() method
             gameController.getInventory().setItem("villageTile", count-1);
             Space s = boardController.getSpaceFromID(location);
             TileComponent tc = new TileComponent(new LandType("village"), new Tile());
@@ -53,7 +49,7 @@ public class PlaceVillageTileCommand extends Command {
     public void setLocation(int l){
         location=l;
     }
-    public int getLocation(int l){
+    public int getLocation(){
         return location;
     }
 }

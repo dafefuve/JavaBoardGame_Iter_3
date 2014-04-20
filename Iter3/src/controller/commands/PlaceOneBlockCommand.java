@@ -50,7 +50,7 @@ public class PlaceOneBlockCommand extends Command {
     public void setLocation(int l){
         location=l;
     }
-    public int getLocation(int l){
+    public int getLocation(){
         return location;
     }
 }

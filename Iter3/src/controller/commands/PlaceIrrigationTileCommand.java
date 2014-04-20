@@ -30,6 +30,12 @@ public class PlaceIrrigationTileCommand extends Command {
             System.out.println("No irrigation tiles left! Broke the rules!");
             //then do thingie to notify player that they broke the rules
         }
+        else if(){
+            //Here we will check if the target location is directly on the board, i.e the target space has no other tiles on it
+        }
+        else if(){
+            //It is illegal to place the tiles directly on the borders of the board, and here we check that
+        }
         else {
         //TODO I assume boardController has a sort of placeTile() method
             gameController.getInventory().setItem("irrigationTile", count-1);
@@ -53,7 +59,7 @@ public class PlaceIrrigationTileCommand extends Command {
     public void setLocation(int l){
         location=l;
     }
-    public int getLocation(int l){
+    public int getLocation(){
         return location;
     }
 }
