@@ -1,7 +1,6 @@
 package controller;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -39,6 +38,13 @@ public class GameStateManager {
         currentState.bindKeys();
 
     }
+    public gameState getActiveState(){return active;}
+    public gameState getFestivalState(){return festival;}
+    public gameState getMainMenuState(){return mainMenuState;}
+    public gameState getPauseState(){return pause;}
+    public gameState getPlanningState(){return planning;}
+    public gameState getReplayState(){return replay;}
+    //public void
 }
 interface gameState {
     //boolean changeTurn();
