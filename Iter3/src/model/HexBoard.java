@@ -8,9 +8,9 @@ import java.util.*;
 
 public class HexBoard
 {
-    ArrayList<Edge> edges;
-    ArrayList<Space> spaces;
-    ArrayList<GraphDistance> distances;
+    private ArrayList<Edge> edges;
+    private ArrayList<Space> spaces;
+    private ArrayList<GraphDistance> distances;
 
     public HexBoard()
     {
@@ -33,7 +33,7 @@ public class HexBoard
         Space southS;               //The space directly below s (direction 2)
         if (s.getRow()+1 < 15)      //ensure that now space is created outside of the board
         {
-            southS = new Space(s.getRow()+1,s.getColumn());
+            southS = spaces.get((s.getRow()+1)*19+s.getColumn());
             this.edges.add(new Edge(s, southS, 0));
             defineEdge(southS);
         }
@@ -43,7 +43,7 @@ public class HexBoard
         {
             if (s.getColumn()+1 < 19)       //no space outside board
             {
-                southeastS = new Space(s.getRow(), s.getColumn()+1);
+                southeastS = spaces.get((s.getRow()*19 + s.getColumn()+1));
                 this.edges.add(new Edge(s, southeastS, 0));
                 defineEdge(southeastS);
             }
@@ -52,7 +52,7 @@ public class HexBoard
         {
             if (s.getRow()+1 < 15 && s.getColumn()+1 < 19)      //no space outside board
             {
-                southeastS = new Space(s.getRow()+1, s.getColumn()+1);
+                southeastS = spaces.get((s.getRow()+1)*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, southeastS, 0));
                 defineEdge(southeastS);
             }
@@ -63,7 +63,7 @@ public class HexBoard
         {
             if (s.getRow()-1 >= 0 && s.getColumn()+1 < 19)       //no space outside board
             {
-                northeastS = new Space(s.getRow()-1, s.getColumn()+1);
+                northeastS = spaces.get((s.getRow()-1)*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, northeastS, 0));
                 defineEdge(northeastS);
             }
@@ -72,7 +72,7 @@ public class HexBoard
         {
             if (s.getColumn()+1 < 19)       //no space outside board
             {
-                northeastS = new Space(s.getRow()+1, s.getColumn()+1);
+                northeastS = spaces.get((s.getRow()+1)*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, northeastS, 0));
                 defineEdge(northeastS);
             }
