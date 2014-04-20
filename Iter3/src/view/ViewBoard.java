@@ -29,6 +29,10 @@ public class ViewBoard
         int firstY = yCoord;
         int secondY = firstY + 26;
 
+        ViewHexCentralJava central = new ViewHexCentralJava();
+        ViewHexHighland highland = new ViewHexHighland();
+        ViewHexLowland lowland = new ViewHexLowland();
+
         //15 rows 19 columns
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 19; j++) {
@@ -44,11 +48,11 @@ public class ViewBoard
 
                 if(i < 8)
                 {
-                    boardImages[i][j].pushIntoStack(new ViewHexHighland());
+                    boardImages[i][j].pushIntoStack(highland);
                 }
                 else
                 {
-                    boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                    boardImages[i][j].pushIntoStack(lowland);
                 }
                 boardPolygons[i][j] = hex;
                 //boardImages[i][j].pushIntoStack(new BaseViewHex());
@@ -89,132 +93,136 @@ public class ViewBoard
 */
         //Hardcode awkward board shape
         //Note that the stack size is 2 but the 'level' of the tile at this point is only 0
-        boardImages[1][4].pushIntoStack(new ViewHexCentralJava());
+        ViewHexCentralJava central = new ViewHexCentralJava();
+        ViewHexHighland highland = new ViewHexHighland();
+        ViewHexLowland lowland = new ViewHexLowland();
 
-        boardImages[1][7].pushIntoStack(new ViewHexCentralJava());
+        boardImages[1][4].pushIntoStack(central);
 
-        boardImages[1][10].pushIntoStack(new ViewHexCentralJava());
+        boardImages[1][7].pushIntoStack(central);
 
-        boardImages[1][13].pushIntoStack(new ViewHexCentralJava());
+        boardImages[1][10].pushIntoStack(central);
 
-        boardImages[2][4].pushIntoStack(new ViewHexCentralJava());
+        boardImages[1][13].pushIntoStack(central);
 
-        boardImages[2][5].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][4].pushIntoStack(central);
 
-        boardImages[2][7].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][5].pushIntoStack(central);
 
-        boardImages[2][4].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][7].pushIntoStack(central);
 
-
-        boardImages[2][10].pushIntoStack(new ViewHexCentralJava());
-
-
-        boardImages[2][11].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][4].pushIntoStack(central);
 
 
-        boardImages[2][13].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][10].pushIntoStack(central);
 
 
-        boardImages[2][14].pushIntoStack(new ViewHexCentralJava());
+        boardImages[2][11].pushIntoStack(central);
+
+
+        boardImages[2][13].pushIntoStack(central);
+
+
+        boardImages[2][14].pushIntoStack(central);
 
         //Set mainland tiles
         for (int i = 3; i < 4; i++) {
             for (int j = 3; j < 17; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 4; i < 5; i++) {
             for (int j = 1; j < 18; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 5; i < 6; i++) {
             for (int j = 2; j < 18; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 6; i < 7; i++) {
             for (int j = 1; j < 18; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 7; i < 8; i++) {
             for (int j = 2; j < 18; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 8; i < 9; i++) {
             for (int j = 3; j < 16; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 9; i < 10; i++) {
             for (int j = 3; j < 17; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 10; i < 11; i++) {
             for (int j = 3; j < 16; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         for (int i = 11; i < 12; i++) {
             for (int j = 4; j < 14; j++) {
 
-                boardImages[i][j].pushIntoStack(new ViewHexLowland());
+                boardImages[i][j].pushIntoStack(central);
             }
         }
 
         //Here you also want to place central java tiles just like up there
 
 
-        boardImages[12][5].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][5].pushIntoStack(central);
 
 
-        boardImages[12][6].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][6].pushIntoStack(central);
 
 
-        boardImages[12][7].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][7].pushIntoStack(central);
 
 
-        boardImages[12][9].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][9].pushIntoStack(central);
 
 
-        boardImages[12][11].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][11].pushIntoStack(central);
 
 
-        boardImages[12][12].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][12].pushIntoStack(central);
 
 
-        boardImages[12][13].pushIntoStack(new ViewHexCentralJava());
+        boardImages[12][13].pushIntoStack(central);
 
 
-        boardImages[13][5].pushIntoStack(new ViewHexCentralJava());
+        boardImages[13][5].pushIntoStack(central);
 
 
-        boardImages[13][6].pushIntoStack(new ViewHexCentralJava());
+        boardImages[13][6].pushIntoStack(central);
 
 
-        boardImages[13][11].pushIntoStack(new ViewHexCentralJava());
+        boardImages[13][11].pushIntoStack(central);
 
 
-        boardImages[13][12].pushIntoStack(new ViewHexCentralJava());
+        boardImages[13][12].pushIntoStack(central);
     }
 
     public ViewHexStack getStackAt(int x, int y)
