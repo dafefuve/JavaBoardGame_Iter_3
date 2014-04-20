@@ -253,6 +253,11 @@ public class BoardController
         return connector;
     }
 
+    public Space getSpaceFromID(int spaceID)
+    {
+        return this.getHexBoard().getSpaces().get(spaceID);
+    }
+
     public HexBoard getHexBoard()
     {
         return this.hexBoard;
