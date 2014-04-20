@@ -9,11 +9,12 @@ import java.util.Stack;
  */
 public class ViewBoard
 {
-    private ViewHexStack[][] board;
+    private Polygon[][] boardPolygons;
+    private ViewHexStack[][] boardImages;
 
     public ViewBoard(int rows, int cols)
     {
-        board = new ViewHexStack[rows][cols];
+        boardImages = new ViewHexStack[rows][cols];
         //Used to set up bottom layer of hex tiles, i.e., just the polygons and their coordinates, NO IMAGES yet
         initializeBaseLayer();
         initializeHardCodedTiles();
@@ -30,8 +31,8 @@ public class ViewBoard
         //15 rows 19 columns
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 19; j++) {
-                board[i][j] = new ViewHexStack();
-                board[i][j].pushIntoStack(new BaseViewHex(xCoord, yCoord));
+                boardPolygons[i][j] = new ViewHexStack();
+                boardPolygons[i][j].pushIntoStack(new BaseViewHex(xCoord, yCoord));
                 xCoord += 45;
 
                 if (j % 2 == 0) {
