@@ -5,7 +5,8 @@ import java.util.*;
 /**
  * Created by Daniel on 4/14/2014.
  */
-public class GameInventory extends Inventory{
+public class GameInventory extends Inventory
+{
     private PalaceCard faceUpCard;
     private Stack<PalaceCard> deck;
     private Stack<PalaceCard> discardDeck;
