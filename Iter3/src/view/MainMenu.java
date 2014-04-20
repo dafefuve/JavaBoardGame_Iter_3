@@ -32,9 +32,20 @@ public class MainMenu extends JFrame{
         this.setVisible(true);
     }
 
+    public MainMenu(JPanel contentPane)
+    {
+        this.setContentPane(contentPane);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setPreferredSize(new Dimension(400,400));
+        this.setMinimumSize(new Dimension(400,400));
+        this.setVisible(true);
+    }
+
     public JPanel createContentPane()
     {
         panel = new JPanel();
+        /*
         panel.addKeyListener(new KeyListener() {
 
             @Override
@@ -76,7 +87,7 @@ public class MainMenu extends JFrame{
             }
         });
 
-
+        */
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 

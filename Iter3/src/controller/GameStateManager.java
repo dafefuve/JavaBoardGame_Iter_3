@@ -1,6 +1,11 @@
 package controller;
 
+import controller.actions.LoadGameAction;
+import controller.actions.NewGameAction;
+import controller.actions.QuitGameAction;
+
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -123,19 +128,20 @@ class mainMenuState implements gameState{
     {
         stateManager = manager;
         theFacade = facade;
+        bindKeys();
     }
     @Override
     public void bindKeys()
     {
         //TODO
-        /*
-        HashMap<KeyStroke, Action> mainMenuActions = new HashMap<KeyStroke, Action>();
+
+        HashMap<KeyStroke, AbstractAction> mainMenuActions = new HashMap<KeyStroke, AbstractAction>();
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction());
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0), new LoadGameAction());
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new QuitGameAction());
 
-         gameFacade.bindMainMenuKeys(activeActions);
-        */
+        theFacade.bindMainMenuKeys(mainMenuActions);
+
     }
 }
 

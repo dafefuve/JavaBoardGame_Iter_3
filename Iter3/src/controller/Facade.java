@@ -78,7 +78,7 @@ public class Facade {
         return tempCommand;
     }
 
-    public void bindMainMenuKeys(HashMap<KeyStroke, Action> keyBindings)
+    public void bindMainMenuKeys(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         //Pass key bindings to the view controller which will add them to the main view
         viewController.recieveMainMenuKeyBindings(keyBindings);

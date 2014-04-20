@@ -13,6 +13,7 @@ public class ViewController {
     public ViewController()
     {
         mainView = new view.MainView();
+
     }
     public ViewController(view.MainView mainView)
     {
@@ -36,7 +37,7 @@ public class ViewController {
 
     }
 
-    public void recieveMainMenuKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void recieveMainMenuKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         mainView.registerMainMenuKeyBindings(keyBindings);
     }

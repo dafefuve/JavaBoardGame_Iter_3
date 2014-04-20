@@ -5,6 +5,8 @@ package view;
  */
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import javax.swing.*;
@@ -18,7 +20,8 @@ public class MainView extends JFrame
     private JPanel playerPanel;
     private JPanel festivalCardPanel;
 
-    private static JFrame mainMenuView;
+    private static MainMenu mainMenuView;
+    private static JPanel mainMenuContentPane;
 
     private JPanel player1;
     private JPanel player2;
@@ -151,9 +154,16 @@ public class MainView extends JFrame
         */
     }
 
-    public void registerMainMenuKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void registerMainMenuKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
-        //DO SOMETHING
+
+        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
+        //Needs a JPanel to work?
+        JPanel p = mainMenuView.createContentPane();
+        mainMenuContentPane = p;
+
+        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
+        p.getActionMap().put("new game",keyBindings.get(k));
     }
 
     public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
