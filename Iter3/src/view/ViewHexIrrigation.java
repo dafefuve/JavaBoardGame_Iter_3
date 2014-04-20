@@ -20,12 +20,22 @@ public class ViewHexIrrigation extends ViewHex
             e.printStackTrace();
         }
 
-
+        selected = false;
     }
 
     @Override
     public BufferedImage getImage()
     {
         return image;
+    }
+
+    public boolean getSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(boolean selected)
+    {
+        this.selected = selected;
     }
 }

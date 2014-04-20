@@ -19,7 +19,7 @@ public class ViewHexVillage extends ViewHex
         {
             e.printStackTrace();
         }
-
+        selected = false;
 
     }
 
@@ -27,5 +27,15 @@ public class ViewHexVillage extends ViewHex
     public BufferedImage getImage()
     {
         return image;
+    }
+
+    public boolean getSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(boolean selected)
+    {
+        this.selected = selected;
     }
 }

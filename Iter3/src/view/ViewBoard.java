@@ -234,4 +234,14 @@ public class ViewBoard
     {
         return boardPolygons[x][y];
     }
+
+    public Polygon[][] getPolygons()
+    {
+        return boardPolygons;
+    }
+
+    public ViewHexStack[][] getImages()
+    {
+        return boardImages;
+    }
 }

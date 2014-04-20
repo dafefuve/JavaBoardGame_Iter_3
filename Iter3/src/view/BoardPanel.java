@@ -149,6 +149,15 @@ public class BoardPanel extends JPanel
                g2.setColor(Color.WHITE);
                g2.setStroke(new BasicStroke(1f));
                g2.drawPolygon(board.getPolygonAt(i,j));
+
+               boolean selected = board.getImages()[i][j].peekIntoStack().getSelected();
+               if(selected)
+               {
+                   Color c = new Color(0f,1f,1f,.3f );
+                   g2.setColor(c);
+                   g2.fillPolygon(board.getPolygonAt(i,j));
+               }
+
                /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
                        || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]
@@ -211,27 +220,27 @@ public class BoardPanel extends JPanel
                //Move up
                if(e.getKeyChar() == '8')
                {
-                   //highlightDoubleSpace(8);
+                   highlightSpace(8);
                }
                else if(e.getKeyChar() == '9')
                {
-                  // highlightDoubleSpace(9);
+                  highlightSpace(9);
                }
                else if(e.getKeyChar() == '3')
                {
-                  // highlightDoubleSpace(3);
+                  highlightSpace(3);
                }
                else if(e.getKeyChar() == '2')
                {
-                  // highlightDoubleSpace(2);
+                   highlightSpace(2);
                }
                else if(e.getKeyChar() == '1')
                {
-                   //highlightDoubleSpace(1);
+                   highlightSpace(1);
                }
                else if(e.getKeyChar() == '7')
                {
-                   //highlightDoubleSpace(7);
+                   highlightSpace(7);
                }
                else if(e.getKeyChar() == 'w')
                {
@@ -258,7 +267,7 @@ public class BoardPanel extends JPanel
            }
        });
    }
-    /*
+
     public void highlightSpace(int key)
     {
         int newRow;
@@ -275,10 +284,10 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                theBoard[currentRow][currentCol].setSelected(false);
+                board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
                 //Select new space
                 currentRow = newRow;
-                theBoard[currentRow][currentCol].setSelected(true);
+                board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                 adjustScroll();
                 //Reflect changes made
                 this.repaint();
@@ -302,14 +311,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current col and row
                     currentRow = newRow;
                     currentCol = newCol;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -328,13 +337,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current col since row didn't change
                     currentCol = newCol;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -359,10 +368,10 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
                     currentCol = newCol;
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -381,13 +390,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     currentCol = newCol;
                     currentRow = newRow;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -407,11 +416,11 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                theBoard[currentRow][currentCol].setSelected(false);
+                board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
                 //Select new space
                 currentRow = newRow;
 
-                theBoard[currentRow][currentCol].setSelected(true);
+                board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                 adjustScroll();
                 //Reflect changes made
                 this.repaint();
@@ -433,13 +442,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current col
                     currentCol = newCol;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -458,14 +467,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current row and col
                     currentCol = newCol;
                     currentRow = newRow;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -488,14 +497,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current col and row
                     currentRow = newRow;
                     currentCol = newCol;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -514,13 +523,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(false);
 
                     //Update current col since row didn't change
                     currentCol = newCol;
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    board.getImages()[currentRow][currentCol].peekIntoStack().setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -532,7 +541,7 @@ public class BoardPanel extends JPanel
 
     }
 
-    public void highlightDoubleSpace(int key)
+   /* public void highlightDoubleSpace(int key)
     {
         int newRow;
         int newCol;
@@ -1021,19 +1030,20 @@ public class BoardPanel extends JPanel
         }
 
     }
-
+*/
     public void highlightStartSpace()
     {
-        theBoard[0][0].setSelected(true);
+        board.getImages()[0][0].peekIntoStack().setSelected(true);
         this.repaint();
     }
-
+/*
     public void highlightDoubleStartSpace()
     {
         theBoard[0][0].setSelected(true);
         theBoard[1][0].setSelected(true);
         this.repaint();
     }
+    */
 
     public void displayAlert(String message, String title)
     {
@@ -1058,7 +1068,7 @@ public class BoardPanel extends JPanel
         }
 
     }
-
+/*
     public void drawLevel(Graphics2D g, BoardHex hex)
     {
         g.setFont(new Font("Helvetica", Font.BOLD, 16));

@@ -13,4 +13,6 @@ public abstract class ViewHex
     public BufferedImage image;
     public abstract BufferedImage getImage();
     public boolean selected;
+    public void setSelected(boolean selected){this.selected = selected;}
+    public boolean getSelected(){return selected;}
 }
