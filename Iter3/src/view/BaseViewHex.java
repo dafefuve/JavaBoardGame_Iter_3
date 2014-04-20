@@ -9,10 +9,9 @@ import java.io.File;
  */
 public class BaseViewHex extends ViewHex
 {
-    public BaseViewHex(int x, int y)
+    public BaseViewHex()
     {
         image = null;
-        createPolygon(x, y);
     }
 
     @Override

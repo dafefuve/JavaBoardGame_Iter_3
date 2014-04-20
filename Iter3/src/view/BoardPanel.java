@@ -143,12 +143,12 @@ public class BoardPanel extends JPanel
                //Draw the texture in hex shape
                BufferedImage texture = board.getStackAt(i, j).peekIntoStack().getImage();
                g2.setPaint(new TexturePaint(texture, new Rectangle(300, 300, 300, 300)));
-               g2.fillPolygon(board.getStackAt(i,j).peekIntoStack().getPolygon());
+               g2.fillPolygon(board.getPolygonAt(i,j));
 
                //Set outline for the shape
                g2.setColor(Color.WHITE);
                g2.setStroke(new BasicStroke(1f));
-               g2.drawPolygon(board.getStackAt(i,j).peekIntoStack().getPolygon());
+               g2.drawPolygon(board.getPolygonAt(i,j));
                /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
                        || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]

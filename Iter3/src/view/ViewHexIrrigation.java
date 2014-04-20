@@ -20,7 +20,7 @@ public class ViewHexIrrigation extends ViewHex
             e.printStackTrace();
         }
 
-        createPolygon(x, y);
+
     }
 
     @Override

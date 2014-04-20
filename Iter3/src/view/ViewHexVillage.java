@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class ViewHexVillage extends ViewHex
 {
-    public ViewHexVillage(int x, int y)
+    public ViewHexVillage()
     {
         try
         {
@@ -20,7 +20,7 @@ public class ViewHexVillage extends ViewHex
             e.printStackTrace();
         }
 
-        createPolygon(x, y);
+
     }
 
     @Override
