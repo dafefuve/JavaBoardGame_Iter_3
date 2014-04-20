@@ -16,8 +16,8 @@ public class PlaceVillageTileCommand extends Command {
         this.gameController=gameController;
     }
 
-    public void execute(){
-    //TODO add a method in BoardController that returns the currently selected space
+    public boolean execute(){
+    //TODO a method that finds the space that the cursor is currently hovering over
     //TODO add a method in BoardController that places a singular tile onto a space on the board 
     //TODO I assume there is a method in gameController that accesses the communal inventory
     /*
@@ -33,6 +33,7 @@ public class PlaceVillageTileCommand extends Command {
         boardController.placeTile(s);
     }
     */
+        return true;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space

@@ -7,12 +7,15 @@ import controller.GameController;
 public class UpgradePalaceCommand(){
 	private int level;//the amount by which you wish to upgrade
 	public UpgradePalaceCommand(int level){
-
+		this.level=level;
 	}
-	public void execute(){
-
+	public boolean execute(){
+		/*
+		//TODO a method that finds the space that the cursor is currently hovering over
+		*/
+		return true;
 	}
 	public void undo(){
-		
+
 	}
 }

@@ -8,13 +8,21 @@ import controller.Command;
  */
 public class MoveDeveloperCommand extends Command {
 	private BoardController boardController;
-
+	/*
+	private Space a;
+	private Space b;
+	*/
 	public MoveDeveloperCommand(BoardController boardController){
 		this.boardController=boardController;
 	}
 
-	public void execute(){
-	//	Player p playerController.getCurrentPlayer();
+	public boolean execute(){	
+	/*
+	FindShortestPath will decrement the players AP by how many times the developer changes land type
+	//TODO a method that finds the space that the cursor is currently hovering over
+
+	*/
+		return true;
 	}
 	public void undo(){
 

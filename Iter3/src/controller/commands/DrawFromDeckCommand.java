@@ -15,11 +15,15 @@ public class DrawFromDeckCommand extends Command {
 		//this.gameController=gameController;
 	}
 
-	public void execute(){
+	public boolean execute(){
+		//Decrement the players AP by 1
 		//card = gameInventory.drawCardFromDeck();
 		//playerController.addPalaceCard(card);
+		return true;
+
 	}
 	public void undo(){
+		//increments the players AP by 1
 		//playerController.removePalaceCard(card);
 	}
 

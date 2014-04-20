@@ -13,8 +13,9 @@ public class ChangeTurnCommand extends Command {
 		//this.boardController=boardController;
 	}
 
-	public void execute(){
+	public boolean execute(){
 	//	Player p playerController.getCurrentPlayer();
+		return true;
 	}
 	public void undo(){
 

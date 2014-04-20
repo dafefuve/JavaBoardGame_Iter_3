@@ -16,9 +16,9 @@ public class PlaceDeveloperCommand extends Command {
 		this.playerController=playerController;
 	}
 
-	public void execute(){
+	public boolean execute(){
 	//	Player p playerController.getCurrentPlayer();
-	//TODO add a method in BoardController that returns the currently selected space
+	//TODO a method that finds the space that the cursor is currently hovering over
 	//TODO add a method in BoardController that places a singular game object thing onto a space on the board 
 	/*
 	int count = playerController.getItem("developer");
@@ -32,6 +32,7 @@ public class PlaceDeveloperCommand extends Command {
 		boardController.placeDeveloper(s);
 	}
 	*/
+		return true;
 	}
 	public void undo(){
 	/*

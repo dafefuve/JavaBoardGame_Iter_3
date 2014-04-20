@@ -16,8 +16,8 @@ public class PlaceThreeBlockCommand extends Command {
         this.gameController=gameController;
     }
 
-    public void execute(){
-    //TODO add a method in BoardController that returns the currently selected space
+    public boolean execute(){
+    //TODO a method that finds the space that the cursor is currently hovering over
     //TODO add a method in BoardController that places a singular tile onto a space on the board 
     //TODO I assume there is a method in gameController that accesses the communal inventory
     /*
@@ -33,7 +33,9 @@ public class PlaceThreeBlockCommand extends Command {
         boardController.placeBlock(s);
     }
     */
+        return true;
     }
+
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
         //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
