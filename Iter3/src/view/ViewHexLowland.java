@@ -13,7 +13,7 @@ public class ViewHexLowland extends ViewHex
     {
         try
         {
-            image = ImageIO.read(new File("Iter3/src/view/images/land.jpg"));
+            image = ImageIO.read(new File("Iter3/src/view/images/land.png"));
         }
         catch(Exception e)
         {

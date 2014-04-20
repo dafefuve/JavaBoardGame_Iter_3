@@ -20,6 +20,8 @@ public abstract class ViewHex
     public void createPolygon(int centerX, int centerY)
     {
         //Generate the hexagon
+        hex = new Polygon();
+
         //Radius of hexagon assumed to be 30
         for(int k = 0; k<6; k++)
         {
