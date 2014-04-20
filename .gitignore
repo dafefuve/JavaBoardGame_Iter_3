@@ -4,6 +4,7 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+Model/
 
 # Folder config file
 Desktop.ini
@@ -103,9 +104,5 @@ local.properties
 *.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-<<<<<<< HEAD
-hs_err_pid*
 
-=======
 hs_err_pid*
->>>>>>> Alex'sBitchinBranch
