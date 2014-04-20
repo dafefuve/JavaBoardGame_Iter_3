@@ -103,11 +103,14 @@ public class BoardController
                     //shortestDistances.add(presentGD);
                     shortDist = presentGD;
                 }
+                //Ignore this code, once tested, delete it
                 /*else if(presentGD.getDistance() == minDistance)
                 {
                     shortestDistances.add(presentGD);
                 }*/
             }
+
+            //Ignore these comments, once tested, delete this comment block
             //we now have all of the shortest distances emanating from endSpace
             //if there are multiple shortest distances, then either one of them is the shortest path
             //just pick the first one and go from there
@@ -126,7 +129,7 @@ public class BoardController
         return shortestPath;
     }
 
-    public int getAPforShortestPath(Space start, Space end)
+    public int getAPForShortestPath(Space start, Space end)
     {
         int ap = 0;
 
@@ -151,6 +154,103 @@ public class BoardController
         }
 
         return ap;
+    }
+
+    public ArrayList<Space> getAreaOfVillage(Space s)
+    {
+        ArrayList<Space> theCity = new ArrayList<Space>();
+        ArrayList<Space> queue = new ArrayList<Space>();
+
+        if (s.getTopTileComponent().getLandType().equals("Village"))
+        {
+            theCity.add(s);
+            queue.add(s);
+        }
+
+        while (!queue.isEmpty())
+        {
+            //Get the neighbors of the first space in the queue
+            ArrayList<Space> neighbors = this.getHexBoard().getNeighborsOfSpace(queue.get(0));
+
+            //For each neighbor
+            for (int i = 0; i < neighbors.size(); i++)
+            {
+                //Check if that neighbor has a village tile (is part of a village)
+                if (neighbors.get(i).getTopTileComponent().getLandType().equals("Village"))
+                {
+                    //add this space to the city
+                    theCity.add(neighbors.get(i));
+                    //add this space to the queue
+                    queue.add(neighbors.get(i));
+                }
+            }
+            //remove the first space from the queue, leaving the others in
+            queue.remove(0);
+        }
+
+        return theCity;
+    }
+
+    public boolean isConnectingCities(Space s)
+    {
+        boolean connector = false;
+        //neighbors of Space s which could lead to cities
+        ArrayList<Space> neighbors = this.getHexBoard().getNeighborsOfSpace(s);
+        //number of cities found so far
+        int citiesFound = 0;
+
+        //for each neighbor
+        for (int i = 0; i < neighbors.size(); i++)
+        {
+            boolean palaceFound = false;
+
+            //queue containing village tiles
+            ArrayList<Space> queue = new ArrayList<Space>();
+            String lType = neighbors.get(i).getTopTileComponent().getLandType();
+            if (lType.equals("Village"))
+            {
+                queue.add(neighbors.get(i));    //add village to the queue
+            }
+            else if (lType.equals("Palace"))
+            {
+                palaceFound = true;             //a palace has been found, don't go to while loop
+                citiesFound++;                  //increment cities found
+            }
+
+            while (!queue.isEmpty() && !palaceFound)
+            {
+                //Get the neighbors of the first space in the queue
+                ArrayList<Space> queueNeighbors = this.getHexBoard().getNeighborsOfSpace(queue.get(0));
+
+                //For each neighbor
+                for (int j = 0; j < queueNeighbors.size(); j++)
+                {
+                    String lt = neighbors.get(j).getTopTileComponent().getLandType();
+                    //Check if that neighbor has a village tile (is part of a village)
+                    if (lt.equals("Village"))
+                    {
+                        //add this space to the queue
+                        queue.add(neighbors.get(i));
+                    }
+                    else if (lt.equals("Palace"))
+                    {
+                        //indicates that a palace, and thus a city, has been found
+                        citiesFound++;
+                        //set palaceFound to true, thus ending the while loop
+                        palaceFound = true;
+                    }
+                }
+                //remove the first space from the queue, leaving the others in
+                queue.remove(0);
+            }
+        }
+
+        if (citiesFound > 1)        //multiple cities found
+        {
+            connector = true;       //space is connecting cities, set connector to true
+        }
+
+        return connector;
     }
 
     public HexBoard getHexBoard()
