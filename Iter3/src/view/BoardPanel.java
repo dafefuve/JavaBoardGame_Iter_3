@@ -9,13 +9,14 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by alexbujduveanu on 4/15/14.
  */
 public class BoardPanel extends JPanel
 {
-   private BoardHex[][] theBoard = new BoardHex[15][19];;
+   private ViewBoard board;
    private BufferedImage dirt;
    private BufferedImage water;
    private BufferedImage land;
@@ -34,6 +35,7 @@ public class BoardPanel extends JPanel
 
    public BoardPanel()
    {
+       board = new ViewBoard(15, 19);
        readTextures();
        setUpIrrigationCoordinates();
 
