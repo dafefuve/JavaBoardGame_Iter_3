@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -87,43 +88,8 @@ public class BoardPanel extends JPanel
         irrigationIDs[2] = 160;
     }
 
-    /*
 
-   public void initializeHexes()
-   {
-       int xCoord = 45;
-       int yCoord = 45;
-       int firstY = yCoord;
-       int secondY = firstY + 26;
 
-       currentID = 0;
-
-       //15 rows 19 columns
-       final ArrayList<Polygon> hexes = new ArrayList<Polygon>();
-       for (int i = 0; i < 15; i++) {
-           for (int j = 0; j < 19; j++) {
-               theBoard[i][j] = new BoardHex(xCoord, yCoord);
-               xCoord += 45;
-
-               if (j % 2 == 0) {
-                   yCoord = secondY;
-               } else {
-                   yCoord = firstY;
-               }
-
-               currentID++;
-
-           }
-
-           //firstY = secondY + 26;
-           //secondY = firstY + 26;
-           firstY += 52;
-           secondY += 52;
-           xCoord = 45;
-           yCoord = firstY;
-       }
-   }
-*/
    @Override
    protected void paintComponent(Graphics g) {
        super.paintComponent(g);
@@ -147,6 +113,8 @@ public class BoardPanel extends JPanel
                g2.setPaint(new TexturePaint(texture, new Rectangle(300, 300, 300, 300)));
                g2.fillPolygon(board.getPolygonAt(i, j));
 
+               drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j).size());
+
                //Set outline for the shape
                g2.setColor(Color.WHITE);
                g2.setStroke(new BasicStroke(1f));
@@ -159,6 +127,9 @@ public class BoardPanel extends JPanel
                    g2.setColor(c);
                    g2.fillPolygon(board.getPolygonAt(i, j));
                }
+
+               //Render levels
+               drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j).size());
 
                /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
@@ -1481,6 +1452,18 @@ public class BoardPanel extends JPanel
         placing = false;
         currentRow = 0;
         currentCol = 0;
+    }
+
+    //Y U NO WORK
+    public void drawLevel(Graphics2D g, Polygon hex, int level)
+    {
+        Font f = new Font("Helvetica", Font.BOLD, 16);
+        g.setFont(f);
+        g.setColor(Color.WHITE);
+        int[] x = hex.xpoints;
+        int[] y = hex.ypoints;
+
+        g.drawString(/*String.valueOf(level)*/"fuuuuucck", x[0] + 15, y[0] + 15);
     }
 }
 

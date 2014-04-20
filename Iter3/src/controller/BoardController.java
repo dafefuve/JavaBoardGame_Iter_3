@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class BoardController
 {
+
     HexBoard hexBoard;
     ArrayList<GraphDistance> distances;
 

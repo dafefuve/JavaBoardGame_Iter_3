@@ -34,6 +34,8 @@ public class ViewBoard
         ViewHexCentralJava central = new ViewHexCentralJava();
         ViewHexHighland highland = new ViewHexHighland();
         ViewHexLowland lowland = new ViewHexLowland();
+        ViewHexIrrigation irrigation = new ViewHexIrrigation();
+
 
         //15 rows 19 columns
         for (int i = 0; i < 15; i++) {
@@ -55,6 +57,22 @@ public class ViewBoard
                 else
                 {
                     boardImages[i][j].pushIntoStack(lowland);
+                }
+
+                if(i == 5 && j == 4)
+                {
+                    boardImages[i][j].popFromStack();
+                    boardImages[i][j].pushIntoStack(irrigation);
+                }
+                if(i == 5 && j == 13)
+                {
+                    boardImages[i][j].popFromStack();
+                    boardImages[i][j].pushIntoStack(irrigation);
+                }
+                if(i == 8 && j == 8)
+                {
+                    boardImages[i][j].popFromStack();
+                    boardImages[i][j].pushIntoStack(irrigation);
                 }
                 boardPolygons[i][j] = hex;
                 //boardImages[i][j].pushIntoStack(new BaseViewHex());

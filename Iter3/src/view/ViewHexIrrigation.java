@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class ViewHexIrrigation extends ViewHex
 {
-    public ViewHexIrrigation(int x, int y)
+    public ViewHexIrrigation()
     {
         try
         {

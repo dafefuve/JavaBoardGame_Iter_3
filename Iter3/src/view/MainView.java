@@ -156,14 +156,21 @@ public class MainView extends JFrame
 
     public void registerMainMenuKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
-
-        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
         //Needs a JPanel to work?
         JPanel p = mainMenuView.createContentPane();
         mainMenuContentPane = p;
 
+        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
         p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
         p.getActionMap().put("new game",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0);
+        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "load game");
+        p.getActionMap().put("load game",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0);
+        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "quit game");
+        p.getActionMap().put("quit game",keyBindings.get(k));
     }
 
     public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)

@@ -19,11 +19,11 @@ public class PlaceVillageTileAction {
     public void actionPerformed(ActionEvent e)
     {
         //facade.getViewController().placeVillageTile();
-        Command c = facade.getCommandController().placeVillageTileCommand(facade.getBoardController(), facade.getGameController());
-        facade.getTempCommand().setTempCommand(c);
+        //Command c = facade.getCommandController().placeVillageTileCommand(facade.getBoardController(), facade.getGameController());
+        /*facade.getTempCommand().setTempCommand(c);
         if(c.execute())
            facade.getCommandStackController().push(c);
         else
-            //facade.getViewController().undo();
+            //facade.getViewController().undo();*/
     }
 }

@@ -45,7 +45,7 @@ public class MainMenu extends JFrame{
     public JPanel createContentPane()
     {
         panel = new JPanel();
-        /*
+
         panel.addKeyListener(new KeyListener() {
 
             @Override
@@ -87,7 +87,7 @@ public class MainMenu extends JFrame{
             }
         });
 
-        */
+
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
