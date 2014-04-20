@@ -36,7 +36,7 @@ public class BoardPanel extends JPanel
    public BoardPanel()
    {
        board = new ViewBoard(15, 19);
-       readTextures();
+       //readTextures();
        setUpIrrigationCoordinates();
 
        //initializeHexes();
