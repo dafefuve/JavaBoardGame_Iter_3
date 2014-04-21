@@ -96,7 +96,7 @@ class activeState implements gameState {
         //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceThreeBlockAction(theFacade));
 
         //Etc
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
 
         theFacade.bindActiveKeys(activeActions);
 
