@@ -13,6 +13,7 @@ public class Space
     public Developer developer;
     public Palace palace;
     public Stack<TileComponent> land;
+    public boolean hasDeveloper;
 
     public int row;
     public int column;
@@ -23,6 +24,7 @@ public class Space
         developer = null;
         palace = null;
         land = null;
+        hasDeveloper = false;
 
         row = 0;
         column = 0;
@@ -34,6 +36,7 @@ public class Space
         developer = null;
         palace = null;
         land = null;
+        hasDeveloper = false;
 
         row = r;
         column = c;
@@ -60,12 +63,29 @@ public class Space
         return 0;
     }
 
-    public void setDeveloper(Developer developer){
+    public void setDeveloper(Developer developer)
+    {
         this.developer = developer;
+        this.setHasDeveloper(true);
+    }
+
+    public Developer getDeveloper()
+    {
+        return this.developer;
     }
 
     public void setPalace(Palace palace){
         this.palace = palace;
+    }
+
+    public boolean getHasDeveloper()
+    {
+        return this.hasDeveloper;
+    }
+
+    public void setHasDeveloper(boolean tf)
+    {
+        this.hasDeveloper = tf;
     }
 
     public int getRow()

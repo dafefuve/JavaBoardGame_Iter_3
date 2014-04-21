@@ -1,9 +1,7 @@
 package controller;
 
-import model.Edge;
-import model.GraphDistance;
-import model.HexBoard;
-import model.Space;
+import com.sun.deploy.panel.JavaPanel;
+import model.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,13 +11,14 @@ import java.util.ArrayList;
  */
 public class BoardController
 {
-
     HexBoard hexBoard;
     ArrayList<GraphDistance> distances;
+    GameController gc;
 
     public BoardController()
     {
         hexBoard = new HexBoard();
+        gc = new GameController();
         distances = new ArrayList<GraphDistance>();
         for (int i = 0; i < this.getHexBoard().getEdges().size(); i++)
         {
@@ -190,6 +189,123 @@ public class BoardController
         }
 
         return theCity;
+    }
+
+    public boolean hasOneHighestRankingDeveloper(ArrayList<Space> city)
+    {
+        boolean highestUp = false;
+
+        //an ArrayList of Spaces containing all those space with developers on them
+        ArrayList<Space> spacesWithDevelopers = new ArrayList<Space>();
+
+        //go through city to find spaces with developers on them
+        for (int i = 0; i < city.size(); i++)
+        {
+            if (city.get(i).getHasDeveloper() == true)
+            {
+                spacesWithDevelopers.add(city.get(i));
+            }
+        }
+
+        //if there is at least one space with a developer on it
+        if (!spacesWithDevelopers.isEmpty())
+        {
+            //Developer hrd is the highest ranking developer
+            Developer hrd = spacesWithDevelopers.get(0).getDeveloper();
+            int levelOfHRD = this.getHexBoard().getSpaces().get(hrd.getSpaceID()).getLevel();
+
+            //check all of the spaces with developers to find the highest ranking developer and his level
+            for (int j = 0; j < spacesWithDevelopers.size(); j++)
+            {
+                if (spacesWithDevelopers.get(j).getLevel() > levelOfHRD)
+                {
+                    Space s = this.getHexBoard().getSpaces().get(hrd.getSpaceID());
+                    spacesWithDevelopers.remove(s);
+                    hrd = spacesWithDevelopers.get(j).getDeveloper();
+                    levelOfHRD = spacesWithDevelopers.get(j).getLevel();
+                    j = 0;
+                }
+                else if(spacesWithDevelopers.get(j).getLevel() < levelOfHRD)
+                {
+                    spacesWithDevelopers.remove(j);
+                    j = 0;
+                }
+                //if equal, do nothing
+            }
+        }
+
+        //more than one developer at the same level
+        if (spacesWithDevelopers.size() > 1)
+        {
+            //get all of the players involved
+            ArrayList<JavaPlayer> players = new ArrayList<JavaPlayer>();
+            players.add(spacesWithDevelopers.get(0).getDeveloper().getJPlayer());
+
+            //find all of the players involved
+            for (int i = 0; i < spacesWithDevelopers.size(); i++)
+            {
+                if (!players.contains(spacesWithDevelopers.get(i).getDeveloper().getJPlayer()))
+                {
+                    players.add(spacesWithDevelopers.get(i).getDeveloper().getJPlayer());
+                }
+            }
+
+            //create an array which holds the number of developers for each player
+            int[] numDevelopers = new int[players.size()];
+            for (int j = 0; j < numDevelopers.length; j++)
+            {
+                //initialize each element in the array to 0
+                numDevelopers[j] = 0;
+            }
+
+            //for each space with a developer on it
+            for (int k = 0; k < spacesWithDevelopers.size(); k++)
+            {
+                //check the player who owns the developer
+                JavaPlayer jp = spacesWithDevelopers.get(k).getDeveloper().getJPlayer();
+                int index = players.indexOf(jp);
+                //increment that player's element in the numDeveloper array
+                numDevelopers[index] = numDevelopers[index]++;
+            }
+
+            //all of the tied players that have the same number of developers
+            ArrayList<JavaPlayer> tiedPlayers = new ArrayList<JavaPlayer>();
+            tiedPlayers.add(players.get(0));
+            int maxDevs = numDevelopers[0];
+            for (int p = 1; p < numDevelopers.length; p++)
+            {
+                if(numDevelopers[p] > maxDevs)
+                {
+                    maxDevs = numDevelopers[p];
+                    tiedPlayers.clear();
+                    tiedPlayers.add(players.get(p));
+                }
+                else if(numDevelopers[p] == maxDevs)
+                {
+                    tiedPlayers.add(players.get(p));
+                }
+            }
+
+            //if there are indeed tied players, nothing can be done, else
+            if (tiedPlayers.size() == 1)
+            {
+                //check if highest ranking developer belongs to current player
+                if (tiedPlayers.get(0).equals(gc.getPlayers().get(0)))
+                {
+                    highestUp = true;
+                }
+            }
+        }
+        else
+        {
+            //check if highest ranking developer belongs to current player
+            if (spacesWithDevelopers.get(0).getDeveloper().getJPlayer().equals(gc.getPlayers().get(0)))
+            {
+                highestUp = true;
+            }
+        }
+
+        return highestUp;
     }
 
     public boolean isConnectingCities(Space s)
