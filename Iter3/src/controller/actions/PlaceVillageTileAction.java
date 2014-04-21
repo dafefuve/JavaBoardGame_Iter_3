@@ -1,6 +1,5 @@
 package controller.actions;
 
-import controller.Command;
 import controller.Facade;
 import controller.commands.MovableCommands;
 

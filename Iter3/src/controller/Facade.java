@@ -1,7 +1,6 @@
 package controller;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -95,16 +94,4 @@ public class Facade {
         //Pass key bindings to the view controller which will add them to the main view
         viewController.recievePlanningKeyBindings(keyBindings);
     }
-
-    /*TODO need to reconsider this methods
-    public void proccessKeyEvent( KeyEvent event)
-    {
-        event.getKeyChar();
-    }
-    public void changeState(KeyEvent event){
-        event.getKeyChar();
-
-    }*/
 }
-//TODO
-//Add getters for each controller, ex getTurnController(), getViewController(), etc etc 
