@@ -21,7 +21,6 @@ public class MainView extends JFrame
     private JPanel festivalCardPanel;
 
     private static MainMenu mainMenuView;
-    private static JPanel mainMenuContentPane;
 
     private JPanel player1;
     private JPanel player2;
@@ -33,14 +32,15 @@ public class MainView extends JFrame
     private int currentPlayer;
 
 
-    public static void main(String[] args)
+   /* public static void main(String[] args)
     {
        createMainMenu();
     }
+    */
 
     public MainView()
     {
-       mainMenuView = new MainMenu();
+       createMainMenu();
     }
 
     public static void createMainMenu()
@@ -55,7 +55,7 @@ public class MainView extends JFrame
         //playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.LINE_AXIS));
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(playerView);
+        mainPanel.add(playerPanel);
 
         boardPanel = new BoardPanel();
         mainPanel.add(boardPanel);
@@ -74,8 +74,8 @@ public class MainView extends JFrame
         //mainPanel.add(bottomPane);
         //mainPanel.setVisible(true);
         registerChangeTurn();
-        playerView.requestFocusInWindow();
-        playerView.requestFocus();
+        playerPanel.requestFocusInWindow();
+        playerPanel.requestFocus();
         return superPanel;
     }
 
@@ -157,20 +157,19 @@ public class MainView extends JFrame
     public void registerMainMenuKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         //Needs a JPanel to work?
-        JPanel p = mainMenuView.createContentPane();
-        mainMenuContentPane = p;
+
 
         KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
-        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
-        p.getActionMap().put("new game",keyBindings.get(k));
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
+        mainMenuView.getMainViewPanel().getActionMap().put("new game",keyBindings.get(k));
 
         k = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0);
-        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "load game");
-        p.getActionMap().put("load game",keyBindings.get(k));
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "load game");
+        mainMenuView.getMainViewPanel().getActionMap().put("load game",keyBindings.get(k));
 
         k = KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0);
-        p.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "quit game");
-        p.getActionMap().put("quit game",keyBindings.get(k));
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "quit game");
+        mainMenuView.getMainViewPanel().getActionMap().put("quit game",keyBindings.get(k));
     }
 
     public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
@@ -188,4 +187,19 @@ public class MainView extends JFrame
         //todo
         return 1;
     }
+
+    public void startNewGame()
+    {
+        mainMenuView.setVisible(false);
+        initializeGameView();
+    }
+
+
+
+
+    /*JFrame frame = new JFrame();
+    frame.setContentPane(ViewTest.createContentPane());
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setVisible(true);*/
 }

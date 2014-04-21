@@ -12,7 +12,7 @@ public class UpgradePalaceCommand {
 		this.level=level;
 	}
 	public boolean execute(){
-		if(){
+		if(true){
 			//TODO THIS CHECK
             //so here we need to check if the current player has the right to build a palace... if they are the player
             //with the highest game piece or the player with the sequence of highest game pieces. Ties do not count

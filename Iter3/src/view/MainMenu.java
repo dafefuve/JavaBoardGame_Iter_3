@@ -22,9 +22,11 @@ public class MainMenu extends JFrame{
     private JPanel panel;
     private JPanel mainView;
 
+
     public MainMenu()
     {
-        this.setContentPane(createContentPane());
+        mainView = createContentPane();
+        this.setContentPane(mainView);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setPreferredSize(new Dimension(400,400));
@@ -45,7 +47,7 @@ public class MainMenu extends JFrame{
     public JPanel createContentPane()
     {
         panel = new JPanel();
-
+/*
         panel.addKeyListener(new KeyListener() {
 
             @Override
@@ -87,7 +89,7 @@ public class MainMenu extends JFrame{
             }
         });
 
-
+*/
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -121,6 +123,11 @@ public class MainMenu extends JFrame{
         panel.setVisible(true);
 
         return panel;
+    }
+
+    public JPanel getMainViewPanel()
+    {
+        return mainView;
     }
 
 }

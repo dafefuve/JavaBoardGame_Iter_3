@@ -57,6 +57,10 @@ public class PlayerView extends JPanel
 
     public static void registerChangeTurn(final PlayerView p)
     {
+        if(p == null)
+        {
+            return;
+        }
         Action myAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 p.changeTurn();

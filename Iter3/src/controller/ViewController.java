@@ -56,4 +56,9 @@ public class ViewController {
     {
         return mainView.getCurrentSpace();
     }
+
+    public void startNewGame()
+    {
+        mainView.startNewGame();
+    }
 }
