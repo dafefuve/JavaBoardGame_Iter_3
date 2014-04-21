@@ -25,7 +25,7 @@ public class Facade {
 
     public Facade(){
         activeController = new ActiveController();
-        boardController = new BoardController();
+        boardController = new BoardController(this);
         commandStackController = new CommandStackController();
         festivalController = new FestivalController();
         gameController = new GameController();
