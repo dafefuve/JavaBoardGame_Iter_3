@@ -1,5 +1,7 @@
 package controller.actions;
 
+import controller.GameStateManager;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -8,8 +10,15 @@ import java.awt.event.ActionEvent;
  */
 public class NewGameAction extends AbstractAction{
 
+    private GameStateManager g;
+    public NewGameAction(GameStateManager g)
+    {
+        this.g = g;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+       g.getActiveState();
 
     }
 }
