@@ -19,7 +19,7 @@ public class PlaceVillageTileAction extends AbstractAction{
 
     public void actionPerformed(ActionEvent e)
     {
-
+        facade.getViewController().placeVillageTile();
         MovableCommands c = facade.getCommandController().placeVillageTileCommand(facade.getBoardController(), facade.getGameController());
         facade.getTempCommand().setTempCommand(c);
     }

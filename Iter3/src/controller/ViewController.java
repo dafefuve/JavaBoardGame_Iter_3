@@ -15,10 +15,6 @@ public class ViewController {
         mainView = new view.MainView();
 
     }
-    public ViewController(view.MainView mainView)
-    {
-         this.mainView = mainView;
-    }
 
     public void initializeView(String[] players)
     {
@@ -100,6 +96,11 @@ public class ViewController {
     public void endPlacement()
     {
         mainView.endPlacement();
+    }
+
+    public void notifyInvalidPlacement()
+    {
+        //todo
     }
 
 

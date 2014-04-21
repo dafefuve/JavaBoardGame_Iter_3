@@ -1189,293 +1189,6 @@ public class BoardPanel extends JPanel
         this.repaint();
     }
 
-    public void moveSpace(int key)
-    {
-        int newRow;
-        int newCol;
-        ViewHex v;
-        if(placing)
-        {
-            //Move up
-            if(key == 8)
-            {
-                newRow = currentRow - 1;
-                if(newRow < 0 )
-                {
-                    displayAlert("You cannot move out of bounds!", null);
-                }
-                else
-                {
-                    //Deselect previous space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
-                    //Select new space
-                    currentRow = newRow;
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
-                    //Reflect changes made
-                    this.repaint();
-                }
-                this.requestFocus();
-
-            }
-            //Move NE
-            else if(key == 9)
-            {
-                if(currentCol % 2 == 0)
-                {
-                    newRow = currentRow - 1;
-                    newCol = currentCol + 1;
-
-                    if(newRow < 0 || newCol >= 19)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current col and row
-                        currentRow = newRow;
-                        currentCol = newCol;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Show changes
-                        this.repaint();
-                    }
-                }
-                else
-                {
-                    newRow = currentRow;
-                    newCol = currentCol + 1;
-
-                    if(newRow < 0 || newCol >= 19)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current col since row didn't change
-                        currentCol = newCol;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Display changes
-                        this.repaint();
-                    }
-                }
-                this.requestFocus();
-
-            }
-            //Move SW
-            else if(key == 3)
-            {
-                if(currentCol % 2 == 0)
-                {
-                    newRow = currentRow;
-                    newCol = currentCol + 1;
-
-                    if(newCol >= 19)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect previous space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-                        currentCol = newCol;
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Reflect changes made
-                        this.repaint();
-                    }
-                }
-                else
-                {
-                    newRow = currentRow + 1;
-                    newCol = currentCol + 1;
-
-                    if(newRow >= 15 || newCol >= 19)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect previous space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        currentCol = newCol;
-                        currentRow = newRow;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Reflect changes made
-                        this.repaint();
-                    }
-                }
-
-                this.requestFocus();
-
-            }
-            else if(key == 2)
-            {
-                newRow = currentRow + 1;
-                if(newRow >= 15 )
-                {
-                    displayAlert("You cannot move out of bounds!", null);
-                }
-                else
-                {
-                    //Deselect previous space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
-                    //Select new space
-                    currentRow = newRow;
-
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
-                    //Reflect changes made
-                    this.repaint();
-                }
-                this.requestFocus();
-            }
-            else if(key == 1)
-            {
-                if(currentCol % 2 == 0)
-                {
-                    newRow = currentRow;
-                    newCol = currentCol - 1;
-
-                    if(newCol < 0 || newRow >= 15)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current col
-                        currentCol = newCol;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Show changes
-                        this.repaint();
-                    }
-                }
-                else
-                {
-                    newRow = currentRow + 1;
-                    newCol = currentCol - 1;
-
-                    if(newCol < 0 || newRow >= 15)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current row and col
-                        currentCol = newCol;
-                        currentRow = newRow;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Display changes
-                        this.repaint();
-                    }
-                }
-                this.requestFocus();
-            }
-            else if(key == 7)
-            {
-                if(currentCol % 2 == 0)
-                {
-                    newRow = currentRow - 1;
-                    newCol = currentCol - 1;
-
-                    if(newRow < 0 || newCol < 0)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current col and row
-                        currentRow = newRow;
-                        currentCol = newCol;
-
-                        //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                        adjustScroll();
-                        //Show changes
-                        this.repaint();
-                    }
-                }
-                else
-                {
-                    newRow = currentRow;
-                    newCol = currentCol - 1;
-
-                    if(newRow < 0 || newCol < 0)
-                    {
-                        displayAlert("You cannot move out of bounds!", null);
-                        return;
-                    }
-                    else
-                    {
-                        //Deselect current space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-
-                        //Update current col since row didn't change
-                        currentCol = newCol;
-
-                        //Select new space
-                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                        board.getStackAt(currentRow, currentCol).popFromStack();
-                        adjustScroll();
-                        //Display changes
-                        this.repaint();
-                    }
-                }
-                this.requestFocus();
-
-            }
-        }
-
-
-    }
 
     public void beginPlacement()
     {
@@ -1519,35 +1232,32 @@ public class BoardPanel extends JPanel
         int newCol;
         ViewHex v;
 
-        if(placing)
+        newRow = currentRow - 1;
+        if(newRow < 0 )
         {
-            //Move up
-            newRow = currentRow - 1;
-            if(newRow < 0 )
-            {
-                displayAlert("You cannot move out of bounds!", null);
-            }
-            else
-            {
-                //Deselect previous space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
-                //Select new space
-                currentRow = newRow;
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Reflect changes made
-                this.repaint();
-            }
-            this.requestFocus();
-
+            displayAlert("You cannot move out of bounds!", null);
         }
+        else
+        {
+            //Deselect previous space
+            v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+            board.getStackAt(currentRow, currentCol).popFromStack();
+            //Select new space
+            currentRow = newRow;
+            board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+            adjustScroll();
+            //Reflect changes made
+            this.repaint();
+        }
+        this.requestFocus();
     }
+
 
     public void moveNorthEast()
     {
         int newRow;
         int newCol;
+        ViewHex v;
 
         if(currentCol % 2 == 0)
         {
@@ -1562,7 +1272,7 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current col and row
@@ -1589,7 +1299,7 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current col since row didn't change
@@ -1609,6 +1319,7 @@ public class BoardPanel extends JPanel
     {
         int newRow;
         int newCol;
+        ViewHex v;
 
         if(currentCol % 2 == 0)
         {
@@ -1623,10 +1334,11 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                board.setDeselectedAt(currentRow, currentCol);
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
                 currentCol = newCol;
                 //Select new space
-                board.setSelectedAt(currentRow, currentCol);
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                 adjustScroll();
                 //Reflect changes made
                 this.repaint();
@@ -1645,13 +1357,14 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                board.setDeselectedAt(currentRow, currentCol);
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
 
                 currentCol = newCol;
                 currentRow = newRow;
 
                 //Select new space
-                board.setSelectedAt(currentRow, currentCol);
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                 adjustScroll();
                 //Reflect changes made
                 this.repaint();
@@ -1659,6 +1372,7 @@ public class BoardPanel extends JPanel
         }
 
         this.requestFocus();
+
     }
 
     public void moveSouth()
@@ -1691,6 +1405,7 @@ public class BoardPanel extends JPanel
     {
         int newRow;
         int newCol;
+        ViewHex v;
 
         if(currentCol % 2 == 0)
         {
@@ -1705,7 +1420,7 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current col
@@ -1731,7 +1446,7 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current row and col
@@ -1752,6 +1467,7 @@ public class BoardPanel extends JPanel
     {
         int newRow;
         int newCol;
+        ViewHex v;
 
         if(currentCol % 2 == 0)
         {
@@ -1766,7 +1482,7 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current col and row
@@ -1793,15 +1509,14 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect current space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                 board.getStackAt(currentRow, currentCol).popFromStack();
 
                 //Update current col since row didn't change
                 currentCol = newCol;
 
                 //Select new space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                 adjustScroll();
                 //Display changes
                 this.repaint();

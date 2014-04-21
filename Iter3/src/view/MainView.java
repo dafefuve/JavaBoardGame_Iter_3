@@ -42,7 +42,8 @@ public class MainView extends JFrame
 
     public MainView()
     {
-       createMainMenu(); content = createContentPane();
+       createMainMenu();
+       content = createContentPane();
     }
 
     public static void createMainMenu()
@@ -91,7 +92,9 @@ public class MainView extends JFrame
         this.setVisible(true);
 
         mainMenuView.dispose();
-        boardPanel.requestFocus();
+        content.requestFocusInWindow();
+        content.requestFocus();
+        //boardPanel.requestFocus();
         playerPanel.requestFocus();
     }
 
