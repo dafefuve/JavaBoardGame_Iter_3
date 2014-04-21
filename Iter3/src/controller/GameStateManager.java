@@ -49,7 +49,7 @@ public class GameStateManager {
     public gameState getPauseState(){return pause;}
     public gameState getPlanningState(){return planning;}
     public gameState getReplayState(){return replay;}
-    //public void
+    public void setState(gameState inState){ currentState = inState;}
 }
 interface gameState {
     //boolean changeTurn();
