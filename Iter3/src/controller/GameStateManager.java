@@ -136,7 +136,7 @@ class mainMenuState implements gameState{
         //TODO
 
         HashMap<KeyStroke, AbstractAction> mainMenuActions = new HashMap<KeyStroke, AbstractAction>();
-        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction());
+        mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new NewGameAction(this));
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0), new LoadGameAction());
         mainMenuActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new QuitGameAction());
 
