@@ -47,7 +47,7 @@ public class GameStateManager {
     public gameState getPauseState(){return pause;}
     public gameState getPlanningState(){return planning;}
     public gameState getReplayState(){return replay;}
-    public void setState(gameState inState){ currentState = inState;}
+    public void setState(gameState inState){ currentState = inState; currentState.bindKeys(); System.out.println("fuck");}
 }
 interface gameState {
     //boolean changeTurn();
@@ -82,9 +82,10 @@ class activeState implements gameState {
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestAction(theFacade));
 
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new PlaceVillageTileAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, 0), new PlaceVillageTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
 
+        System.out.println("KEY BINDINGS WORK?");
         //Developer
         //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperAction(theFacade));
         //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperAction(theFacade));

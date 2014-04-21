@@ -2,6 +2,7 @@ package controller.actions;
 
 import controller.Command;
 import controller.Facade;
+import controller.commands.MovableCommands;
 
 import java.awt.event.ActionEvent;
 
@@ -19,7 +20,7 @@ public class PlaceIrrigationTileAction {
     public void actionPerformed(ActionEvent e)
     {
         //facade.getViewController().placeIrrigationTile();
-        Command c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
+        MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
         facade.getTempCommand().setTempCommand(c);
     }
 }

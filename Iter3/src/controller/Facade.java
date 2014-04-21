@@ -84,13 +84,13 @@ public class Facade {
         viewController.recieveMainMenuKeyBindings(keyBindings);
     }
 
-    public void bindActiveKeys(HashMap<KeyStroke, Action> keyBindings)
+    public void bindActiveKeys(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         //Pass key bindings to the view controller which will add them to the main view
         viewController.recieveActiveKeyBindings(keyBindings);
     }
 
-    public void bindPlanningKeys(HashMap<KeyStroke, Action> keyBindings)
+    public void bindPlanningKeys(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         //Pass key bindings to the view controller which will add them to the main view
         viewController.recievePlanningKeyBindings(keyBindings);
