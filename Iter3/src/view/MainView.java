@@ -197,7 +197,7 @@ public class MainView extends JFrame
     public int getCurrentSpace()
     {
         //Gets current space we are on when placing
-
+        return boardPanel.getCurrentSpace();
     }
 
     public void startNewGame()
@@ -220,6 +220,33 @@ public class MainView extends JFrame
     {
         boardPanel.moveNorthEast();
     }
+
+    public void moveSouthEast()
+    {
+        boardPanel.moveSouthEast();
+    }
+
+    public void moveSouth()
+    {
+        boardPanel.moveSouth();
+    }
+
+    public void moveSouthWest()
+    {
+        boardPanel.moveSouthWest();
+    }
+
+    public void moveNorthWest()
+    {
+        boardPanel.moveNorthWest();
+    }
+
+    public void endPlacement()
+    {
+        boardPanel.endPlacement();
+    }
+
+
 
 
 

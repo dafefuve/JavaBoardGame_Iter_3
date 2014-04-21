@@ -77,5 +77,10 @@ public class ViewController {
         mainView.moveNorthEast();
     }
 
+    public void endPlacement()
+    {
+        mainView.endPlacement();
+    }
+
 
 }
