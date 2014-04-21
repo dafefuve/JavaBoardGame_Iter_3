@@ -182,28 +182,28 @@ class planningState implements gameState {
         //TODO GET THIS WORKING!
         //Movement
         /*
-         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestPlanningAction(gameFacade));
 
         //Developer
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperPlanningAction(gameFacade));
 
         //Blocks
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlaceDeveloperPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new PlaceOneBlockPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, 0), new PlaceTwoBlockPlanningAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceThreeBlockPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlaceDeveloperPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new PlaceOneBlockPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, 0), new PlaceTwoBlockPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceThreeBlockPlanningAction(gameFacade));
 
         //Etc
         //ChangeTurnPlanningAction will prompt user to end the planning mode (i.e., save or discard changes)
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnPlanningAction(gameFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnPlanningAction(gameFacade));
 
-        gameFacade.bindPlanningKeys(activeActions);
+        theFacade.bindPlanningKeys(planningActions);
         */
 
     }
