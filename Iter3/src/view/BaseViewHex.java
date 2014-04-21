@@ -1,6 +1,7 @@
 package view;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -19,4 +20,11 @@ public class BaseViewHex extends ViewHex
     {
         return image;
     }
+
+    @Override
+    public TexturePaint getTP()
+    {
+        return texture;
+    }
+
 }

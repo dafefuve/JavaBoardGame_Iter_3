@@ -34,21 +34,15 @@ public class BoardPanel extends JPanel
    private JScrollPane jsp;
    private JPanel panel;
    private boolean placing;
+   //private ViewHexVillage viewHexVillage;
 
    public BoardPanel()
    {
        board = new ViewBoard(15, 19);
-       //readTextures();
-       setUpIrrigationCoordinates();
-
-       //initializeHexes();
-       //setUpMainLand();
        setUpKeyListener();
-       //highlightDoubleStartSpace();
-
-       //hacky temporary solution
        panel = this;
        placing = false;
+       //viewHexVillage = new ViewHexVillage();
 
        this.setBorder(new EmptyBorder(50, 50, 50, 50) );
        this.setMinimumSize(new Dimension(900,850));
@@ -64,31 +58,6 @@ public class BoardPanel extends JPanel
    {
        return this.jsp;
    }
-
-   public void readTextures()
-   {
-       try
-       {
-           dirt = ImageIO.read(new File("Iter3/src/view/images/dirt.jpg"));
-           water = ImageIO.read(new File("Iter3/src/view/images/water.jpg"));
-           land = ImageIO.read(new File("Iter3/src/view/images/land.png"));
-           mainland = ImageIO.read(new File("Iter3/src/view/images/mainland.jpg"));
-       }
-       catch(Exception e)
-       {
-           e.printStackTrace();
-       }
-   }
-
-    public void setUpIrrigationCoordinates()
-    {
-        irrigationIDs = new int[3];
-        irrigationIDs[0] = 99;
-        irrigationIDs[1] = 108;
-        irrigationIDs[2] = 160;
-    }
-
-
 
    @Override
    protected void paintComponent(Graphics g) {
@@ -110,10 +79,10 @@ public class BoardPanel extends JPanel
            {
                //Draw the texture in hex shape
                BufferedImage texture = board.getStackAt(i, j).peekIntoStack().getImage();
-               g2.setPaint(new TexturePaint(texture, new Rectangle(300, 300, 300, 300)));
+               g2.setPaint(board.getStackAt(i, j).peekIntoStack().getTP());
                g2.fillPolygon(board.getPolygonAt(i, j));
 
-               drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j).size());
+               //drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j));
 
                //Set outline for the shape
                g2.setColor(Color.WHITE);
@@ -129,7 +98,29 @@ public class BoardPanel extends JPanel
                }
 
                //Render levels
-               drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j).size());
+               //Avoid irrigation tiles and central java
+               if(board.getStackAt(i, j).size() == 1)
+               {
+                   continue;
+               }
+               if(i == 5 && j == 4)
+               {
+                   continue;
+               }
+               if(i == 5 && j == 13)
+               {
+                   continue;
+               }
+               if(i == 8 && j == 8)
+               {
+                   continue;
+               }
+               if(placing && currentRow == i && currentCol == j)
+               {
+                   continue;
+               }
+               drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j));
+
 
                /*
                if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
@@ -224,6 +215,16 @@ public class BoardPanel extends JPanel
                {
                    beginPlacement();
                    placeSingleVillageTile();
+               }
+               else if(e.getKeyChar() == 'r')
+               {
+                   beginPlacement();
+                   placeSingleRiceTile();
+               }
+               else if(e.getKeyChar() == 'i')
+               {
+                   beginPlacement();
+                   placeIrrigationTile();
                }
 
 
@@ -1164,11 +1165,23 @@ public class BoardPanel extends JPanel
         this.repaint();
     }
 
+    public void placeSingleRiceTile()
+    {
+        board.getStackAt(0, 0).pushIntoStack(new ViewHexRice());
+        this.repaint();
+    }
+
+    public void placeIrrigationTile()
+    {
+        board.getStackAt(0, 0).pushIntoStack(new ViewHexIrrigation());
+        this.repaint();
+    }
+
     public void moveSpace(int key)
     {
         int newRow;
         int newCol;
-
+        ViewHex v;
         if(placing)
         {
             //Move up
@@ -1182,10 +1195,11 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                     board.getStackAt(currentRow, currentCol).popFromStack();
                     //Select new space
                     currentRow = newRow;
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -1209,6 +1223,7 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current col and row
@@ -1216,7 +1231,7 @@ public class BoardPanel extends JPanel
                         currentCol = newCol;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Show changes
                         this.repaint();
@@ -1235,13 +1250,14 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current col since row didn't change
                         currentCol = newCol;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Display changes
                         this.repaint();
@@ -1266,10 +1282,11 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect previous space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
                         currentCol = newCol;
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Reflect changes made
                         this.repaint();
@@ -1288,13 +1305,14 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect previous space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         currentCol = newCol;
                         currentRow = newRow;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Reflect changes made
                         this.repaint();
@@ -1314,11 +1332,12 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                     board.getStackAt(currentRow, currentCol).popFromStack();
                     //Select new space
                     currentRow = newRow;
 
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -1340,13 +1359,14 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current col
                         currentCol = newCol;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Show changes
                         this.repaint();
@@ -1365,6 +1385,7 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current row and col
@@ -1372,7 +1393,7 @@ public class BoardPanel extends JPanel
                         currentRow = newRow;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Display changes
                         this.repaint();
@@ -1395,6 +1416,7 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current col and row
@@ -1402,7 +1424,7 @@ public class BoardPanel extends JPanel
                         currentCol = newCol;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        board.getStackAt(currentRow, currentCol).pushIntoStack(v);
                         adjustScroll();
                         //Show changes
                         this.repaint();
@@ -1421,13 +1443,15 @@ public class BoardPanel extends JPanel
                     else
                     {
                         //Deselect current space
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
                         board.getStackAt(currentRow, currentCol).popFromStack();
 
                         //Update current col since row didn't change
                         currentCol = newCol;
 
                         //Select new space
-                        board.getStackAt(currentRow, currentCol).pushIntoStack(new ViewHexVillage());
+                        v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                        board.getStackAt(currentRow, currentCol).popFromStack();
                         adjustScroll();
                         //Display changes
                         this.repaint();
@@ -1452,18 +1476,21 @@ public class BoardPanel extends JPanel
         placing = false;
         currentRow = 0;
         currentCol = 0;
+        repaint();
     }
 
-    //Y U NO WORK
-    public void drawLevel(Graphics2D g, Polygon hex, int level)
+
+    public void drawLevel(Graphics2D g, Polygon hex, ViewHexStack v)
     {
+
         Font f = new Font("Helvetica", Font.BOLD, 16);
         g.setFont(f);
         g.setColor(Color.WHITE);
         int[] x = hex.xpoints;
         int[] y = hex.ypoints;
 
-        g.drawString(/*String.valueOf(level)*/"fuuuuucck", x[0] + 15, y[0] + 15);
+        g.drawString(String.valueOf(v.size() - 2), x[0] - 40, y[0]);
+
     }
 }
 

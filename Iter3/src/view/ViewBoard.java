@@ -59,21 +59,6 @@ public class ViewBoard
                     boardImages[i][j].pushIntoStack(lowland);
                 }
 
-                if(i == 5 && j == 4)
-                {
-                    boardImages[i][j].popFromStack();
-                    boardImages[i][j].pushIntoStack(irrigation);
-                }
-                if(i == 5 && j == 13)
-                {
-                    boardImages[i][j].popFromStack();
-                    boardImages[i][j].pushIntoStack(irrigation);
-                }
-                if(i == 8 && j == 8)
-                {
-                    boardImages[i][j].popFromStack();
-                    boardImages[i][j].pushIntoStack(irrigation);
-                }
                 boardPolygons[i][j] = hex;
                 //boardImages[i][j].pushIntoStack(new BaseViewHex());
                 xCoord += 45;
@@ -131,9 +116,6 @@ public class ViewBoard
         boardImages[2][5].pushIntoStack(central);
 
         boardImages[2][7].pushIntoStack(central);
-
-        boardImages[2][4].pushIntoStack(central);
-
 
         boardImages[2][10].pushIntoStack(central);
 
@@ -244,6 +226,17 @@ public class ViewBoard
 
 
         boardImages[13][12].pushIntoStack(central);
+
+
+        ViewHexIrrigation irrigation = new ViewHexIrrigation();
+        boardImages[5][4].popFromStack();
+        boardImages[5][4].pushIntoStack(irrigation);
+
+        boardImages[5][13].popFromStack();
+        boardImages[5][13].pushIntoStack(irrigation);
+
+        boardImages[8][8].popFromStack();
+        boardImages[8][8].pushIntoStack(irrigation);
     }
 
     public ViewHexStack getStackAt(int x, int y)

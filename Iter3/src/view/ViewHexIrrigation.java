@@ -1,6 +1,7 @@
 package view;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -9,6 +10,7 @@ import java.io.File;
  */
 public class ViewHexIrrigation extends ViewHex
 {
+    Rectangle rectangle = new Rectangle(300, 300, 300, 300);
     public ViewHexIrrigation()
     {
         try
@@ -20,7 +22,17 @@ public class ViewHexIrrigation extends ViewHex
             e.printStackTrace();
         }
 
+        texture = new TexturePaint(image, rectangle);
+
         selected = false;
+        hexID = ID;
+        ID++;
+    }
+
+    @Override
+    public TexturePaint getTP()
+    {
+        return texture;
     }
 
     @Override

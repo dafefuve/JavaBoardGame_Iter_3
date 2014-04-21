@@ -12,7 +12,9 @@ public abstract class ViewHex
     public int hexID;
     public BufferedImage image;
     public abstract BufferedImage getImage();
+    public abstract TexturePaint getTP();
     public boolean selected;
+    public TexturePaint texture;
     public void setSelected(boolean selected){this.selected = selected;}
     public boolean getSelected(){return selected;}
 }

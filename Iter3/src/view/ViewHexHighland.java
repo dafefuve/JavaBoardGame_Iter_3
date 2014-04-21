@@ -1,6 +1,7 @@
 package view;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -19,14 +20,22 @@ public class ViewHexHighland extends ViewHex
         {
             e.printStackTrace();
         }
-
+        texture = new TexturePaint(image, new Rectangle(300, 300, 300, 300));
         selected = false;
+        hexID = ID;
+        ID++;
     }
 
     @Override
     public BufferedImage getImage()
     {
         return image;
+    }
+
+    @Override
+    public TexturePaint getTP()
+    {
+        return texture;
     }
 
     public boolean getSelected()
