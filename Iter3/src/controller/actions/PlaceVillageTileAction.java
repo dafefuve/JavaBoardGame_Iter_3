@@ -2,6 +2,7 @@ package controller.actions;
 
 import controller.Command;
 import controller.Facade;
+import controller.commands.MovableCommands;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ public class PlaceVillageTileAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {
 
-        Command c = facade.getCommandController().placeVillageTileCommand(facade.getBoardController(), facade.getGameController());
+        MovableCommands c = facade.getCommandController().placeVillageTileCommand(facade.getBoardController(), facade.getGameController());
         facade.getTempCommand().setTempCommand(c);
     }
 }
