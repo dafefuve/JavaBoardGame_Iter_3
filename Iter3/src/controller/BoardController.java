@@ -13,12 +13,14 @@ public class BoardController
 {
     HexBoard hexBoard;
     ArrayList<GraphDistance> distances;
+    Facade facade;
     GameController gc;
 
-    public BoardController()
+    public BoardController(Facade facade)
     {
         hexBoard = new HexBoard();
-        gc = new GameController();
+        this.facade = facade;
+        gc = facade.getGameController();
         distances = new ArrayList<GraphDistance>();
         for (int i = 0; i < this.getHexBoard().getEdges().size(); i++)
         {

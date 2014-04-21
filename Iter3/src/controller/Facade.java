@@ -1,5 +1,7 @@
 package controller;
 
+import model.Game;
+
 import javax.swing.*;
 import java.util.HashMap;
 
@@ -19,6 +21,7 @@ public class Facade {
     private ReplayController replayController;
     private ViewController viewController;
     private TempCommand tempCommand;
+    private GameSetupController gameSetupController;
 
     public Facade(){
         activeController = new ActiveController();
@@ -32,11 +35,16 @@ public class Facade {
         viewController = new ViewController();
         commandController = new CommandController();
         tempCommand = new TempCommand(this);
+        gameSetupController = new GameSetupController(this);
     }
 
+    public GameSetupController getGameSetupController(){ return gameSetupController;}
+
     public ActiveController getActiveController(){
+
         return activeController;
     }
+
     public BoardController getBoardController(){
         return boardController;
     }

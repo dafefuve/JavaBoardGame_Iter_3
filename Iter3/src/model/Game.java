@@ -17,6 +17,14 @@ public class Game {
         board = initBoard;
     }
 
+    public void setItem(String item, Integer count){
+        inventory.setItem(item,count);
+    }
+
+    public Integer getItem(String item){
+        return inventory.getItem(item);
+    }
+
     public List<JavaPlayer> getPlayers(){
         return players;
     }
