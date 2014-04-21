@@ -1,8 +1,6 @@
 package controller;
 
-import controller.actions.LoadGameAction;
-import controller.actions.NewGameAction;
-import controller.actions.QuitGameAction;
+import controller.actions.*;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -70,34 +68,38 @@ class activeState implements gameState {
     @Override
     public void bindKeys()
     {
-        HashMap<KeyStroke, Action> activeActions = new HashMap<KeyStroke, Action>();
-        //TODO GET THIS WORKING!!
+        HashMap<KeyStroke, AbstractAction> activeActions = new HashMap<KeyStroke, AbstractAction>();
+
         //Stores all the actions and their associated keys for activeMode, then calls Facade and passes this map
         //Let me know if I've missed any actions!!
         //Movement
-        /*
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestAction(gameFacade));
+
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastAction(theFacade));
+
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestAction(theFacade));
+
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new PlaceVillageTileAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
 
         //Developer
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperAction(gameFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperAction(theFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperAction(theFacade));
 
         //Blocks
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlaceDeveloperAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new PlaceOneBlockAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, 0), new PlaceTwoBlockAction(gameFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceThreeBlockAction(gameFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlaceDeveloperAction(theFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), new PlaceOneBlockAction(theFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, 0), new PlaceTwoBlockAction(theFacade));
+        //activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceThreeBlockAction(theFacade));
 
         //Etc
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(gameFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
 
-        gameFacade.bindActiveKeys(activeActions);
-        */
+        theFacade.bindActiveKeys(activeActions);
+
     }
 }
 

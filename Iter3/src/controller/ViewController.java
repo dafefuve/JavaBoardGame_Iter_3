@@ -61,4 +61,21 @@ public class ViewController {
     {
         mainView.startNewGame();
     }
+
+    public void placeVillageTile()
+    {
+        mainView.placeVillageTile();
+    }
+
+    public void moveNorth()
+    {
+        mainView.moveNorth();
+    }
+
+    public void moveNorthEast()
+    {
+        mainView.moveNorthEast();
+    }
+
+
 }

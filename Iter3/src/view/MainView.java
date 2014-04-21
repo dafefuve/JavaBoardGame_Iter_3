@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 public class MainView extends JFrame
 {
-    private JPanel boardPanel;
+    private BoardPanel boardPanel;
     private JPanel communalView;
     private JPanel playerPanel;
     private JPanel festivalCardPanel;
@@ -57,7 +57,9 @@ public class MainView extends JFrame
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(playerPanel);
 
+
         boardPanel = new BoardPanel();
+        //jsp = new JScrollPane(boardPanel);
         mainPanel.add(boardPanel);
 
         JPanel bottomPane = new JPanel();
@@ -174,7 +176,17 @@ public class MainView extends JFrame
 
     public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
     {
-        //DO SOMETHING
+        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
+        mainMenuView.getMainViewPanel().getActionMap().put("new game",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0);
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "load game");
+        mainMenuView.getMainViewPanel().getActionMap().put("load game",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0);
+        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "quit game");
+        mainMenuView.getMainViewPanel().getActionMap().put("quit game",keyBindings.get(k));
     }
 
     public void registerPlanningKeyBindings(HashMap<KeyStroke, Action> keyBindings)
@@ -184,14 +196,29 @@ public class MainView extends JFrame
 
     public int getCurrentSpace()
     {
-        //todo
-        return 1;
+        //Gets current space we are on when placing
+
     }
 
     public void startNewGame()
     {
         mainMenuView.setVisible(false);
         initializeGameView();
+    }
+
+    public void placeVillageTile()
+    {
+        boardPanel.placeSingleVillageTile();
+    }
+
+    public void moveNorth()
+    {
+        boardPanel.moveNorth();
+    }
+
+    public void moveNorthEast()
+    {
+        boardPanel.moveNorthEast();
     }
 
 

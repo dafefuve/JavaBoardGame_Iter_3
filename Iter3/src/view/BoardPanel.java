@@ -15,9 +15,10 @@ import java.util.Stack;
 /**
  * Created by alexbujduveanu on 4/15/14.
  */
-public class BoardPanel extends JPanel
+public class BoardPanel extends JScrollPane
 {
    private ViewBoard board;
+   private int[][] IDs;
    private BufferedImage dirt;
    private BufferedImage water;
    private BufferedImage land;
@@ -40,7 +41,7 @@ public class BoardPanel extends JPanel
    {
        board = new ViewBoard(15, 19);
        setUpKeyListener();
-       panel = this;
+       //panel = this;
        placing = false;
        //viewHexVillage = new ViewHexVillage();
 
@@ -49,6 +50,17 @@ public class BoardPanel extends JPanel
        this.setPreferredSize(new Dimension(900,850));
        this.setBackground(Color.decode("#80C7FF"));
        this.setFocusable(true);
+
+       IDs = new int[15][19];
+       int k = 0;
+       for(int i = 0; i < 15; i++)
+       {
+           for(int j = 0; j < 19; j++)
+           {
+               IDs[i][j] = k;
+               k++;
+           }
+       }
 
        jsp = new JScrollPane(this);
 
@@ -92,7 +104,7 @@ public class BoardPanel extends JPanel
                boolean selected = board.getSelectedAt(i, j);
                if(selected)
                {
-                   Color c = new Color(0f,1f,1f,.3f );
+                   Color c = new Color(0f,1f,1f,.3f);
                    g2.setColor(c);
                    g2.fillPolygon(board.getPolygonAt(i, j));
                }
@@ -1491,6 +1503,45 @@ public class BoardPanel extends JPanel
 
         g.drawString(String.valueOf(v.size() - 2), x[0] - 40, y[0]);
 
+    }
+
+    public int getCurrentSpace()
+    {
+        //returns id of the currently selected space
+        return IDs[currentRow][currentCol];
+
+    }
+
+
+    public void moveNorth()
+    {
+        int newRow;
+        int newCol;
+        ViewHex v;
+
+        if(placing)
+        {
+            //Move up
+            newRow = currentRow - 1;
+            if(newRow < 0 )
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous space
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
+                //Select new space
+                currentRow = newRow;
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                adjustScroll();
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
+
+        }
     }
 }
 
