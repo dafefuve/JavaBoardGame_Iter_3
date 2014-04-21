@@ -15,7 +15,7 @@ import java.util.Stack;
 /**
  * Created by alexbujduveanu on 4/15/14.
  */
-public class BoardPanel extends JScrollPane
+public class BoardPanel extends JPanel
 {
    private ViewBoard board;
    private int[][] IDs;
@@ -40,7 +40,7 @@ public class BoardPanel extends JScrollPane
    public BoardPanel()
    {
        board = new ViewBoard(15, 19);
-       setUpKeyListener();
+       //setUpKeyListener();
        //panel = this;
        placing = false;
        //viewHexVillage = new ViewHexVillage();
@@ -186,7 +186,7 @@ public class BoardPanel extends JScrollPane
        }
    }
 
-   public void setUpKeyListener()
+  /* public void setUpKeyListener()
    {
        this.addKeyListener(new KeyListener() {
 
@@ -246,7 +246,7 @@ public class BoardPanel extends JScrollPane
                 {
                     selectPlayer();
                 }*/
-           }
+           /*}
 
            @Override
            public void keyReleased(KeyEvent e) {
@@ -261,7 +261,7 @@ public class BoardPanel extends JScrollPane
            }
        });
    }
-
+*/
     public void highlightSpace(int key)
     {
         int newRow;

@@ -2,6 +2,7 @@ package controller.actions;
 
 import controller.Command;
 import controller.Facade;
+import controller.commands.MovableCommands;
 
 import java.awt.event.ActionEvent;
 
@@ -19,7 +20,7 @@ public class MoveDeveloperAction {
     public void actionPerformed(ActionEvent e)
     {
         //facade.getViewController().moveDeveloper();
-        Command c = facade.getCommandController().moveDeveloperCommand(facade.getBoardController());
+        MovableCommands c = facade.getCommandController().moveDeveloperCommand(facade.getBoardController());
         facade.getTempCommand().setTempCommand(c);
     }
 }

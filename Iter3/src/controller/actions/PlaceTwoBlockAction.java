@@ -2,6 +2,7 @@ package controller.actions;
 
 import controller.Command;
 import controller.Facade;
+import controller.commands.MovableCommands;
 
 import java.awt.event.ActionEvent;
 
@@ -20,7 +21,7 @@ public class PlaceTwoBlockAction {
     public void actionPerformed(ActionEvent e)
     {
         //facade.getViewController().placeTwoBlock();
-        Command c = facade.getCommandController().placeTwoBlockCommand(facade.getBoardController());
+        MovableCommands c = facade.getCommandController().placeTwoBlockCommand(facade.getBoardController());
         facade.getTempCommand().setTempCommand(c);
     }
 }

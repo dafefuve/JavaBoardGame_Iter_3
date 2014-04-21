@@ -31,6 +31,8 @@ public class MainView extends JFrame
     public static JScrollPane jsp;
     private int currentPlayer;
 
+    private JPanel content;
+
 
    /* public static void main(String[] args)
     {
@@ -40,7 +42,7 @@ public class MainView extends JFrame
 
     public MainView()
     {
-       createMainMenu();
+       createMainMenu(); content = createContentPane();
     }
 
     public static void createMainMenu()
@@ -83,13 +85,14 @@ public class MainView extends JFrame
 
     public void initializeGameView()
     {
-        this.setContentPane(createContentPane());
+        this.setContentPane(content);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
 
+        mainMenuView.dispose();
         boardPanel.requestFocus();
-        playerView.requestFocus();
+        playerPanel.requestFocus();
     }
 
 
@@ -174,22 +177,42 @@ public class MainView extends JFrame
         mainMenuView.getMainViewPanel().getActionMap().put("quit game",keyBindings.get(k));
     }
 
-    public void registerActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void registerActiveKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
-        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_N, 0);
-        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "new game");
-        mainMenuView.getMainViewPanel().getActionMap().put("new game",keyBindings.get(k));
+        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_8, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move N");
+        boardPanel.getActionMap().put("move N",keyBindings.get(k));
 
-        k = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0);
-        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "load game");
-        mainMenuView.getMainViewPanel().getActionMap().put("load game",keyBindings.get(k));
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_9, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move NE");
+        boardPanel.getActionMap().put("move NE",keyBindings.get(k));
 
-        k = KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0);
-        mainMenuView.getMainViewPanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "quit game");
-        mainMenuView.getMainViewPanel().getActionMap().put("quit game",keyBindings.get(k));
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_3, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move SE");
+        boardPanel.getActionMap().put("move SE",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_2, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move S");
+        boardPanel.getActionMap().put("move S",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_1, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move SW");
+        boardPanel.getActionMap().put("move SW",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_7, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move NW");
+        boardPanel.getActionMap().put("move NW",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_V, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place village");
+        boardPanel.getActionMap().put("place village",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
+        boardPanel.getActionMap().put("end placement",keyBindings.get(k));
     }
 
-    public void registerPlanningKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void registerPlanningKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         //DO SOMETHING
     }
@@ -247,13 +270,4 @@ public class MainView extends JFrame
     }
 
 
-
-
-
-
-    /*JFrame frame = new JFrame();
-    frame.setContentPane(ViewTest.createContentPane());
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.pack();
-    frame.setVisible(true);*/
 }

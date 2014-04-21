@@ -3,6 +3,7 @@ package controller.actions;
 import controller.Command;
 import controller.CommandStackController;
 import controller.Facade;
+import controller.commands.MovableCommands;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,7 @@ public class PlaceOneBlockAction extends AbstractAction
     public void actionPerformed(ActionEvent e)
     {
         //Facade.getViewController().placeOneBlock();
-        Command c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
+        MovableCommands c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
         facade.getTempCommand().setTempCommand(c);
 
 

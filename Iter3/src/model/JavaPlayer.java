@@ -38,6 +38,10 @@ public class JavaPlayer extends Player{
         return developers.remove(index);
     }
 
+    public void removeDeveloper(Developer d){
+         developers.remove(d);
+    }
+
     public void addPalaceCard(PalaceCard card){
         inventory.addPalaceCard(card);
     }

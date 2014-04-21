@@ -42,12 +42,12 @@ public class ViewController {
         mainView.registerMainMenuKeyBindings(keyBindings);
     }
 
-    public void recieveActiveKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void recieveActiveKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         mainView.registerActiveKeyBindings(keyBindings);
     }
 
-    public void recievePlanningKeyBindings(HashMap<KeyStroke, Action> keyBindings)
+    public void recievePlanningKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
         mainView.registerPlanningKeyBindings(keyBindings);
     }
@@ -75,6 +75,26 @@ public class ViewController {
     public void moveNorthEast()
     {
         mainView.moveNorthEast();
+    }
+
+    public void moveSouth()
+    {
+        mainView.moveSouth();
+    }
+
+    public void moveSouthEast()
+    {
+        mainView.moveSouthEast();
+    }
+
+    public void moveSouthWest()
+    {
+        mainView.moveSouthWest();
+    }
+
+    public void moveNorthWest()
+    {
+        mainView.moveNorthWest();
     }
 
     public void endPlacement()

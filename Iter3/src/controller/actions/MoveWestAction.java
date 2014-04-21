@@ -19,6 +19,6 @@ public class MoveWestAction extends AbstractAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        f.getViewController().moveWest();
+        //f.getViewController().moveWest();
     }
 }
