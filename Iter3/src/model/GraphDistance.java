@@ -10,13 +10,11 @@ public class GraphDistance
     BoardController bc;
     int distance;
     Edge correspondingEdge;
-    int edgeIndex;
 
     public GraphDistance(int d, Edge ce)
     {
         distance = d;
         correspondingEdge = ce;
-        edgeIndex = bc.getHexBoard().getEdges().indexOf(correspondingEdge);
     }
 
     public int getDistance()
@@ -32,10 +30,5 @@ public class GraphDistance
     public Edge getCorrespondingEdge()
     {
         return this.correspondingEdge;
-    }
-
-    public int getEdgeIndex()
-    {
-        return this.edgeIndex;
     }
 }

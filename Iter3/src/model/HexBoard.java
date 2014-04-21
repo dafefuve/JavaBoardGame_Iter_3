@@ -25,25 +25,69 @@ public class HexBoard
             }
         }
 
-        this.defineEdge(this.getSpaces().get(0));   //start defining edges starting at Space at (0,0)
+        //make the N-S edges
+        for (int eachCol = 0; eachCol < 19; eachCol++)
+        {
+            for (int aRow = 0; (aRow+1) < 15; aRow++)
+            {
+                //add to edges the Edge(northSpace, southSpace, 0)
+                edges.add(new Edge(spaces.get(aRow*19 + eachCol), spaces.get((aRow+1)*19 + eachCol), 0));
+            }
+        }
+
+        //make the NW-SE edges
+        for (int eachCol = 0; eachCol < 19; eachCol++)
+        {
+            for (int aRow = 0; aRow+1 < 15; aRow++)
+            {
+                if (eachCol % 2 == 0)
+                {
+                    //make edge from a space with row-evenCol to a space with row-oddCol
+                    edges.add(new Edge(spaces.get(aRow*19+eachCol), spaces.get(aRow*19+eachCol+1), 0));
+                }
+                else
+                {
+                    //make edge from a space with row-oddCol to a space with row-evenCol
+                    edges.add(new Edge(spaces.get((aRow)*19+eachCol), spaces.get((aRow+1)*19+eachCol+1), 0));
+                }
+            }
+        }
+
+        //make the NE-SW edges
+        for (int eachCol = 0; eachCol < 19; eachCol++)
+        {
+            for (int aRow = 14; aRow > 0; aRow--)
+            {
+                if (eachCol % 2 == 0)
+                {
+                    edges.add(new Edge(spaces.get(aRow*19+eachCol), spaces.get((aRow-1)*19+eachCol+1), 0));
+                }
+                else
+                {
+                    edges.add(new Edge(spaces.get(aRow*19+eachCol), spaces.get(aRow*19+eachCol+1), 0));
+                }
+            }
+        }
+
+        //this.defineEdge(this.getSpaces().get(0));   //start defining edges starting at Space at (0,0)
     }
 
     public void defineEdge(Space s)
     {
-        Space southS;               //The space directly below s (direction 2)
+                       //The space directly below s (direction 2)
         if (s.getRow()+1 < 15)      //ensure that now space is created outside of the board
         {
-            southS = spaces.get((s.getRow()+1)*19+s.getColumn());
+            Space southS = spaces.get((s.getRow()+1)*19+s.getColumn());
             this.edges.add(new Edge(s, southS, 0));
             defineEdge(southS);
         }
 
-        Space southeastS;                   //The space southeast of s (direction 3)
+        //Space southeastS;                   //The space southeast of s (direction 3)
         if (s.getColumn() % 2 == 0)         //even column
         {
             if (s.getColumn()+1 < 19)       //no space outside board
             {
-                southeastS = spaces.get((s.getRow()*19 + s.getColumn()+1));
+                Space southeastS = spaces.get((s.getRow()*19 + s.getColumn()+1));
                 this.edges.add(new Edge(s, southeastS, 0));
                 defineEdge(southeastS);
             }
@@ -52,18 +96,18 @@ public class HexBoard
         {
             if (s.getRow()+1 < 15 && s.getColumn()+1 < 19)      //no space outside board
             {
-                southeastS = spaces.get((s.getRow()+1)*19+ s.getColumn()+1);
+                Space southeastS = spaces.get((s.getRow()+1)*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, southeastS, 0));
                 defineEdge(southeastS);
             }
         }
 
-        Space northeastS;               //The space northeast of s (direction 9)
+        //Space northeastS;               //The space northeast of s (direction 9)
         if (s.getColumn() % 2 == 0)     //even column
         {
             if (s.getRow()-1 >= 0 && s.getColumn()+1 < 19)       //no space outside board
             {
-                northeastS = spaces.get((s.getRow()-1)*19+ s.getColumn()+1);
+                Space northeastS = spaces.get((s.getRow()-1)*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, northeastS, 0));
                 defineEdge(northeastS);
             }
@@ -72,7 +116,7 @@ public class HexBoard
         {
             if (s.getColumn()+1 < 19)       //no space outside board
             {
-                northeastS = spaces.get((s.getRow()+1)*19+ s.getColumn()+1);
+                Space northeastS = spaces.get((s.getRow())*19+ s.getColumn()+1);
                 this.edges.add(new Edge(s, northeastS, 0));
                 defineEdge(northeastS);
             }
@@ -86,7 +130,7 @@ public class HexBoard
 
         int i = 0;
         int numEdgesFound = 0;
-        while (i < 285 && numEdgesFound < 6)
+        while (i < this.edges.size() && numEdgesFound < 6)
         {
             Space esOne = this.edges.get(i).getSpaceOne();
             Space esTwo = this.edges.get(i).getSpaceTwo();
