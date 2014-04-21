@@ -12,7 +12,7 @@ import controller.PlayerController;
 /*
  * Created by Will
  */
-public class PlacePalaceTileCommand extends Command {
+public class PlacePalaceTileCommand extends MovableCommands {
     private BoardController boardController;
     private GameController gameController;
     private PlayerController playerController;

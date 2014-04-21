@@ -11,7 +11,7 @@ import model.Space;
 /*
  * Created by Will
  */
-public class PlaceIrrigationTileCommand extends Command {
+public class PlaceIrrigationTileCommand extends MovableCommands {
     private BoardController boardController;
     private GameController gameController;
     //private Space s;

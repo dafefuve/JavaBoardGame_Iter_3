@@ -8,7 +8,7 @@ import model.Developer;
 /*
  * Created by Will
  */
-public class MoveDeveloperCommand extends Command {
+public class MoveDeveloperCommand extends MovableCommands {
 	private BoardController boardController;
 	private PlayerController playerController;
 	private int apAmount;

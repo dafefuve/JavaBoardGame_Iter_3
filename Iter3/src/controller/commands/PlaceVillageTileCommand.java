@@ -11,7 +11,7 @@ import model.Space;
 /*
  * Created by Will
  */
-public class PlaceVillageTileCommand extends Command {
+public class PlaceVillageTileCommand extends MovableCommands {
     private BoardController boardController;
     private GameController gameController;
     //private Space s;

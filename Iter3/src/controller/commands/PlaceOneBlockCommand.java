@@ -7,7 +7,7 @@ import controller.GameController;
 /*
  * Created by Will
  */
-public class PlaceOneBlockCommand extends Command {
+public class PlaceOneBlockCommand extends MovableCommands {
  	private BoardController boardController;
     private GameController gameController;
     //private Space s;

@@ -1,10 +1,12 @@
 package controller;
 
+import controller.commands.MovableCommands;
+
 /**
  * Created by Horacio on 4/19/14.
  */
 public class TempCommand {
-    private Command tempCommand;
+    private MovableCommands tempCommand;    //only commands that have a setter for location
     private Facade facade;
 
     public TempCommand(Facade facade){
@@ -12,21 +14,21 @@ public class TempCommand {
         this.facade = facade;
     }
 
-    public void setTempCommand(Command c){
+    public void setTempCommand(MovableCommands c){
         tempCommand = c;
     }
     //Todo
-    public void execute(){
-//        if(tempCommand!=null)
-//            //check if the command requires a location and if it does set it for the command
-//            if(!tempCommand.execute()) {
-//                //notify the view if the execution failed
-//                facade.getCommandStackController().push(tempCommand);
-//                tempCommand = null;
-//
-//            }
-//            else{
-//                //tell the ViewContoller that no action can be executed
-//            }
+    public void execute(int spaceId){
+        if(tempCommand!=null)                       //if there is a command loaded then do this
+            tempCommand.setLocation(spaceId);       //sets the location in the loaded command
+            if(!tempCommand.execute()) {
+                //notify the view if the execution failed
+                facade.getCommandStackController().push(tempCommand);
+                tempCommand = null;
+
+            }
+            else{
+                //tell the ViewContoller that no action can be executed
+            }
     }
 }
