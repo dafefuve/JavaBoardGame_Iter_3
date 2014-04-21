@@ -34,8 +34,8 @@ public class JavaPlayer extends Player{
         developers.add(developer);
     }
 
-    public void removeDeveloper(Developer developer){
-        developers.remove(developer);
+    public Developer removeDeveloper(int index){
+        return developers.remove(index);
     }
 
     public void addPalaceCard(PalaceCard card){
