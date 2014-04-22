@@ -8,15 +8,16 @@ import java.util.List;
  * Created by alexbujduveanu on 4/15/14.
  */
 public class PlayerController {
-    JavaPlayer currentPlayer;
+    private JavaPlayer currentPlayer;
+    private Facade facade;
 
-    public PlayerController(){
-        //todo find out how to give individual currentPlayers
-        this.currentPlayer = null;
+    public PlayerController(Facade facade){
+
+        this.currentPlayer = facade.getTurnController().getCurrentPlayer();
     }
 
-    public void setCurrentPlayer(JavaPlayer player){
-        this.currentPlayer = player;
+    public void setCurrentPlayer(){
+        this.currentPlayer = facade.getTurnController().getCurrentPlayer();
     }
     public void setItemCount(String item, Integer count){
         currentPlayer.setItemCount(item, count);

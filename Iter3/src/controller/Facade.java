@@ -1,5 +1,6 @@
 package controller;
 
+import controller.actions.TurnController;
 import model.Game;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class Facade {
     private ViewController viewController;
     private TempCommand tempCommand;
     private GameSetupController gameSetupController;
+    private TurnController turnController;
 
     public Facade(){
         activeController = new ActiveController();
@@ -30,12 +32,17 @@ public class Facade {
         festivalController = new FestivalController();
         gameController = new GameController();
         planningController = new PlanningController();
-        playerController = new PlayerController();
+        playerController = new PlayerController(this);
         replayController = new ReplayController();
         viewController = new ViewController();
         commandController = new CommandController();
         tempCommand = new TempCommand(this);
         gameSetupController = new GameSetupController(this);
+        turnController = new TurnController(this);
+    }
+
+    public TurnController getTurnController(){
+        return turnController;
     }
 
     public GameSetupController getGameSetupController(){ return gameSetupController;}

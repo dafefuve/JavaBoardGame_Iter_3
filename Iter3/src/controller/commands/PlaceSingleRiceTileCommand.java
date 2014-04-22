@@ -21,7 +21,7 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
         playerController = gameFacade.getPlayerController();
         commandCompletion = false;
         facade = gameFacade;
-        facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
+        facade.getPlayerController().setCurrentPlayer();
     }
     public void setLocation(int newLocation){
         this.location = newLocation;

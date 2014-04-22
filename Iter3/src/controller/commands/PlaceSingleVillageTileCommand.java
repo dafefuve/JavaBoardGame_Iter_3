@@ -19,7 +19,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
 
         this.boardController=facade.getBoardController();
         this.playerController=facade.getPlayerController();
-        facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
+        facade.getPlayerController().setCurrentPlayer();
         commandCompletion = false;
         this.facade = facade;
     }
