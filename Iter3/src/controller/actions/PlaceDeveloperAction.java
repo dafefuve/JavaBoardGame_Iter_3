@@ -21,7 +21,7 @@ public class PlaceDeveloperAction {
     {
         if(facade.getTempCommand().getTempCommand()==null){
             //facade.getViewController().placeDeveloper();
-            MovableCommands c = facade.getCommandController().placeDeveloperCommand(facade.getBoardController());
+            MovableCommands c = facade.getCommandController().placeDeveloperCommand(facade);
             facade.getTempCommand().setTempCommand(c);
         }
     }
