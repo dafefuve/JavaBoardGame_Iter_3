@@ -6,18 +6,22 @@ import controller.Command;
  * Created by Will
  */
 public class UseActionTokenCommand extends Command {
-    //private PlayerController playerController;
+    private PlayerController playerController;
 
-    public UseActionTokenCommand(){
-        //this.playerController=playerController;
+    public UseActionTokenCommand(Facade f){
+        this.playerController=f.getPlayerController();
     }
 
     public boolean execute(){
-        //playerController.setItemCount("actionToken", playerController.getItemCount("actionToken")+1);
-        return false;
+        if(playerController.getItemCount("actionToken")>0){
+            playerController.setItemCount("actionToken", playerController.getItemCount("actionToken")+1);
+            return true;
+        }
+        else
+            return false;
     }
     public void undo(){
-        //playerController.setItemCount("actionToken", playerController.getItemCount("actionToken")-1);
+        playerController.setItemCount("actionToken", playerController.getItemCount("actionToken")-1);
     }
 
     public String toString(){
