@@ -78,4 +78,22 @@ public class PlayerPanel extends JPanel
 	    
 	    this.setBorder(new CompoundBorder(border, margin));
 	}
+
+    public void setNumTwoBlocks(int numTwoBlocks)
+    {
+        this.numTwoBlocks = numTwoBlocks;
+        twoBlocks.setText("Two Blocks: " + this.numTwoBlocks);
+    }
+
+    public void setNumVillageBlocks(int numVillageBlocks)
+    {
+        this.numSingleVillageBlocks = numVillageBlocks;
+        singleVillageBlocks.setText("Single Village Blocks: " + this.numSingleVillageBlocks);
+    }
+
+    public void setRiceBlocks(int numRiceBlocks)
+    {
+        this.numSingleRiceBlocks = numRiceBlocks;
+        singleVillageBlocks.setText("Single Rice Blocks: " + this.numSingleRiceBlocks);
+    }
 }

@@ -1007,8 +1007,10 @@ public class BoardPanel extends JPanel
     {
 
         Font f = new Font("Helvetica", Font.BOLD, 16);
+
         g.setFont(f);
         g.setColor(Color.WHITE);
+        g.setStroke(new BasicStroke(4));
         int[] x = hex.xpoints;
         int[] y = hex.ypoints;
 
