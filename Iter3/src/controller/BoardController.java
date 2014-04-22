@@ -11,10 +11,10 @@ import java.util.ArrayList;
  */
 public class BoardController
 {
-    HexBoard hexBoard;
-    ArrayList<GraphDistance> distances;
-    Facade facade;
-    GameController gc;
+    private HexBoard hexBoard;
+    private ArrayList<GraphDistance> distances;
+    private Facade facade;
+    private GameController gc;
 
     public BoardController(Facade facade)
     {
@@ -380,5 +380,142 @@ public class BoardController
     public HexBoard getHexBoard()
     {
         return this.hexBoard;
+    }
+
+    public void initializeBoard(){
+        int boardSpaces = 285;
+        //Sets the top half of the board to higlands
+        TileComponent highland = new TileComponent(new LandType("highland"), new Tile());
+        for(int i=0; i<boardSpaces/2; i++){
+            addTileComponent(i,highland);
+        }
+        //Sets the bottom half of the board to lowlands
+        TileComponent lowland = new TileComponent(new LandType("lowland"), new Tile());
+        for(int i=boardSpaces/2; i<boardSpaces; i++){
+            addTileComponent(i, lowland);
+        }
+
+        TileComponent central = new TileComponent(new LandType("central"), new Tile());
+        removeTopTileComponent(23);
+        addTileComponent(23,central);
+
+        removeTopTileComponent(26);
+        addTileComponent(26,central);
+
+        removeTopTileComponent(29);
+        addTileComponent(29,central);
+
+        removeTopTileComponent(32);
+        addTileComponent(32,central);
+
+        removeTopTileComponent(42);
+        addTileComponent(42,central);
+
+        removeTopTileComponent(42);
+        addTileComponent(42,central);
+
+        removeTopTileComponent(45);
+        addTileComponent(45,central);
+
+        removeTopTileComponent(46);
+        addTileComponent(46,central);
+
+        removeTopTileComponent(48);
+        addTileComponent(48,central);
+
+        removeTopTileComponent(49);
+        addTileComponent(49,central);
+
+        removeTopTileComponent(51);
+        addTileComponent(51,central);
+
+        for(int i=60; i<74; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for (int i=77; i<94; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=97; i<113; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=115; i<132; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=135; i<151; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=155; i<168; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=174; i<188; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=193; i<206; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=213; i<223; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        for(int i=233; i<236; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        removeTopTileComponent(237);
+        addTileComponent(237,central);
+
+        for(int i=239; i<242; i++){
+            removeTopTileComponent(i);
+            addTileComponent(i,central);
+        }
+
+        removeTopTileComponent(252);
+        addTileComponent(252,central);
+
+        removeTopTileComponent(253);
+        addTileComponent(253,central);
+
+        removeTopTileComponent(258);
+        addTileComponent(258,central);
+
+        removeTopTileComponent(259);
+        addTileComponent(259,central);
+
+        //Placing irrigation tiles
+        TileComponent irrigation = new TileComponent(new LandType("irrigation"), new Tile());
+        removeTopTileComponent(99);
+        addTileComponent(99,irrigation);
+
+        removeTopTileComponent(108);
+        addTileComponent(108,irrigation);
+
+        removeTopTileComponent(160);
+        addTileComponent(160,irrigation);
+    }
+
+    public void addTileComponent(int spaceID, TileComponent tc){
+        hexBoard.addTileComponent(spaceID,tc);
+    }
+
+    public TileComponent removeTopTileComponent(int spaceID){
+        return hexBoard.removeTopTileComponent(spaceID);
     }
 }

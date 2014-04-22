@@ -34,7 +34,8 @@ public class GameSetupController {
         Game game = new Game(players, gameInventory, board);    //The game is created here
 
         facade.getGameController().setGame(game);   //gives GameController the reference to game
-        System.out.print("blah");
+
+        initializeBoard();
 
 
     }
@@ -103,6 +104,10 @@ public class GameSetupController {
         PlayerInventory inventory = new PlayerInventory(hand,items);
 
         return inventory;
+    }
+
+    public void initializeBoard(){
+        facade.getBoardController().initializeBoard();
     }
 
     //todo PalaceFestival set up

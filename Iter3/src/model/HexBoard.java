@@ -201,4 +201,11 @@ public class HexBoard
         this.spaces.remove(index);
         this.spaces.add(index, s);
     }
+    public void addTileComponent(int spaceID, TileComponent tc){
+        spaces.get(spaceID).addTileComponent(tc);
+    }
+
+    public TileComponent removeTopTileComponent(int spaceID){
+        return spaces.get(spaceID).removeTopTileComponent();
+    }
 }

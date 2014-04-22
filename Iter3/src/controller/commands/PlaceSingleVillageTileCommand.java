@@ -32,7 +32,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board tile
         TileComponent villageToBePlaced = new TileComponent(new LandType("village"), new Tile());  //village tile
 
-        if(topTileComponentOfSpace.getLandType() != null && (remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation"))){
+        if(topTileComponentOfSpace.getLandType().equals("central") && (remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation"))){
             commandCompletion = false;
         }
         else {

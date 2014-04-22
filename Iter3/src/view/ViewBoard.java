@@ -117,6 +117,8 @@ public class ViewBoard
 
         boardImages[2][7].pushIntoStack(central);
 
+        boardImages[2][8].pushIntoStack(central);
+
         boardImages[2][10].pushIntoStack(central);
 
 

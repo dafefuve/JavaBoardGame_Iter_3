@@ -47,9 +47,9 @@ public class Space
         land.push(tileComponent);
     }
 
-    public void removeTopTileComponent()
+    public TileComponent removeTopTileComponent()
     {
-        land.pop();
+        return land.pop();
     }
 
     public TileComponent getTopTileComponent()
