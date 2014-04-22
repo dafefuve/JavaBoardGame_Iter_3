@@ -34,14 +34,20 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
         Space space = boardController.getSpaceFromID(location);
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();
         TileComponent riceToBePlaced = new TileComponent(new LandType("riceTile"), new Tile());
+        int currentActionPoints = playerController.getItemCount("actionPoints");
+        if(currentActionPoints > 0) {
 
-        if(remainingRiceCount >= 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation")){
-            System.out.print("got into placing a tile");
-            playerController.setItemCount("riceTile", remainingRiceCount - 1);
-            space.addTileComponent(riceToBePlaced);
-            commandCompletion = true;
+            if (remainingRiceCount >= 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
+                System.out.print("got into placing a tile");
+                playerController.setItemCount("riceTile", remainingRiceCount - 1);
+                playerController.setItemCount("actionPoints", currentActionPoints -1 );
+                space.addTileComponent(riceToBePlaced);
+                commandCompletion = true;
+            } else {
+                commandCompletion = false;
+            }
         }
-        else{
+        else {
             commandCompletion = false;
         }
         return commandCompletion;

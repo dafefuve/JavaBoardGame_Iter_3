@@ -13,7 +13,7 @@ import model.Space;
 public class PlaceSingleIrrigationTileCommand extends MovableCommands {
     private BoardController boardController;
     private GameController gameController;
-    private Space s;
+    private Space space;
     private int location;
     public PlaceSingleIrrigationTileCommand(BoardController boardController, GameController gameController){
         this.boardController=boardController;
@@ -29,7 +29,7 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
             System.out.println("No irrigation tiles left! Broke the rules!");
             //then do thingie to notify player that they broke the rules
         }
-        else if(s.getLevel() != 0)
+        else if(space.getLevel() != 0)
         {
             System.out.println("You're not placing on the board! Broke the rules!");
             //Here we will check if the target location is directly on the board, i.e the target space has no other tiles on it
