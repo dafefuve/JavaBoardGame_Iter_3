@@ -15,7 +15,6 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
     private BoardController boardController;
     private PlayerController playerController;
     private Facade facade;
-    //private Space s;
     private int location;
     public PlaceSingleRiceTileCommand(Facade gameFacade){
         boardController = gameFacade.getBoardController();
@@ -40,9 +39,12 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
             System.out.print("got into placing a tile");
             playerController.setItemCount("riceTile", remainingRiceCount - 1);
             space.addTileComponent(riceToBePlaced);
-            return true;
+            commandCompletion = true;
         }
-        return false;
+        else{
+            commandCompletion = false;
+        }
+        return commandCompletion;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
