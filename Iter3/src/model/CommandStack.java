@@ -69,7 +69,6 @@ public class CommandStack {
         writer.close();
     }*/
     /*
-    Maybe there should be a save game command...
     */
     /*
     File Save Format:

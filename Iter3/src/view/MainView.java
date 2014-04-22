@@ -214,6 +214,10 @@ public class MainView extends JFrame
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place rice");
         boardPanel.getActionMap().put("place rice",keyBindings.get(k));
 
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place two block");
+        boardPanel.getActionMap().put("place two block",keyBindings.get(k));
+
         k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
         boardPanel.getActionMap().put("end placement",keyBindings.get(k));
@@ -305,6 +309,11 @@ public class MainView extends JFrame
             verticalBar.setValue(0);
         }
 
+    }
+
+    public void placeTwoBlock()
+    {
+        boardPanel.placeDoubleTile();
     }
 
 }
