@@ -37,8 +37,8 @@ public class MoveDeveloperCommand extends MovableCommands {
 	public String toString(){
         return null;
 	}
-	public void setLocation(int l){
-        destination=l;
+	public void setLocation(int newLocation){
+        destination= newLocation;
     }
     public int getLocation(int l){
         return destination;

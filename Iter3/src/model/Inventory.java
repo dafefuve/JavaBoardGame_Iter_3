@@ -5,8 +5,8 @@ package model;
  */
 public abstract class Inventory   {
 
-    public abstract void setItem(String item, Integer count);
-    public abstract Integer getItem(String item);
+    public abstract void setItemCount(String item, Integer count);
+    public abstract Integer getItemCount(String item);
 
 
 }

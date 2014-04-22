@@ -1,7 +1,6 @@
 package controller.commands;
 
 import controller.BoardController;
-import controller.Command;
 import controller.GameController;
 import model.TileComponent;
 import model.LandType;
@@ -29,7 +28,7 @@ public class PlaceSinglePalaceTileCommand extends MovableCommands {
     //TODO a method that finds the space that the cursor is currently hovering over
     //TODO add a method in BoardController that places a singular tile onto a space on the board 
     //TODO I assume there is a method in gameController that accesses the communal inventory
-        int count = gameController.getInventory().getItem("palaceTile");
+        int count = gameController.getInventory().getItemCount("palaceTile");
         Space s = boardController.getSpaceFromID(location);
         if(count<=0){
             System.out.println("No palace tiles left! Broke the rules!");
@@ -45,18 +44,18 @@ public class PlaceSinglePalaceTileCommand extends MovableCommands {
         }
         else {
         //TODO I assume boardController has a sort of placeTile() method
-            gameController.getInventory().setItem("palaceTile", count-1);
+            gameController.getInventory().setItemCount("palaceTile", count - 1);
             TileComponent tc = new TileComponent(new LandType("palace"), new Tile());
             s.addTileComponent(tc);
             s.setPalace(new Palace(level));
-            playerController.setItem("famePoints",playerController.getItem("famePoints")+level/2);
+            playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") + level / 2);
             return true;
         }
         return false;
     }
     public void undo(){
-        gameController.getInventory().setItem("palaceTile", gameController.getInventory().getItem("palaceTile")+1);
-        playerController.setItem("famePoints",playerController.getItem("famePoints")-level/2);
+        gameController.getInventory().setItemCount("palaceTile", gameController.getInventory().getItemCount("palaceTile") + 1);
+        playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") - level / 2);
         boardController.getSpaceFromID(location).removeTopTileComponent();
         boardController.getSpaceFromID(location).setPalace(null);
     }
@@ -64,8 +63,8 @@ public class PlaceSinglePalaceTileCommand extends MovableCommands {
     public String toString(){
         return null;
     }
-    public void setLocation(int l){
-        location=l;
+    public void setLocation(int newLocation){
+        this.location = newLocation;
     }
     public int getLocation(){
         return location;

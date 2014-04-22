@@ -7,10 +7,8 @@ import controller.Command;
  */
 public abstract class MovableCommands extends Command{
 
-    public boolean execute(){
-        return false;
-    }
-    public void undo(){}
-    public void saveToStack(){}
-    public void setLocation(int l){};
+    protected boolean commandCompletion;
+    public abstract boolean execute();
+    public abstract void undo();
+    public abstract void setLocation(int newLocation);
 }

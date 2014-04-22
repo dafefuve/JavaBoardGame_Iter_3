@@ -22,12 +22,12 @@ public class JavaPlayer extends Player{
         return false;
     }
 
-    public void setItem(String item, Integer count){
-        inventory.setItem(item,count);
+    public void setItemCount(String item, Integer count){
+        inventory.setItemCount(item, count);
     }
 
-    public Integer getItem(String item){
-        return inventory.getItem(item);
+    public Integer getItemCount(String item){
+        return inventory.getItemCount(item);
     }
 
     public void addDeveloper(Developer developer){

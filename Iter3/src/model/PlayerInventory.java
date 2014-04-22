@@ -17,12 +17,12 @@ public class PlayerInventory extends Inventory{
     }
 
     @Override
-    public void setItem(String item, Integer count){
+    public void setItemCount(String item, Integer count){
         items.put(item,count);
     }
 
     @Override
-    public Integer getItem(String item){
+    public Integer getItemCount(String item){
         return items.get(item);
     }
 

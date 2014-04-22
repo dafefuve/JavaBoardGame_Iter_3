@@ -18,11 +18,11 @@ public class Game {
     }
 
     public void setItem(String item, Integer count){
-        inventory.setItem(item,count);
+        inventory.setItemCount(item, count);
     }
 
     public Integer getItem(String item){
-        return inventory.getItem(item);
+        return inventory.getItemCount(item);
     }
 
     public List<JavaPlayer> getPlayers(){

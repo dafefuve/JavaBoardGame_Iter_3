@@ -18,12 +18,12 @@ public class PlayerController {
     public void setCurrentPlayer(JavaPlayer player){
         this.currentPlayer = player;
     }
-    public void setItem(String item, Integer count){
-        currentPlayer.setItem(item, count);
+    public void setItemCount(String item, Integer count){
+        currentPlayer.setItemCount(item, count);
     }
 
-    public Integer getItem(String item){
-        return currentPlayer.getItem(item);
+    public Integer getItemCount(String item){
+        return currentPlayer.getItemCount(item);
     }
 
     public void addDeveloper(Developer developer){
