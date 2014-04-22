@@ -43,11 +43,9 @@ public class CommandController {
         return null;
     }
 
-    public PlaceSingleRiceTileCommand placeRiceTileCommand(BoardController boardController){
-        //TODO this needs to be done, constructor needs the proper call
-        //PlaceSingleRiceTileCommand command = new PlaceSingleRiceTileCommand(boardController);
-        //return command;
-        return null;
+    public PlaceSingleRiceTileCommand placeRiceTileCommand(Facade facade){
+        PlaceSingleRiceTileCommand command = new PlaceSingleRiceTileCommand(facade);
+        return command;
     }
 
     public PlaceDeveloperCommand placeDeveloperCommand(BoardController boardController){

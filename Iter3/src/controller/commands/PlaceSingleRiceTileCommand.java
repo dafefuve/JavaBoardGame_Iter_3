@@ -34,16 +34,15 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
         int remainingRiceCount = playerController.getInventory().getItemCount("riceTile");
         Space space = boardController.getSpaceFromID(location);
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();
-        TileComponent riceToBePlaced = new TileComponent(new LandType("rice"), new Tile());
-        if(remainingRiceCount > 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation")){
+        TileComponent riceToBePlaced = new TileComponent(new LandType("riceTile"), new Tile());
+
+        if(remainingRiceCount >= 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation")){
+            System.out.print("got into placing a tile");
             playerController.setItemCount("riceTile", remainingRiceCount - 1);
             space.addTileComponent(riceToBePlaced);
-            commandCompletion = true;
+            return true;
         }
-        else {
-            commandCompletion = false;
-        }
-        return commandCompletion;
+        return false;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space

@@ -22,7 +22,7 @@ public class PlaceRiceTileAction extends AbstractAction{
     {
         if(facade.getTempCommand().getTempCommand()==null){
             facade.getViewController().placeRiceTile();
-            MovableCommands c = facade.getCommandController().placeRiceTileCommand(facade.getBoardController());
+            MovableCommands c = facade.getCommandController().placeRiceTileCommand(facade);
             facade.getTempCommand().setTempCommand(c);
         }
     }
