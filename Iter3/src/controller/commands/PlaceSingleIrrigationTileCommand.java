@@ -45,6 +45,7 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
                 gameController.setItem("irrigation", remainingIrrigationCount - 1);
                 space.addTileComponent(irrigationToBePlaced);
                 facade.getViewController().setIrrigationTiles(remainingIrrigationCount - 1);
+                playerController.setItemCount("actionPoints",currentActionPoints-1);
                 commandCompletion = true;
             }
             else{
@@ -58,6 +59,7 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
     }
     public void undo(){
         gameController.getInventory().setItemCount("irrigationTile", gameController.getInventory().getItemCount("irrigationTile") + 1);
+        gameController.getInventory().setItemCount("actionPoints", gameController.getInventory().getItemCount("actionPoints") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
 

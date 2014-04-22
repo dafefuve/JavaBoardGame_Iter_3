@@ -18,9 +18,9 @@ public class TempCommand {
         tempCommand = c;
     }
     //Todo
-    public void execute(int spaceId){
+    public void execute(){
 
-            tempCommand.setLocation(spaceId);       //sets the location in the loaded command
+
             if(tempCommand.execute()) {
                 //notify the view if the execution failed
                 facade.getCommandStackController().push(tempCommand);
@@ -35,5 +35,9 @@ public class TempCommand {
 
     public MovableCommands getTempCommand(){
         return tempCommand;
+    }
+
+    public void setLocation(int spaceId){
+        tempCommand.setLocation(spaceId);       //sets the location in the loaded command
     }
 }

@@ -9,10 +9,10 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Horacio on 4/20/14.
  */
-public class ExecuteAction extends AbstractAction{
+public class ExecuteActionActive extends AbstractAction{
     private Facade facade;
 
-    public ExecuteAction(Facade facade)
+    public ExecuteActionActive(Facade facade)
     {
         this.facade = facade;
     }
@@ -20,7 +20,8 @@ public class ExecuteAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {   if(facade.getTempCommand().getTempCommand()!=null){ //if there is a command loaded then do this
             int spaceId = facade.getViewController().getCurrentSpace();
-            facade.getTempCommand().execute(spaceId);
+            facade.getTempCommand().setLocation(spaceId);
+            facade.getTempCommand().execute();
         }
     }
 }
