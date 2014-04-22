@@ -388,19 +388,26 @@ public class BoardController
         if (s.getLevel() == 0)
         {
             canPlace = true;
-            return canPlace;
+            //return canPlace;
         }
-
+        //there are tiles below
+        else
+        {
+            //tile component on bottom
             TileComponent tcOnBottom = s.getTopTileComponent();
+            //the current level of the stack
             int curLevel = s.getLevel();
+            //the UUID of the tile component
             UUID tileOnBottomID = tcOnBottom.getTile().getId();
 
+            //all the neighbors of Space s
             ArrayList<Space> spaceNeighbors = this.getHexBoard().getNeighborsOfSpace(s);
             //for each neighbor, check the tileComponent AT THE SAME LEVEL as tcOnBottom
             //if there are multiple tileComponents, we must make a temporary stack to check
 
             ArrayList<TileComponent> tcAtLevel = new ArrayList<TileComponent>();
 
+            System.out.println("Space neighbors size: " + spaceNeighbors.size());
             for (int i = 0; i < spaceNeighbors.size(); i++)
             {
                 //don't worry about those tile components surrounding you that are at a lower level
@@ -416,9 +423,12 @@ public class BoardController
                     Stack<TileComponent> tempStack = new Stack<TileComponent>();
                     for (int j = spaceNeighbors.get(i).getLevel(); j > curLevel; j--)
                     {
+                        //push the top tile component of the stack into a temp stack
                         tempStack.push(spaceNeighbors.get(i).getLand().peek());
+                        //remove that tile component
                         spaceNeighbors.get(i).removeTopTileComponent();
                     }
+                    //at the tile component at the current level to tcAtLevel
                     tcAtLevel.add(spaceNeighbors.get(i).getTopTileComponent());
                     for (int k = 0; k < tempStack.size(); k++)
                     {
@@ -433,21 +443,21 @@ public class BoardController
                 //there is a tile component beneath you, but none surrounding it
                 //must be a one-space land tile
                 canPlace = false;
-                return canPlace;
             }
-
-            //check all tileComponents at that level
-            for (int i = 0; i < tcAtLevel.size(); i++)
+            else
             {
-                if (tcOnBottom.getTile().getId() == tcAtLevel.get(i).getTile().getId())
+                //check all tileComponents at that level
+                for (int i = 0; i < tcAtLevel.size(); i++)
                 {
-                    //two (at least) tile components with the same UUID
-                    //not a one-space land tile
-                    canPlace = true;
-                    return canPlace;
+                    if (tcOnBottom.getTile().getId() == tcAtLevel.get(i).getTile().getId())
+                    {
+                        //two (at least) tile components with the same UUID
+                        //not a one-space land tile
+                        canPlace = true;
+                    }
                 }
             }
-
+        }
         return canPlace;
     }
 

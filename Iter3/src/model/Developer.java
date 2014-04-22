@@ -10,14 +10,20 @@ public class Developer
     int spaceID;
     JavaPlayer jPlayer;
 
-    public Developer()
+    public Developer(JavaPlayer jp)
     {
         spaceID = 0;
+        jPlayer = jp;
     }
 
     public int getSpaceID()
     {
         return this.spaceID;
+    }
+
+    public void setSpaceID(int newSpaceID)
+    {
+        this.spaceID = newSpaceID;
     }
 
     public JavaPlayer getJPlayer()
