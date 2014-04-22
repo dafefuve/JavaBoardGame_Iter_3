@@ -20,7 +20,10 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
         commandCompletion = false;
     }
-
+    //this must happen before execute
+    public void setLocation(int newLocation){
+        location = newLocation;
+    }
     public boolean execute(){
         int remainingVillageCount = playerController.getItemCount("villageTile");
         Space space = boardController.getSpaceFromID(location);
@@ -29,7 +32,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board tile
         TileComponent villageToBePlaced = new TileComponent(new LandType("village"), new Tile());  //village tile
 
-        if(topTileComponentOfSpace != null && (remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation"))){
+        if(topTileComponentOfSpace.getLandType() != null && (remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation"))){
             commandCompletion = false;
         }
         else {
@@ -48,9 +51,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     public String toString(){
         return null;
     }
-    public void setLocation(int newLocation){
-        this.location = newLocation;
-    }
+
     public int getLocation(){
         return location;
     }
