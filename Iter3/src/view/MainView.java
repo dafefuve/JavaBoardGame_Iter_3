@@ -433,4 +433,9 @@ public class MainView extends JFrame
         ((CommunalView)communalView).setPlanningMode();
     }
 
+    public void setActiveMode()
+    {
+        ((CommunalView)communalView).setActiveMode();
+    }
+
 }

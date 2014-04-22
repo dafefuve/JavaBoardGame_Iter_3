@@ -60,6 +60,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         playerController.setItemCount("villageTile", playerController.getItemCount("villageTile") + 1);
         playerController.getInventory().setItemCount("actionPoints", playerController.getInventory().getItemCount("actionPoints") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
+        facade.getViewController().setSingleVillageBlocks(facade.getPlayerController().getItemCount("villageTile"),facade.getTurnController().getCurrentPlayer().getName());
     }
 
     public String toString(){

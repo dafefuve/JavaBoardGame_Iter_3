@@ -208,6 +208,7 @@ class planningState implements gameState {
         //Needs statemanager to change state back to active
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0), new CommitPlanningAction(stateManager, theFacade));
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, 0), new ExitPlanningAction(stateManager, theFacade));
+        //Enter key
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteActionPlanning(theFacade));
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
         /*

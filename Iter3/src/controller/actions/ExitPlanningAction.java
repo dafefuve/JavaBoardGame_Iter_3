@@ -21,8 +21,10 @@ public class ExitPlanningAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         //Go back to active mode
+        facade.getPlayerController().setCurrentPlayer();
         facade.getPlanningController().exitPlanning();
-        facade.getViewController().setSingleVillageBlocks(facade.getPlayerController().getItemCount("villageTile"),facade.getTurnController().getCurrentPlayer().getName());
+
+        facade.getViewController().setActiveMode();
         gameStateManager.setState(gameStateManager.getActiveState());
     }
 }

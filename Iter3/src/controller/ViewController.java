@@ -188,4 +188,9 @@ public class ViewController {
         mainView.setPlanningMode();
     }
 
+    public void setActiveMode()
+    {
+        mainView.setActiveMode();
+    }
+
 }

@@ -119,6 +119,11 @@ public class CommunalView extends JPanel
 
     public void setPlanningMode()
     {
-        modeLabel.setText("Current mode: Planning");
+        modeLabel.setText("Current Mode: Planning");
+    }
+
+    public void setActiveMode()
+    {
+        modeLabel.setText("Current Mode: Active");
     }
 }

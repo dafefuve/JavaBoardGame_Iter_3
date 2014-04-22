@@ -1,5 +1,6 @@
 package controller;
 
+import controller.commands.MovableCommands;
 import model.Tile;
 import model.TileComponent;
 
@@ -11,14 +12,14 @@ import java.util.Stack;
  */
 public class PlanningController {
     private Facade facade;
-    private Stack<Command> planningStack;
+    private Stack<MovableCommands> planningStack;
 
     public PlanningController(Facade facade){
         this.facade = facade;
-        planningStack = new Stack<Command>();
+        planningStack = new Stack<MovableCommands>();
     }
 
-    public void pushIntoPlanningStack(Command c){
+    public void pushIntoPlanningStack(MovableCommands c){
         planningStack.push(c);
     }
 
@@ -28,21 +29,21 @@ public class PlanningController {
 
     public void commitPlanning(){
         //empties the planning stack into a
-        ArrayList<Command> temp = new ArrayList<Command>();
+        ArrayList<MovableCommands> temp = new ArrayList<MovableCommands>();
         for(int i = 0; i < planningStack.size(); i++){
             temp.add(planningStack.pop());
         }
 
         //sends the commands to the commandStack after they are executed
         for (int i=1; i < temp.size(); i++){
-            Command c = temp.get(temp.size() - i);
+            MovableCommands c = temp.get(temp.size() - i);
             facade.getCommandStackController().push(c);
         }
     }
 
     public void exitPlanning(){
         for(int i = 0; i < planningStack.size(); i++){
-            planningStack.pop().undo();
+        planningStack.pop().undo();
 
         }
     }
