@@ -37,7 +37,7 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
         int currentActionPoints = playerController.getItemCount("actionPoints");
         if(currentActionPoints > 0) {
 
-            if (remainingRiceCount >= 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
+            if (remainingRiceCount > 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
                 System.out.print("got into placing a tile");
                 playerController.setItemCount("riceTile", remainingRiceCount - 1);
                 playerController.setItemCount("actionPoints", currentActionPoints -1 );
