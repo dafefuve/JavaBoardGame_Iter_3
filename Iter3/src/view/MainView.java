@@ -182,6 +182,9 @@ public class MainView extends JFrame
 
     public void registerActiveKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
+        boardPanel.getInputMap().clear();
+        boardPanel.getActionMap().clear();
+
         KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_8, 0);
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move N");
         boardPanel.getActionMap().put("move N",keyBindings.get(k));
@@ -226,6 +229,10 @@ public class MainView extends JFrame
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "change turn");
         boardPanel.getActionMap().put("change turn",keyBindings.get(k));
 
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "go to planning mode");
+        boardPanel.getActionMap().put("go to planning mode",keyBindings.get(k));
+
         k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
         boardPanel.getActionMap().put("end placement",keyBindings.get(k));
@@ -237,7 +244,70 @@ public class MainView extends JFrame
 
     public void registerPlanningKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
-        //DO SOMETHING
+        boardPanel.getInputMap().clear();
+        boardPanel.getActionMap().clear();
+
+        KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_8, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move N");
+        boardPanel.getActionMap().put("move N",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_9, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move NE");
+        boardPanel.getActionMap().put("move NE",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_3, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move SE");
+        boardPanel.getActionMap().put("move SE",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_2, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move S");
+        boardPanel.getActionMap().put("move S",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_1, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move SW");
+        boardPanel.getActionMap().put("move SW",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_7, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "move NW");
+        boardPanel.getActionMap().put("move NW",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_V, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place village");
+        boardPanel.getActionMap().put("place village",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_R, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place rice");
+        boardPanel.getActionMap().put("place rice",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place two block");
+        boardPanel.getActionMap().put("place two block",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_I, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place irrigation");
+        boardPanel.getActionMap().put("place irrigation",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_E, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "change turn");
+        boardPanel.getActionMap().put("change turn",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_U, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "undo planning");
+        boardPanel.getActionMap().put("undo planning",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_C, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "commit planning");
+        boardPanel.getActionMap().put("commit planning",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_X, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "exit planning");
+        boardPanel.getActionMap().put("exit planning",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
+        boardPanel.getActionMap().put("end placement",keyBindings.get(k));
+
+
     }
 
     public int getCurrentSpace()
@@ -356,6 +426,11 @@ public class MainView extends JFrame
     public void setIrrigationTiles(int numIrrigation)
     {
         ((CommunalView)communalView).setIrrigationTiles(numIrrigation);
+    }
+
+    public void setPlanningMode()
+    {
+        ((CommunalView)communalView).setPlanningMode();
     }
 
 }

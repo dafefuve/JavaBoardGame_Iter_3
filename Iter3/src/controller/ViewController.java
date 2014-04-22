@@ -183,4 +183,9 @@ public class ViewController {
         mainView.setIrrigationTiles(numIrrigationTiles);
     }
 
+    public void setPlanningMode()
+    {
+        mainView.setPlanningMode();
+    }
+
 }

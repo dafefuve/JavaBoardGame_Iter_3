@@ -38,9 +38,10 @@ public class BoardPanel extends JPanel
     private ViewLocation mainViewLocation;
     private ArrayList<ViewLocation> auxHexagons;
 
-    private JScrollPane jsp;
+   private JScrollPane jsp;
    private JPanel panel;
    private boolean placing;
+   private boolean placingDeveloper;
    private boolean placingDouble;
    //private ViewHexVillage viewHexVillage;
 
@@ -1170,6 +1171,7 @@ public class BoardPanel extends JPanel
                     this.repaint();
                 }
             }
+
             this.requestFocus();
         }
     }
@@ -1536,6 +1538,16 @@ public class BoardPanel extends JPanel
             }
             this.requestFocus();
         }
+    }
+
+    public void beginDeveloperPlacement()
+    {
+        placingDeveloper = true;
+    }
+
+    public void endDeveloperPlacement()
+    {
+        placingDeveloper = false;
     }
 
 
