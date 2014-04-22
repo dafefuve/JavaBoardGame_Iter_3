@@ -20,7 +20,7 @@ public class PlaceIrrigationTileAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {
         if(facade.getTempCommand().getTempCommand()==null){
-
+            facade.getViewController().placeIrrigationTile();
             MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade);
             facade.getTempCommand().setTempCommand(c);
         }
