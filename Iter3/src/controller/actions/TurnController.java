@@ -16,11 +16,12 @@ public class TurnController {
 
     public TurnController(Facade facade){
         this.facade = facade;
-
+        currentPlayer = null;
         turnFamePoints = 0;
     }
 
     public void changeTurn(){
+        currentPlayer.addFamePoints(turnFamePoints);
         List<JavaPlayer> players = facade.getGameController().getPlayers();
         players.add(players.remove(0));
         facade.getGameController().setPlayers(players);

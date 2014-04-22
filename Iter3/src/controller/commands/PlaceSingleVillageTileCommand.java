@@ -30,7 +30,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     public boolean execute(){
         int remainingVillageCount = playerController.getItemCount("villageTile");
         Space space = boardController.getSpaceFromID(location);
-        System.out.println("the view id is " + location);
+
 
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board til
         TileComponent villageToBePlaced = new TileComponent(new LandType("village"), new Tile());  //village tile

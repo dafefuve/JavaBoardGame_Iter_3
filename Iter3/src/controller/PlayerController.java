@@ -12,7 +12,7 @@ public class PlayerController {
     private Facade facade;
 
     public PlayerController(Facade facade){
-
+        this.facade = facade;
         this.currentPlayer = null;
     }
 
@@ -53,5 +53,11 @@ public class PlayerController {
 
     public List<Developer> getDevelopers(){
         return currentPlayer.getDevelopers();
+    }
+
+    public void addFamePoints(int amount){
+        int oldAmount = getItemCount("famePoint");
+        int total = oldAmount + amount;
+        setItemCount("famePoint",total);
     }
 }
