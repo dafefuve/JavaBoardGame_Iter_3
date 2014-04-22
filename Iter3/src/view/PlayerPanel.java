@@ -33,7 +33,7 @@ public class PlayerPanel extends JPanel
 	public PlayerPanel(String s)
 	{
 		//Initialize the "model"
-		numSingleVillageBlocks = 2;
+		numSingleVillageBlocks = 3;
 		numSingleRiceBlocks = 3;
 		numTwoBlocks = 5;
 		numActionTokens = 3;
