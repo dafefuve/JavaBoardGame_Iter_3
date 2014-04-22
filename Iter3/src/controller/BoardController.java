@@ -41,7 +41,7 @@ public class BoardController
             {
                 edges.get(i).setWeight(0);
             }
-            else if (spaceOneLandType.equals("Mountain") || spaceTwoLandType.equals("Mountain"))
+            else if (spaceOneLandType.equals("Highland") || spaceTwoLandType.equals("highland"))
             {
                 edges.get(i).setWeight(2);
             }
@@ -147,9 +147,9 @@ public class BoardController
             {
                 ap+=0;  //Just to indicate that there is no AP cost in moving between same land types
             }
-            else if (firstSpaceLandType.equals("Mountain") || secondSpaceLandType.equals("Mountain"))
+            else if (firstSpaceLandType.equals("highland") || secondSpaceLandType.equals("highland"))
             {
-                ap+=2;   //indicates 2 AP cost in going from Mountain to Central Java
+                ap+=2;   //indicates 2 AP cost in going from highland to Central Java
             }
             else
             {

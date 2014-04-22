@@ -26,13 +26,19 @@ public class BoardPanel extends JPanel
    private int[] irrigationIDs;
    private ArrayList<Polygon> hexes;
    private static int currentID = 0;
-   private static int currentRow = 0;
-   private static int currentCol = 0;
-   private static int currentRow2 = 1;
-   private static int currentCol2 = 0;
-   private static int currentRow3 = 0;
-   private static int currentCol3 = 0;
-   private JScrollPane jsp;
+
+   /*private static int mainViewLocation.getViewRow() = 0;
+   private static int mainViewLocation.getViewCol() = 0;
+   private static int mainViewLocation.getViewRow()2 = 1;
+   private static int mainViewLocation.getViewCol()2 = 0;
+   private static int mainViewLocation.getViewRow()3 = 0;
+   private static int mainViewLocation.getViewCol()3 = 0;
+   */
+
+    private ViewLocation mainViewLocation;
+    private ArrayList<ViewLocation> auxHexagons;
+
+    private JScrollPane jsp;
    private JPanel panel;
    private boolean placing;
    private boolean placingDouble;
@@ -45,6 +51,11 @@ public class BoardPanel extends JPanel
        //panel = this;
        placing = false;
        //viewHexVillage = new ViewHexVillage();
+
+       mainViewLocation = new ViewLocation();
+       auxHexagons = new ArrayList<ViewLocation>();
+       //auxHexagons.add(new ViewLocation());
+       //auxHexagons.add(new ViewLocation());
 
        this.setBorder(new EmptyBorder(50, 50, 50, 50) );
        this.setMinimumSize(new Dimension(900,850));
@@ -128,14 +139,11 @@ public class BoardPanel extends JPanel
                {
                    continue;
                }
-               if(placing && currentRow == i && currentCol == j)
+               if(placing && mainViewLocation.getViewRow() == i && mainViewLocation.getViewCol() == j)
                {
                    continue;
                }
                drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j));
-
-
-
            }
        }
    }
@@ -149,7 +157,7 @@ public class BoardPanel extends JPanel
         //Move up
         if(key == 8)
         {
-            newRow = currentRow - 1;
+            newRow = mainViewLocation.getViewRow() - 1;
             if(newRow < 0 )
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -157,10 +165,10 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                board.setDeselectedAt(currentRow, currentCol);
+                board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
                 //Select new space
-                currentRow = newRow;
-                board.setSelectedAt(currentRow, currentCol);
+                mainViewLocation.setViewRow(newRow);
+                board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                 //Reflect changes made
                 this.repaint();
@@ -171,10 +179,10 @@ public class BoardPanel extends JPanel
         //Move NE
         else if(key == 9)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow() - 1;
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -184,14 +192,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Show changes
                     this.repaint();
@@ -199,8 +207,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -210,13 +218,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Display changes
                     this.repaint();
@@ -228,10 +236,10 @@ public class BoardPanel extends JPanel
         //Move SW
         else if(key == 3)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newCol >= 19)
                 {
@@ -241,10 +249,10 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    board.setDeselectedAt(currentRow, currentCol);
-                    currentCol = newCol;
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
+                    mainViewLocation.setViewCol(newCol);
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Reflect changes made
                     this.repaint();
@@ -252,8 +260,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow() + 1;
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow >= 15 || newCol >= 19)
                 {
@@ -263,13 +271,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Reflect changes made
                     this.repaint();
@@ -281,7 +289,7 @@ public class BoardPanel extends JPanel
         }
         else if(key == 2)
         {
-            newRow = currentRow + 1;
+            newRow = mainViewLocation.getViewRow() + 1;
             if(newRow >= 15 )
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -289,11 +297,11 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                board.setDeselectedAt(currentRow, currentCol);
+                board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
                 //Select new space
-                currentRow = newRow;
+                mainViewLocation.setViewRow(newRow);
 
-                board.setSelectedAt(currentRow, currentCol);
+                board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                 //Reflect changes made
                 this.repaint();
@@ -302,10 +310,10 @@ public class BoardPanel extends JPanel
         }
         else if(key == 1)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -315,13 +323,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current col
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Show changes
                     this.repaint();
@@ -329,8 +337,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow() + 1;
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -340,14 +348,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current row and col
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Display changes
                     this.repaint();
@@ -357,10 +365,10 @@ public class BoardPanel extends JPanel
         }
         else if(key == 7)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow() - 1;
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -370,14 +378,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Show changes
                     this.repaint();
@@ -385,8 +393,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -396,13 +404,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    board.setDeselectedAt(currentRow, currentCol);
+                    board.setDeselectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    board.setSelectedAt(currentRow, currentCol);
+                    board.setSelectedAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol());
 
                     //Display changes
                     this.repaint();
@@ -424,8 +432,8 @@ public class BoardPanel extends JPanel
         //Move up
         if(key == 8)
         {
-            newRow = currentRow - 1;
-            newRow2 = currentRow2 - 1;
+            newRow = mainViewLocation.getViewRow() - 1;
+            newRow2 = mainViewLocation.getViewRow()2 - 1;
             if(newRow < 0 || newRow2 < 0)
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -433,15 +441,15 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous spaces
-                theBoard[currentRow][currentCol].setSelected(false);
-                theBoard[currentRow2][currentCol2].setSelected(false);
+                theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
+                theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                 //Select new spaces
-                currentRow = newRow;
-                currentRow2 = newRow2;
+                mainViewLocation.setViewRow(newRow);
+                mainViewLocation.getViewRow()2 = newRow2;
 
-                theBoard[currentRow][currentCol].setSelected(true);
-                theBoard[currentRow2][currentCol2].setSelected(true);
+                theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
+                theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
 
                 adjustScroll();
                 //Reflect changes made
@@ -453,10 +461,10 @@ public class BoardPanel extends JPanel
         //Move NE
         else if(key == 9)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow() - 1;
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -466,14 +474,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -481,8 +489,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -492,23 +500,23 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
                 }
             }
 
-            if(currentCol2 % 2 == 0)
+            if(mainViewLocation.getViewCol()2 % 2 == 0)
             {
-                newRow2 = currentRow2 - 1;
-                newCol2 = currentCol2 + 1;
+                newRow2 = mainViewLocation.getViewRow()2 - 1;
+                newCol2 = mainViewLocation.getViewCol()2 + 1;
 
                 if(newRow2 < 0 || newCol2 >= 19)
                 {
@@ -518,14 +526,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current col and row
-                    currentRow2 = newRow2;
-                    currentCol2 = newCol2;
+                    mainViewLocation.getViewRow()2 = newRow2;
+                    mainViewLocation.getViewCol()2 = newCol2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -533,8 +541,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow2 = currentRow2;
-                newCol2 = currentCol2 + 1;
+                newRow2 = mainViewLocation.getViewRow()2;
+                newCol2 = mainViewLocation.getViewCol()2 + 1;
 
                 if(newRow2 < 0 || newCol2 >= 19)
                 {
@@ -544,13 +552,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current col since row didn't change
-                    currentCol2 = newCol2;
+                    mainViewLocation.getViewCol()2 = newCol2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -562,10 +570,10 @@ public class BoardPanel extends JPanel
         //Move SW
         else if(key == 3)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newCol >= 19)
                 {
@@ -575,10 +583,10 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow][currentCol].setSelected(false);
-                    currentCol = newCol;
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
+                    mainViewLocation.setViewCol(newCol);
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -586,8 +594,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol + 1;
+                newRow = mainViewLocation.getViewRow() + 1;
+                newCol = mainViewLocation.getViewCol() + 1;
 
                 if(newRow >= 15 || newCol >= 19)
                 {
@@ -597,23 +605,23 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
                 }
             }
 
-            if(currentCol2 % 2 == 0)
+            if(mainViewLocation.getViewCol()2 % 2 == 0)
             {
-                newRow2 = currentRow2;
-                newCol2 = currentCol2 + 1;
+                newRow2 = mainViewLocation.getViewRow()2;
+                newCol2 = mainViewLocation.getViewCol()2 + 1;
 
                 if(newCol2 >= 19)
                 {
@@ -623,10 +631,10 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
-                    currentCol = newCol;
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
+                    mainViewLocation.setViewCol(newCol);
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -634,8 +642,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow2 = currentRow2 + 1;
-                newCol2 = currentCol2 + 1;
+                newRow2 = mainViewLocation.getViewRow()2 + 1;
+                newCol2 = mainViewLocation.getViewCol()2 + 1;
 
                 if(newRow2 >= 15 || newCol2 >= 19)
                 {
@@ -645,13 +653,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
-                    currentCol2 = newCol2;
-                    currentRow2 = newRow2;
+                    mainViewLocation.getViewCol()2 = newCol2;
+                    mainViewLocation.getViewRow()2 = newRow2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Reflect changes made
                     this.repaint();
@@ -663,8 +671,8 @@ public class BoardPanel extends JPanel
         }
         else if(key == 2)
         {
-            newRow = currentRow + 1;
-            newRow2 = currentRow2 + 1;
+            newRow = mainViewLocation.getViewRow() + 1;
+            newRow2 = mainViewLocation.getViewRow()2 + 1;
             if(newRow >= 15 || newRow2 >= 15)
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -672,14 +680,14 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                theBoard[currentRow][currentCol].setSelected(false);
-                theBoard[currentRow2][currentCol2].setSelected(false);
+                theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
+                theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
                 //Select new space
-                currentRow = newRow;
-                currentRow2 = newRow2;
+                mainViewLocation.setViewRow(newRow);
+                mainViewLocation.getViewRow()2 = newRow2;
 
-                theBoard[currentRow][currentCol].setSelected(true);
-                theBoard[currentRow2][currentCol2].setSelected(true);
+                theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
+                theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                 adjustScroll();
                 //Reflect changes made
                 this.repaint();
@@ -688,10 +696,10 @@ public class BoardPanel extends JPanel
         }
         else if(key == 1)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -701,13 +709,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current col
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -715,8 +723,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow() + 1;
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -726,24 +734,24 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current row and col
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
                 }
             }
 
-            if(currentCol2 % 2 == 0)
+            if(mainViewLocation.getViewCol()2 % 2 == 0)
             {
-                newRow2 = currentRow2;
-                newCol2 = currentCol2 - 1;
+                newRow2 = mainViewLocation.getViewRow()2;
+                newCol2 = mainViewLocation.getViewCol()2 - 1;
 
                 if(newCol2 < 0 || newRow2 >= 15)
                 {
@@ -753,13 +761,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current col
-                    currentCol2 = newCol2;
+                    mainViewLocation.getViewCol()2 = newCol2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -767,8 +775,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow2 = currentRow2 + 1;
-                newCol2 = currentCol2 - 1;
+                newRow2 = mainViewLocation.getViewRow()2 + 1;
+                newCol2 = mainViewLocation.getViewCol()2 - 1;
 
                 if(newCol2 < 0 || newRow2 >= 15)
                 {
@@ -778,14 +786,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current row and col
-                    currentCol2 = newCol2;
-                    currentRow2 = newRow2;
+                    mainViewLocation.getViewCol()2 = newCol2;
+                    mainViewLocation.getViewRow()2 = newRow2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -795,10 +803,10 @@ public class BoardPanel extends JPanel
         }
         else if(key == 7)
         {
-            if(currentCol % 2 == 0)
+            if(mainViewLocation.getViewCol() % 2 == 0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow() - 1;
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -808,14 +816,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -823,8 +831,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                newRow = mainViewLocation.getViewRow();
+                newCol = mainViewLocation.getViewCol() - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -834,23 +842,23 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow][currentCol].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(false);
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
 
                     //Select new space
-                    theBoard[currentRow][currentCol].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
                 }
             }
 
-            if(currentCol2 % 2 == 0)
+            if(mainViewLocation.getViewCol()2 % 2 == 0)
             {
-                newRow2 = currentRow2 - 1;
-                newCol2 = currentCol2 - 1;
+                newRow2 = mainViewLocation.getViewRow()2 - 1;
+                newCol2 = mainViewLocation.getViewCol()2 - 1;
 
                 if(newRow2 < 0 || newCol2 < 0)
                 {
@@ -860,14 +868,14 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current col and row
-                    currentRow2 = newRow2;
-                    currentCol2 = newCol2;
+                    mainViewLocation.getViewRow()2 = newRow2;
+                    mainViewLocation.getViewCol()2 = newCol2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Show changes
                     this.repaint();
@@ -875,8 +883,8 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow2 = currentRow2;
-                newCol2 = currentCol2 - 1;
+                newRow2 = mainViewLocation.getViewRow()2;
+                newCol2 = mainViewLocation.getViewCol()2 - 1;
 
                 if(newRow2 < 0 || newCol2 < 0)
                 {
@@ -886,13 +894,13 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    theBoard[currentRow2][currentCol2].setSelected(false);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(false);
 
                     //Update current col since row didn't change
-                    currentCol2 = newCol2;
+                    mainViewLocation.getViewCol()2 = newCol2;
 
                     //Select new space
-                    theBoard[currentRow2][currentCol2].setSelected(true);
+                    theBoard[mainViewLocation.getViewRow()2][mainViewLocation.getViewCol()2].setSelected(true);
                     adjustScroll();
                     //Display changes
                     this.repaint();
@@ -929,7 +937,7 @@ public class BoardPanel extends JPanel
    /* public void adjustScroll()
     {
         //Scroll the panel based on what row we are on
-        if(currentRow > 9)
+        if(mainViewLocation.getViewRow() > 9)
         {
             JScrollBar verticalBar = jsp.getVerticalScrollBar();
             verticalBar.setValue(verticalBar.getMaximum ());
@@ -990,8 +998,8 @@ public class BoardPanel extends JPanel
     {
         if(!invalidPlacement){
             placing = false;
-            currentRow = 0;
-            currentCol = 0;
+            mainViewLocation.setViewRow(0);
+            mainViewLocation.setViewCol(0);
             repaint();
         }else {
             JOptionPane.showMessageDialog(this.getTopLevelAncestor(),
@@ -1021,15 +1029,16 @@ public class BoardPanel extends JPanel
     public int getCurrentSpace()
     {
         //returns id of the currently selected space
-        return IDs[currentRow][currentCol];
+        return IDs[mainViewLocation.getViewRow()][mainViewLocation.getViewCol()];
 
     }
 
     public void exitPlacement(){
-        board.getStackAt(currentRow, currentCol).popFromStack();
+        board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
         endPlacement(false);
         this.repaint();
     }
+
     public void moveNorth()
     {
         if(placing)
@@ -1038,7 +1047,14 @@ public class BoardPanel extends JPanel
             int newCol;
             ViewHex v;
 
-            newRow = currentRow - 1;
+            //newRow = mainViewLocation.getViewRow() - 1;
+            int minAuxRow = 14;
+            if (auxHexagons.size()>0)
+            {
+                minAuxRow = Math.min(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+            }
+            newRow = Math.min(mainViewLocation.getViewRow(), minAuxRow) - 1;
+
             if(newRow < 0 )
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -1046,20 +1062,26 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
                 //Select new space
-                currentRow = newRow;
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                //mainViewLocation.setViewRow(newRow);
+
+                mainViewLocation.setViewRow(newRow);
+
+                for (ViewLocation vl : auxHexagons)
+                {
+                    vl.setViewRow(vl.getViewRow()-1);
+                }
+
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                 //Reflect changes made
                 this.repaint();
             }
             this.requestFocus();
         }
-
     }
-
 
     public void moveNorthEast()
     {
@@ -1069,10 +1091,20 @@ public class BoardPanel extends JPanel
             int newCol;
             ViewHex v;
 
-            if(currentCol % 2 == 0)
+            int minAuxRow = 14; int maxAuxCol = 0;
+            if (auxHexagons.size()>0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol + 1;
+                minAuxRow = Math.min(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+                maxAuxCol = Math.max(auxHexagons.get(0).getViewCol(), auxHexagons.get(1).getViewCol());
+            }
+
+            if(mainViewLocation.getViewCol() % 2 == 0)
+            {
+                //newRow = mainViewLocation.getViewRow() - 1;
+                //newCol = mainViewLocation.getViewCol() + 1;
+
+                newRow = Math.min(mainViewLocation.getViewRow(), minAuxRow) - 1;
+                newCol = Math.max(mainViewLocation.getViewCol(), maxAuxCol) + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -1082,15 +1114,21 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
+
+                    for(ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewRow(vl.getViewRow()-1);
+                        vl.setViewCol(vl.getViewCol() + 1);
+                    }
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Show changes
                     this.repaint();
@@ -1098,8 +1136,11 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                //newRow = mainViewLocation.getViewRow();
+                //newCol = mainViewLocation.getViewCol() + 1;
+
+                newRow = Math.min(mainViewLocation.getViewRow(), minAuxRow);
+                newCol = Math.max(mainViewLocation.getViewCol(), maxAuxCol) + 1;
 
                 if(newRow < 0 || newCol >= 19)
                 {
@@ -1109,14 +1150,20 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewCol(vl.getViewCol()+1);
+                    }
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Display changes
                     this.repaint();
@@ -1124,21 +1171,42 @@ public class BoardPanel extends JPanel
             }
             this.requestFocus();
         }
-
     }
 
     public void moveSouthEast()
     {
+        System.out.println("Inside the moveSouthEast() method");
         if(placing)
         {
+            System.out.println("placing is true");
             int newRow;
             int newCol;
             ViewHex v;
 
-            if(currentCol % 2 == 0)
+            int maxAuxRow = 0; int maxAuxCol = 0;
+
+            System.out.println("maxAuxRow " + maxAuxRow);
+            System.out.println("maxAuxCol " + maxAuxCol);
+
+            if (auxHexagons.size()>0)
             {
-                newRow = currentRow;
-                newCol = currentCol + 1;
+                maxAuxRow = Math.max(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+                maxAuxCol = Math.max(auxHexagons.get(0).getViewCol(), auxHexagons.get(1).getViewCol());
+
+                System.out.println("maxAuxRow " + maxAuxRow);
+                System.out.println("maxAuxCol " + maxAuxCol);
+            }
+
+            System.out.println("mvl row: " + mainViewLocation.getViewRow());
+            System.out.println("mvl col: " + mainViewLocation.getViewCol());
+
+            if(mainViewLocation.getViewCol() % 2 == 0)
+            {
+                //newRow = mainViewLocation.getViewRow();
+                //newCol = mainViewLocation.getViewCol() + 1;
+
+                newRow = Math.max(mainViewLocation.getViewRow(), maxAuxRow);
+                newCol = Math.max(mainViewLocation.getViewCol(), maxAuxCol) + 1;
 
                 if(newCol >= 19)
                 {
@@ -1148,11 +1216,19 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
-                    currentCol = newCol;
+
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
+                    mainViewLocation.setViewCol(newCol);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewCol(vl.getViewCol()+1);
+                    }
+
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Reflect changes made
                     this.repaint();
@@ -1160,8 +1236,11 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol + 1;
+                //newRow = mainViewLocation.getViewRow() + 1;
+                //newCol = mainViewLocation.getViewCol() + 1;
+
+                newRow = Math.max(mainViewLocation.getViewRow(), maxAuxRow) + 1;
+                newCol = Math.max(mainViewLocation.getViewCol(), maxAuxCol) + 1;
 
                 if(newRow >= 15 || newCol >= 19)
                 {
@@ -1171,24 +1250,28 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect previous space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
 
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
+
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewRow(vl.getViewRow()+1);
+                        vl.setViewCol(vl.getViewCol()+1);
+                    }
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Reflect changes made
                     this.repaint();
                 }
             }
-
             this.requestFocus();
         }
-
-
     }
 
     public void moveSouth()
@@ -1198,7 +1281,14 @@ public class BoardPanel extends JPanel
             int newRow;
             int newCol;
 
-            newRow = currentRow + 1;
+            int maxAuxRow = 0;
+            if (auxHexagons.size()>0)
+            {
+                maxAuxRow = Math.max(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+            }
+            newRow = Math.max(mainViewLocation.getViewRow(), maxAuxRow) + 1;
+
+            //newRow = mainViewLocation.getViewRow() + 1;
             if(newRow >= 15 )
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -1206,33 +1296,49 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                ViewHex v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
                 //Select new space
-                currentRow = newRow;
+                mainViewLocation.setViewRow(newRow);
 
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                for (ViewLocation vl : auxHexagons)
+                {
+                    vl.setViewRow(vl.getViewRow()+1);
+                }
+
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                 //Reflect changes made
                 this.repaint();
             }
             this.requestFocus();
         }
-
     }
 
     public void moveSouthWest()
     {
+        System.out.println("Inside moveSouthWest");
         if(placing)
         {
+            System.out.println("Placing is true");
             int newRow;
             int newCol;
             ViewHex v;
 
-            if(currentCol % 2 == 0)
+            int maxAuxRow = 0; int minAuxCol = 19;
+            if (auxHexagons.size()>0)
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                maxAuxRow = Math.max(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+                minAuxCol = Math.min(auxHexagons.get(0).getViewCol(), auxHexagons.get(1).getViewCol());
+            }
+
+            if(mainViewLocation.getViewCol() % 2 == 0)
+            {
+                //newRow = mainViewLocation.getViewRow();
+                //newCol = mainViewLocation.getViewCol() - 1;
+
+                newRow = Math.max(mainViewLocation.getViewRow(), maxAuxRow);
+                newCol = Math.min(mainViewLocation.getViewCol(), minAuxCol) - 1;
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -1242,14 +1348,21 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current col
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
+                    //Update row
+                    mainViewLocation.setViewRow(newRow);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewCol(vl.getViewCol()-1);
+                    }
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Show changes
                     this.repaint();
@@ -1257,8 +1370,14 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow + 1;
-                newCol = currentCol - 1;
+                //newRow = mainViewLocation.getViewRow() + 1;
+                //newCol = mainViewLocation.getViewCol() - 1;
+
+                newRow = Math.max(mainViewLocation.getViewRow(), maxAuxRow) + 1;
+                newCol = Math.min(mainViewLocation.getViewCol(), minAuxCol) - 1;
+
+                System.out.println("newRow " + newRow);
+                System.out.println("newCol " + newCol);
 
                 if(newCol < 0 || newRow >= 15)
                 {
@@ -1268,15 +1387,21 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current row and col
-                    currentCol = newCol;
-                    currentRow = newRow;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewRow(vl.getViewRow()+1);
+                        vl.setViewCol(vl.getViewCol()-1);
+                    }
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Display changes
                     this.repaint();
@@ -1295,10 +1420,20 @@ public class BoardPanel extends JPanel
             int newCol;
             ViewHex v;
 
-            if(currentCol % 2 == 0)
+            int minAuxRow = 14; int minAuxCol = 19;
+            if (auxHexagons.size()>0)
             {
-                newRow = currentRow - 1;
-                newCol = currentCol - 1;
+                minAuxRow = Math.min(auxHexagons.get(0).getViewRow(), auxHexagons.get(1).getViewRow());
+                minAuxCol = Math.min(auxHexagons.get(0).getViewCol(), auxHexagons.get(1).getViewCol());
+            }
+
+            if(mainViewLocation.getViewCol() % 2 == 0)
+            {
+                //newRow = mainViewLocation.getViewRow() - 1;
+                //newCol = mainViewLocation.getViewCol() - 1;
+
+                newRow = Math.min(mainViewLocation.getViewRow(), minAuxRow) - 1;
+                newCol = Math.min(mainViewLocation.getViewCol(), minAuxCol) - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -1308,15 +1443,22 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current col and row
-                    currentRow = newRow;
-                    currentCol = newCol;
+                    mainViewLocation.setViewRow(newRow);
+                    mainViewLocation.setViewCol(newCol);
+
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewRow(vl.getViewRow() - 1);
+                        vl.setViewCol(vl.getViewCol()-1);
+                    }
+
 
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Show changes
                     this.repaint();
@@ -1324,8 +1466,11 @@ public class BoardPanel extends JPanel
             }
             else
             {
-                newRow = currentRow;
-                newCol = currentCol - 1;
+                //newRow = mainViewLocation.getViewRow();
+                //newCol = mainViewLocation.getViewCol() - 1;
+
+                newRow = Math.min(mainViewLocation.getViewRow(), minAuxRow);
+                newCol = Math.min(mainViewLocation.getViewCol(), minAuxCol) - 1;
 
                 if(newRow < 0 || newCol < 0)
                 {
@@ -1335,14 +1480,20 @@ public class BoardPanel extends JPanel
                 else
                 {
                     //Deselect current space
-                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
 
                     //Update current col since row didn't change
-                    currentCol = newCol;
+                    mainViewLocation.setViewCol(newCol);
+                    mainViewLocation.setViewRow(newRow);
 
+                    for (ViewLocation vl : auxHexagons)
+                    {
+                        vl.setViewCol(vl.getViewCol()-1);
+                    }
+                      
                     //Select new space
-                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                     //Display changes
                     this.repaint();
@@ -1350,13 +1501,11 @@ public class BoardPanel extends JPanel
             }
             this.requestFocus();
         }
-
-
     }
 
     public int getCurrentRow()
     {
-        return currentRow;
+        return mainViewLocation.getViewRow();
     }
 
     public void moveNorthDouble()
@@ -1367,7 +1516,7 @@ public class BoardPanel extends JPanel
             int newCol;
             ViewHex v;
 
-            newRow = currentRow - 1;
+            newRow = mainViewLocation.getViewRow() - 1;
             if(newRow < 0 )
             {
                 displayAlert("You cannot move out of bounds!", null);
@@ -1375,11 +1524,11 @@ public class BoardPanel extends JPanel
             else
             {
                 //Deselect previous space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
                 //Select new space
-                currentRow = newRow;
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                mainViewLocation.setViewRow(newRow);
+                board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                 //Reflect changes made
                 this.repaint();
