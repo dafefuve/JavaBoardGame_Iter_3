@@ -3,16 +3,19 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 import javax.swing.*;
 
 public class PlayerView extends JPanel
 {
+    HashMap<String, PlayerPanel> hashMap;
 	JPanel[] players;
 	static int currentPlayer;
 	
 	public PlayerView(int numberOfPlayers)
 	{
+        hashMap = new HashMap<String, PlayerPanel>();
 		currentPlayer = 0;
 		players = new JPanel[numberOfPlayers];
 		
@@ -23,6 +26,7 @@ public class PlayerView extends JPanel
 		for(int i = 0; i < players.length; i++)
 		{
 			JPanel currentPanel = new PlayerPanel("Player " + (i + 1));
+            hashMap.put("Player" + i, (PlayerPanel)currentPanel);
 			players[i] = currentPanel;
 			this.add(currentPanel);
 		}
@@ -70,5 +74,20 @@ public class PlayerView extends JPanel
 
         p.getActionMap().put("doSomething",
                 myAction);
+    }
+
+    public void setTwoBlocks(int numTwoBlocks, String currentPlayer)
+    {
+        hashMap.get(currentPlayer).setNumTwoBlocks(numTwoBlocks);
+    }
+
+    public void setVillageBlocks(int numVillageBlocks, String currentPlayer)
+    {
+        hashMap.get(currentPlayer).setNumVillageBlocks(numVillageBlocks);
+    }
+
+    public void setRiceBlocks(int numRiceBlocks, String currentPlayer)
+    {
+        hashMap.get(currentPlayer).setRiceBlocks(numRiceBlocks);
     }
 }

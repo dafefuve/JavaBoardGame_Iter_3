@@ -126,22 +126,22 @@ public class ViewController {
         mainView.placeTwoBlock();
     }
 
-    /*
+
     public void setTwoBlocks(int numTwoBlocks, String playerName)
     {
         mainView.setTwoBlocks(numTwoBlocks, playerName);
     }
-    public void setSingleVillageBlocks(numVillageBlocks, playerName)
+
+    public void setSingleVillageBlocks(int numVillageBlocks, String playerName)
     {
         mainView.setSingleVillageBlocks(numVillageBlocks, playerName);
     }
-
 
     public void setRiceBlocks(int numRiceBlocks, String playerName)
     {
         mainView.setRiceBlocks(numRiceBlocks, playerName);
     }
-
+/*
     public void setActionTokens(int numActionTokens, String playerName)
     {
         mainView.setActionTokens(numActionTokens, playerName);
@@ -152,9 +152,27 @@ public class ViewController {
         mainView.setDevelopers(numActionTokens, playerName);
     }
 
-    public void setScore(int numDevelopers, String playerName)
+    public void setScore(int score, String playerName)
     {
-        mainView.setScore(
+        mainView.setScore(score, playerName);
     }
+    */
+/*
+    //Shared Resources
+    public void setThreeBlocks(int numThreeBlocks)
+    {
+        mainView.setThreeBlocks(numThreeBlocks);
+    }
+
+    public void setIrrigationTiles(int numIrrigationTiles)
+    {
+        mainView.setIrrigationTiles(numIrrigationTiles)
+    }
+
+    public void setLvl2PalaceTiles(int numLvl2PalaceTiles)
+    {
+        mainView.setLvl2PalaceTiles(int numLvl2PalaceTiles);
+    }
+
     */
 }

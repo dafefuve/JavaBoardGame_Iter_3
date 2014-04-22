@@ -320,9 +320,19 @@ public class MainView extends JFrame
         boardPanel.placeDoubleTile();
     }
 
-    public void setTwoBlocks(int numTwoBlocks)
+    public void setTwoBlocks(int numTwoBlocks, String playerName)
     {
+        ((PlayerView)playerPanel).setTwoBlocks(numTwoBlocks, playerName);
+    }
 
+    public void setSingleVillageBlocks(int numVillageBlocks, String playerName)
+    {
+        ((PlayerView)playerPanel).setVillageBlocks(numVillageBlocks, playerName);
+    }
+
+    public void setRiceBlocks(int numRiceBlocks, String playerName)
+    {
+        ((PlayerView)playerPanel).setRiceBlocks(numRiceBlocks, playerName);
     }
 
 }
