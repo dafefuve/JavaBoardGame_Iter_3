@@ -21,7 +21,7 @@ public class ExecuteAction extends AbstractAction{
     {   if(facade.getTempCommand().getTempCommand()!=null){ //if there is a command loaded then do this
             int spaceId = facade.getViewController().getCurrentSpace();
             facade.getTempCommand().execute(spaceId);
-            facade.getViewController().endPlacement();
+            //facade.getViewController().endPlacement();
             //facade.getTempCommand().setTempCommand(null);
         }
     }

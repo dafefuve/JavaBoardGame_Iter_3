@@ -63,39 +63,46 @@ public class ViewController {
     public void placeVillageTile()
     {
         mainView.placeVillageTile();
+
     }
 
     public void moveNorth()
     {
         mainView.moveNorth();
+        invalidPlacement = false;
     }
 
     public void moveNorthEast()
     {
         mainView.moveNorthEast();
+        invalidPlacement = false;
     }
 
     public void moveSouth()
     {
         mainView.moveSouth();
+        invalidPlacement = false;
     }
 
     public void moveSouthEast()
     {
         mainView.moveSouthEast();
+        invalidPlacement = false;
     }
 
     public void moveSouthWest()
     {
         mainView.moveSouthWest();
+        invalidPlacement = false;
     }
 
     public void moveNorthWest()
     {
         mainView.moveNorthWest();
+        invalidPlacement = false;
     }
 
-    public void endPlacement()
+    public void endPlacement(boolean invalidPlacement)
     {
         mainView.endPlacement(invalidPlacement);
     }

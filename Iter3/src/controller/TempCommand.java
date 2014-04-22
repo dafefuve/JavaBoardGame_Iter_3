@@ -25,11 +25,11 @@ public class TempCommand {
                 //notify the view if the execution failed
                 facade.getCommandStackController().push(tempCommand);
                 tempCommand = null;
-                //facade.getViewController().endPlacement();
+                facade.getViewController().endPlacement(false);
 
             }
             else{
-                facade.getViewController().notifyInvalidPlacement();
+                facade.getViewController().endPlacement(true);
             }
     }
 

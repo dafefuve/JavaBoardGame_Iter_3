@@ -13,12 +13,15 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     private BoardController boardController;
     private PlayerController playerController;
     private int location;
+    private Facade facade;
+
     public PlaceSingleVillageTileCommand(Facade facade){
 
         this.boardController=facade.getBoardController();
         this.playerController=facade.getPlayerController();
         facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
-        //commandCompletion = false;
+        commandCompletion = false;
+        this.facade = facade;
     }
     //this must happen before execute
     public void setLocation(int newLocation){
@@ -27,23 +30,21 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     public boolean execute(){
         int remainingVillageCount = playerController.getItemCount("villageTile");
         Space space = boardController.getSpaceFromID(location);
+        System.out.println("the view id is " + location);
         //commandCompletion = false;
 
-        TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board tile
+        TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board til
         TileComponent villageToBePlaced = new TileComponent(new LandType("village"), new Tile());  //village tile
 
-        if(!topTileComponentOfSpace.getLandType().equals("central") || remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation")){
+        if(remainingVillageCount >= 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation")){
 
-            return false;
-        }
-        else {
             playerController.setItemCount("villageTile", remainingVillageCount - 1);
             space.addTileComponent(villageToBePlaced);
-            System.out.println("placed");
+
             return true;
         }
-       // return commandCompletion;
 
+        return false;
     }
     public void undo(){
         playerController.setItemCount("villageTile", playerController.getItemCount("villageTile") + 1);

@@ -635,8 +635,8 @@ public class BoardController
         removeTopTileComponent(42);
         addTileComponent(42,central);
 
-        removeTopTileComponent(42);
-        addTileComponent(42,central);
+        removeTopTileComponent(43);
+        addTileComponent(43,central);
 
         removeTopTileComponent(45);
         addTileComponent(45,central);
