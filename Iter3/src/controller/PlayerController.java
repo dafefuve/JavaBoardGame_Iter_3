@@ -13,7 +13,7 @@ public class PlayerController {
 
     public PlayerController(Facade facade){
 
-        this.currentPlayer = facade.getTurnController().getCurrentPlayer();
+        this.currentPlayer = null;
     }
 
     public void setCurrentPlayer(){

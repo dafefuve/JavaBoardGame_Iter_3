@@ -32,7 +32,7 @@ public class GameSetupController {
 
 
         Game game = new Game(players, gameInventory, board);    //The game is created here
-
+        facade.getTurnController().setCurrentPlayer(players.get(0));
         facade.getGameController().setGame(game);   //gives GameController the reference to game
 
         initializeBoard();
