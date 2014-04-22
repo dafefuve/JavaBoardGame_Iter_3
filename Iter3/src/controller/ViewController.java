@@ -30,10 +30,6 @@ public class ViewController {
     {
         ViewTest.registerChangeTurn();
     }
-    public void changeTurn()
-    {
-
-    }
 
     public void recieveMainMenuKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
     {
@@ -179,5 +175,10 @@ public class ViewController {
     public void placeIrrigationTile()
     {
         mainView.placeIrrigationTile();
+    }
+
+    public void changeTurn()
+    {
+        mainView.changeTurn();
     }
 }

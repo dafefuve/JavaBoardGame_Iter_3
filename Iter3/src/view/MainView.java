@@ -222,6 +222,10 @@ public class MainView extends JFrame
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "place irrigation");
         boardPanel.getActionMap().put("place irrigation",keyBindings.get(k));
 
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_E, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "change turn");
+        boardPanel.getActionMap().put("change turn",keyBindings.get(k));
+
         k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
         boardPanel.getActionMap().put("end placement",keyBindings.get(k));
@@ -342,6 +346,11 @@ public class MainView extends JFrame
     public void placeIrrigationTile()
     {
         boardPanel.placeIrrigationTile();
+    }
+
+    public void changeTurn()
+    {
+        ((PlayerView)playerPanel).changeTurn();
     }
 
 }
