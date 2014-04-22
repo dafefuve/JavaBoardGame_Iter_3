@@ -48,14 +48,14 @@ public class PlaceSinglePalaceTileCommand extends MovableCommands {
             TileComponent tc = new TileComponent(new LandType("palace"), new Tile());
             s.addTileComponent(tc);
             s.setPalace(new Palace(level));
-            playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") + level / 2);
+           // playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") + level / 2);
             return true;
         }
         return false;
     }
     public void undo(){
         gameController.getInventory().setItemCount("palaceTile", gameController.getInventory().getItemCount("palaceTile") + 1);
-        playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") - level / 2);
+     //   playerController.setItemCount("famePoints", playerController.getItemCount("famePoints") - level / 2);
         boardController.getSpaceFromID(location).removeTopTileComponent();
         boardController.getSpaceFromID(location).setPalace(null);
     }

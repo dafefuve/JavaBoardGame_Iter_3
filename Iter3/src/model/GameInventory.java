@@ -52,12 +52,18 @@ public class GameInventory extends Inventory
         faceUpCard = drawCardFromDeck();
         return oldFaceUpCard;
     }
-
     public PalaceCard getFaceUpCard(){
         return faceUpCard;
     }
 
     public void discardCard(PalaceCard card){
         discardDeck.push(card);
+    }
+    public void putOnTopOfDeck(PalaceCard card){
+        deck.push(card);
+    }
+    public void undoFaceUpDraw(PalaceCard card){
+        deck.push(faceUpCard);
+        faceUpCard=card;
     }
 }

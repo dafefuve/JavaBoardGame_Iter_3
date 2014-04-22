@@ -33,7 +33,7 @@ public class PlayerPanel extends JPanel
 	public PlayerPanel(String s)
 	{
 		//Initialize the "model"
-		numSingleVillageBlocks = 2;
+		numSingleVillageBlocks = 3;
 		numSingleRiceBlocks = 3;
 		numTwoBlocks = 5;
 		numActionTokens = 3;
@@ -78,4 +78,22 @@ public class PlayerPanel extends JPanel
 	    
 	    this.setBorder(new CompoundBorder(border, margin));
 	}
+
+    public void setNumTwoBlocks(int numTwoBlocks)
+    {
+        this.numTwoBlocks = numTwoBlocks;
+        twoBlocks.setText("Two Blocks: " + this.numTwoBlocks);
+    }
+
+    public void setNumVillageBlocks(int numVillageBlocks)
+    {
+        this.numSingleVillageBlocks = numVillageBlocks;
+        singleVillageBlocks.setText("Single Village Blocks: " + this.numSingleVillageBlocks);
+    }
+
+    public void setRiceBlocks(int numRiceBlocks)
+    {
+        this.numSingleRiceBlocks = numRiceBlocks;
+        singleVillageBlocks.setText("Single Rice Blocks: " + this.numSingleRiceBlocks);
+    }
 }

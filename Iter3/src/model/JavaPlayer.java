@@ -59,4 +59,10 @@ public class JavaPlayer extends Player{
     public List<Developer> getDevelopers(){
         return developers;
     }
+
+    public void addFamePoints(int amount){
+        int oldAmount = getItemCount("famePoint");
+        int total = oldAmount + amount;
+        setItemCount("famePoint",total);
+    }
 }
