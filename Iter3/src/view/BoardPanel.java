@@ -134,134 +134,12 @@ public class BoardPanel extends JPanel
                drawLevel(g2, board.getPolygonAt(i, j), board.getStackAt(i, j));
 
 
-               /*
-               if(theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[0]
-                       || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[1]
-                       || theBoard[i][j].getBoardHex().getSpaceID() == irrigationIDs[2] )
-               {
 
-                   g2.setPaint(new TexturePaint(water, new Rectangle(300,300,300,300)));
-
-                   g2.fillPolygon(theBoard[i][j].getPolygon());
-               }
-               else if(theBoard[i][j].getBoardHex().getIsLowlands() == true)
-               {
-                   g2.setPaint(new TexturePaint(land, new Rectangle(700,700,700,700)));
-
-                   g2.fillPolygon(theBoard[i][j].getPolygon());
-                   g2.setColor(Color.WHITE);
-                   g2.setStroke(new BasicStroke(1f));
-                   g2.drawPolygon(theBoard[i][j].getPolygon());
-
-               }
-               else if(theBoard[i][j].getBoardHex().getIsMountain() == true)
-               {
-                   g2.setPaint(new TexturePaint(dirt, new Rectangle(300,300,300,300)));
-                   g2.fillPolygon(theBoard[i][j].getPolygon());
-                   g2.setColor(Color.WHITE);
-                   g2.setStroke(new BasicStroke(1f));
-                   g2.drawPolygon(theBoard[i][j].getPolygon());
-               }
-               else
-               {
-                   g2.setPaint(new TexturePaint(mainland, new Rectangle(300,300,300,300)));
-                   g2.fillPolygon(theBoard[i][j].getPolygon());
-                   g2.setColor(Color.WHITE);
-                   g2.setStroke(new BasicStroke(1f));
-                   g2.drawPolygon(theBoard[i][j].getPolygon());
-
-                   //Draw the level string
-                   drawLevel(g2, theBoard[i][j].getBoardHex());
-
-               }
-
-               if(theBoard[i][j].getSelected() == true)
-               {
-                   Color c = new Color(0f,1f,1f,.3f );
-                   g2.setColor(c);
-                   g2.fillPolygon(theBoard[i][j].getBoardHex().getPolygon());
-               }
-            */
            }
        }
    }
 
-  /* public void setUpKeyListener()
-   {
-       this.addKeyListener(new KeyListener() {
-
-           @Override
-           public void keyTyped(KeyEvent e) {
-               // TODO Auto-generated method stub
-               //Move up
-               if(e.getKeyChar() == '8')
-               {
-                   moveSpace(8);
-               }
-               else if(e.getKeyChar() == '9')
-               {
-                   moveSpace(9);
-               }
-               else if(e.getKeyChar() == '3')
-               {
-                   moveSpace(3);
-               }
-               else if(e.getKeyChar() == '2')
-               {
-                   moveSpace(2);
-               }
-               else if(e.getKeyChar() == '1')
-               {
-                   moveSpace(1);
-               }
-               else if(e.getKeyChar() == '7')
-               {
-                   moveSpace(7);
-               }
-               else if(e.getKeyChar() == 'w')
-               {
-                    endPlacement();
-
-               }
-               else if(e.getKeyChar() == 'v')
-               {
-                   beginPlacement();
-                   placeSingleVillageTile();
-               }
-               else if(e.getKeyChar() == 'r')
-               {
-                   beginPlacement();
-                   placeSingleRiceTile();
-               }
-               else if(e.getKeyChar() == 'i')
-               {
-                   beginPlacement();
-                   placeIrrigationTile();
-               }
-
-
-               //else for changing player
-                /*
-                else if(e.getKeyChar() == 'p')
-                {
-                    selectPlayer();
-                }*/
-           /*}
-
-           @Override
-           public void keyReleased(KeyEvent e) {
-               // TODO Auto-generated method stub
-
-           }
-
-           @Override
-           public void keyPressed(KeyEvent e) {
-               // TODO Auto-generated method stub
-
-           }
-       });
-   }
-*/
+ 
     public void highlightSpace(int key)
     {
         int newRow;
@@ -1180,6 +1058,7 @@ public class BoardPanel extends JPanel
 
     public void placeSingleRiceTile()
     {
+        placing = true;
         board.getStackAt(0, 0).pushIntoStack(new ViewHexRice());
         this.repaint();
     }
