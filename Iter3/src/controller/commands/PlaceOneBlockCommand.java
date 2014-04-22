@@ -17,17 +17,13 @@ public class PlaceOneBlockCommand extends MovableCommands {
     }
 
     public boolean execute(){
-    ///TODO a method that finds the space that the cursor is currently hovering over
-    //TODO add a method that places a singular tile onto a space on the board 
-    //TODO I assume there is a method in gameController that accesses the communal inventory
-    /*
+     /*
     int count = gameController.getItemCount("oneBlock");
     if(count<=0){
         System.out.println("No one blocks left! Broke the rules!");
         //then do thingie to notify player that they broke the rules
     }
     else {
-    //TODO I assume boardController has a sort of placeTile() method
         gameController.setItemCount("oneBlock", count-1);
         s = boardController.getSelectedSpace();
         boardController.placeBlock(s);
@@ -37,7 +33,6 @@ public class PlaceOneBlockCommand extends MovableCommands {
         return true;
     }
     public void undo(){
-        //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
         //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
         /*gameController.setItemCount("oneBlock", gameController.getItemCount("oneBlock")-1);
         boardController.removeBlock(s);*/

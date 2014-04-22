@@ -8,14 +8,16 @@ import controller.GameController;
 */
 public class UpgradePalaceCommand {
 	private int level;//the amount by which you wish to upgrade
-	public UpgradePalaceCommand(int level){
+	private Facade f;
+	public UpgradePalaceCommand(int level, Facade f){
 		this.level=level;
+		this.f=f;
 	}
 	public boolean execute(){
 		if(true){
-			//TODO THIS CHECK
-            //so here we need to check if the current player has the right to build a palace... if they are the player
-            //with the highest game piece or the player with the sequence of highest game pieces. Ties do not count
+		  //so here we need to check if the current player has the right to build a palace... if they are the player
+          //with the highest game piece or the player with the sequence of highest game pieces. Ties do not count
+        	return true;
         }
 		return false;
 	}

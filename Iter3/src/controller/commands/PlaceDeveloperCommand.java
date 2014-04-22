@@ -17,9 +17,6 @@ public class PlaceDeveloperCommand extends MovableCommands {
 	}
 
 	public boolean execute(){
-	//	Player p playerController.getCurrentPlayer();
-	//TODO a method that finds the space that the cursor is currently hovering over
-	//TODO add a method in BoardController that places a singular game object thing onto a space on the board 
 	/*
 	int count = playerController.getItemCount("developer");
 	if(count<=0){
@@ -37,7 +34,6 @@ public class PlaceDeveloperCommand extends MovableCommands {
 	}
 	public void undo(){
 	/*
-		//TODO implement a method in BoardController that removes a developer/block/tile from a selected space
 		//The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
 		playerController.setItemCount("developer", playerController.getItemCount("developer");+1);
 		boardController.removeDeveloper(s);

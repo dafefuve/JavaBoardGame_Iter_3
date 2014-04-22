@@ -23,7 +23,6 @@ public class MoveDeveloperCommand extends MovableCommands {
 	public boolean execute(){	
 	/*
 	FindShortestPath will decrement the players AP by how many times the developer changes land type
-	//TODO a method that finds the space that the cursor is currently hovering over
 		apAmount=boardController.getAPForShortestPath();
 		d.setLocation(destination);
 	*/

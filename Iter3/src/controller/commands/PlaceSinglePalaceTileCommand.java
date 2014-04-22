@@ -25,9 +25,6 @@ public class PlaceSinglePalaceTileCommand extends MovableCommands {
     }
 
     public boolean execute(){
-    //TODO a method that finds the space that the cursor is currently hovering over
-    //TODO add a method in BoardController that places a singular tile onto a space on the board 
-    //TODO I assume there is a method in gameController that accesses the communal inventory
         int count = gameController.getInventory().getItemCount("palaceTile");
         Space s = boardController.getSpaceFromID(location);
         if(count<=0){
