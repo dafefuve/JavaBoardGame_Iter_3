@@ -27,20 +27,20 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     public boolean execute(){
         int remainingVillageCount = playerController.getItemCount("villageTile");
         Space space = boardController.getSpaceFromID(location);
-        commandCompletion = false;
+        //commandCompletion = false;
 
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();             //board tile
         TileComponent villageToBePlaced = new TileComponent(new LandType("village"), new Tile());  //village tile
 
-        if(topTileComponentOfSpace.getLandType().equals("central") && (remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation"))){
-            commandCompletion = false;
+        if(!topTileComponentOfSpace.getLandType().equals("central") || remainingVillageCount < 0 || villageToBePlaced.sameType(topTileComponentOfSpace)|| space.getDeveloper()!=null || space.getPalace()!=null || villageToBePlaced.getLandType().equals("irrigation")){
+            return false;
         }
         else {
             playerController.setItemCount("villageTile", remainingVillageCount - 1);
             space.addTileComponent(villageToBePlaced);
-            commandCompletion = true;
+            return true;
         }
-        return commandCompletion;
+       // return commandCompletion;
 
     }
     public void undo(){
