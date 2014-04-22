@@ -12,6 +12,12 @@ public class LandType
         this.type = type;
     }
 
+    public boolean equals(LandType other){
+        if(type.equals(other.getType())){
+            return true;
+        }
+        return false;
+    }
     public String getType(){
         return this.type;
     }

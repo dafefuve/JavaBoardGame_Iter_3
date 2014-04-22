@@ -23,7 +23,7 @@ public class Space
     {
         developer = null;
         palace = null;
-        land = null;
+        land = new Stack<TileComponent>();
         hasDeveloper = false;
 
         row = 0;
@@ -35,7 +35,7 @@ public class Space
     {
         developer = null;
         palace = null;
-        land = null;
+        land = new Stack<TileComponent>();
         hasDeveloper = false;
 
         row = r;
@@ -54,7 +54,7 @@ public class Space
 
     public TileComponent getTopTileComponent()
     {
-        return this.land.get(this.land.size());
+        return this.land.peek();
     }
 
     public Integer getLevel(){
@@ -76,6 +76,10 @@ public class Space
 
     public void setPalace(Palace palace){
         this.palace = palace;
+    }
+
+    public Palace getPalace(){
+        return palace;
     }
 
     public boolean getHasDeveloper()

@@ -12,6 +12,16 @@ public class TileComponent {
         this.landType = landType;
     }
 
+    public boolean sameTile(TileComponent other){
+        if(tile.equals(other.getTile()))
+            return true;
+        return false;
+    }
+    public boolean sameType(TileComponent other){
+        if(landType.equals(other.getLandType()))
+            return true;
+        return false;
+    }
     public Tile getTile() {
         return tile;
     }

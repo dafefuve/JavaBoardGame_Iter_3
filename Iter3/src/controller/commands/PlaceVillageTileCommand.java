@@ -1,8 +1,6 @@
 package controller.commands;
 
-import controller.BoardController;
-import controller.Command;
-import controller.GameController;
+import controller.*;
 import model.TileComponent;
 import model.LandType;
 import model.Tile;
@@ -13,31 +11,35 @@ import model.Space;
  */
 public class PlaceVillageTileCommand extends MovableCommands {
     private BoardController boardController;
-    private GameController gameController;
+    private PlayerController playerController;
     //private Space s;
     private int location;
-    public PlaceVillageTileCommand(BoardController boardController, GameController gameController){
-        this.boardController=boardController;
-        this.gameController=gameController;
+    public PlaceVillageTileCommand(Facade facade){
+
+        this.boardController=facade.getBoardController();
+        this.playerController=facade.getPlayerController();
+        facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
     }
 
     public boolean execute(){
-    int count = gameController.getInventory().getItem("villageTile");
-        if(count<=0){
-            System.out.println("No village tiles left! Broke the rules!");
-            //then do thingie to notify player that they broke the rules
+        int count = playerController.getItem("villageTile");
+        Space s = boardController.getSpaceFromID(location);
+
+        TileComponent bt = s.getTopTileComponent();             //board tile
+        TileComponent vt = new TileComponent(new LandType("village"), new Tile());  //village tile
+
+        if(bt!=null && (count<0 || vt.sameType(bt)|| s.getDeveloper()!=null || s.getPalace()!=null || vt.getLandType().equals("irrigation"))){
+
         }
         else {
-            gameController.getInventory().setItem("villageTile", count-1);
-            Space s = boardController.getSpaceFromID(location);
-            TileComponent tc = new TileComponent(new LandType("village"), new Tile());
-            s.addTileComponent(tc);
+            playerController.setItem("villageTile", count - 1);
+            s.addTileComponent(vt);
             return true;
         }
         return false;
     }
     public void undo(){
-        gameController.getInventory().setItem("villageTile", gameController.getInventory().getItem("villageTile")+1);
+        playerController.setItem("villageTile", playerController.getItem("villageTile") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
 

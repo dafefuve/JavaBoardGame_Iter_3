@@ -19,8 +19,10 @@ public class PlaceIrrigationTileAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeIrrigationTile();
-        MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+        if(facade.getTempCommand().getTempCommand()==null){
+            //facade.getViewController().placeIrrigationTile();
+            MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
     }
 }

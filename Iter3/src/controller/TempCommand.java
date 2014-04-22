@@ -19,17 +19,21 @@ public class TempCommand {
     }
     //Todo
     public void execute(int spaceId){
-        if(tempCommand!=null)                       //if there is a command loaded then do this
+
             tempCommand.setLocation(spaceId);       //sets the location in the loaded command
-            if(!tempCommand.execute()) {
+            if(tempCommand.execute()) {
                 //notify the view if the execution failed
                 facade.getCommandStackController().push(tempCommand);
                 tempCommand = null;
-                facade.getViewController().endPlacement();
+                //facade.getViewController().endPlacement();
 
             }
             else{
                 facade.getViewController().notifyInvalidPlacement();
             }
+    }
+
+    public MovableCommands getTempCommand(){
+        return tempCommand;
     }
 }

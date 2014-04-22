@@ -18,9 +18,11 @@ public class ExecuteAction extends AbstractAction{
     }
 
     public void actionPerformed(ActionEvent e)
-    {
-        facade.getViewController().endPlacement();
-        int spaceId = facade.getViewController().getCurrentSpace();
-        facade.getTempCommand().execute(spaceId);
+    {   if(facade.getTempCommand().getTempCommand()!=null){ //if there is a command loaded then do this
+            int spaceId = facade.getViewController().getCurrentSpace();
+            facade.getTempCommand().execute(spaceId);
+            facade.getViewController().endPlacement();
+            //facade.getTempCommand().setTempCommand(null);
+        }
     }
 }

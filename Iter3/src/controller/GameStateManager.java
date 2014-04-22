@@ -84,6 +84,8 @@ class activeState implements gameState {
 
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, 0), new PlaceVillageTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
+
 
         System.out.println("KEY BINDINGS WORK?");
         //Developer

@@ -19,8 +19,11 @@ public class PlaceThreeBlockAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeThreeBlock();
-        MovableCommands c = facade.getCommandController().placeThreeBlockCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+        if(facade.getTempCommand().getTempCommand()==null){
+
+            MovableCommands c = facade.getCommandController().placeThreeBlockCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+            //facade.getViewController().placeThreeBlock();
+        }
     }
 }

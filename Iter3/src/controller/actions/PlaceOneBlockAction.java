@@ -21,10 +21,11 @@ public class PlaceOneBlockAction extends AbstractAction
     }
 
     public void actionPerformed(ActionEvent e)
-    {
-        //Facade.getViewController().placeOneBlock();
-        MovableCommands c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+    {   if(facade.getTempCommand().getTempCommand()==null){
+            //Facade.getViewController().placeOneBlock();
+            MovableCommands c = facade.getCommandController().placeOneBlockCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
 
 
         // If we are in Planning mode, then we would not execute, but instead we would push to the planning mode's stack

@@ -1196,12 +1196,20 @@ public class BoardPanel extends JPanel
     }
 
 
-    public void endPlacement()
+    public void endPlacement(boolean invalidPlacement)
     {
-        placing = false;
-        currentRow = 0;
-        currentCol = 0;
-        repaint();
+        if(!invalidPlacement){
+            placing = false;
+            currentRow = 0;
+            currentCol = 0;
+            repaint();
+        }else {
+            JOptionPane.showMessageDialog(this.getTopLevelAncestor(),
+                    "You cannot preform that move",
+                    "Invalid Action",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
 
@@ -1225,7 +1233,10 @@ public class BoardPanel extends JPanel
 
     }
 
-
+    public void exitPlacement(){
+        board.getStackAt(currentRow, currentCol).popFromStack();
+        this.repaint();
+    }
     public void moveNorth()
     {
         int newRow;

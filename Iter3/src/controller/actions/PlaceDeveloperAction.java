@@ -19,8 +19,10 @@ public class PlaceDeveloperAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeDeveloper();
-        MovableCommands c = facade.getCommandController().placeDeveloperCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+        if(facade.getTempCommand().getTempCommand()==null){
+            //facade.getViewController().placeDeveloper();
+            MovableCommands c = facade.getCommandController().placeDeveloperCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
     }
 }

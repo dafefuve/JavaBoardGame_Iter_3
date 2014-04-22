@@ -18,9 +18,10 @@ public class PlacePalaceTileAction {
     }
 
     public void actionPerformed(ActionEvent e)
-    {
-        //facade.getViewController().placePalaceTile();
-        MovableCommands c = facade.getCommandController().placePalaceTileCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+    {   if(facade.getTempCommand().getTempCommand()==null){
+            //facade.getViewController().placePalaceTile();
+            MovableCommands c = facade.getCommandController().placePalaceTileCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
     }
 }

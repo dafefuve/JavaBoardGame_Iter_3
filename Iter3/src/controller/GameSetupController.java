@@ -26,7 +26,7 @@ public class GameSetupController {
 
         //setting up the inventory for each player
         for (int i= 0; i < numPlayers; i++ ){
-            String name = "something";
+            String name = "something"+(i+1);
             players.add(new JavaPlayer(name , createPlayerResources(gameInventory)));
         }
 
@@ -34,7 +34,7 @@ public class GameSetupController {
         Game game = new Game(players, gameInventory, board);    //The game is created here
 
         facade.getGameController().setGame(game);   //gives GameController the reference to game
-
+        System.out.print("blah");
 
 
     }
@@ -104,4 +104,6 @@ public class GameSetupController {
 
         return inventory;
     }
+
+    //todo PalaceFestival set up
 }

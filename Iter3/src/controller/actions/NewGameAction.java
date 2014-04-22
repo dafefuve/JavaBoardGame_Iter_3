@@ -25,7 +25,7 @@ public class NewGameAction extends AbstractAction{
 
        g.setState(g.getActiveState());
        f.getViewController().startNewGame();
-       System.out.println("frehialdo;pas");
+       f.getGameSetupController().setUpGame();
 
     }
 }

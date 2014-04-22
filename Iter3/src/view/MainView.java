@@ -267,10 +267,13 @@ public class MainView extends JFrame
         boardPanel.moveNorthWest();
     }
 
-    public void endPlacement()
+    public void endPlacement(boolean invalidPlacement)
     {
-        boardPanel.endPlacement();
+        boardPanel.endPlacement(invalidPlacement);
     }
 
+    public void exitPlacement(){
+        boardPanel.exitPlacement();
+    }
 
 }

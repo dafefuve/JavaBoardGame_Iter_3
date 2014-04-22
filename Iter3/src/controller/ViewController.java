@@ -10,9 +10,11 @@ import java.util.HashMap;
  */
 public class ViewController {
     view.MainView mainView;
+    private boolean invalidPlacement;
     public ViewController()
     {
         mainView = new view.MainView();
+        invalidPlacement = false;
 
     }
 
@@ -95,13 +97,16 @@ public class ViewController {
 
     public void endPlacement()
     {
-        mainView.endPlacement();
+        mainView.endPlacement(invalidPlacement);
     }
 
     public void notifyInvalidPlacement()
     {
-        //todo
+        invalidPlacement = true;
     }
 
+    public void exitPlacement(){
+        mainView.exitPlacement();
+    }
 
 }

@@ -20,8 +20,10 @@ public class PlaceTwoBlockAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeTwoBlock();
-        MovableCommands c = facade.getCommandController().placeTwoBlockCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+        if(facade.getTempCommand().getTempCommand()==null){
+            //facade.getViewController().placeTwoBlock();
+            MovableCommands c = facade.getCommandController().placeTwoBlockCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
     }
 }

@@ -19,8 +19,10 @@ public class PlaceRiceTileAction {
 
     public void actionPerformed(ActionEvent e)
     {
-        //facade.getViewController().placeRiceTile();
-        MovableCommands c = facade.getCommandController().placeRiceTileCommand(facade.getBoardController());
-        facade.getTempCommand().setTempCommand(c);
+        if(facade.getTempCommand().getTempCommand()==null){
+            //facade.getViewController().placeRiceTile();
+            MovableCommands c = facade.getCommandController().placeRiceTileCommand(facade.getBoardController());
+            facade.getTempCommand().setTempCommand(c);
+        }
     }
 }
