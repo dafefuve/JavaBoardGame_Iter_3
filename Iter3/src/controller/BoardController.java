@@ -5,6 +5,9 @@ import model.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+import java.util.UUID;
 
 /**
  * Created by alexbujduveanu on 4/15/14.
@@ -370,6 +373,169 @@ public class BoardController
         }
 
         return connector;
+    }
+
+    public boolean checkDifferentOneSpaceBeneath(Space s)
+    {
+        boolean canPlace = false;
+
+        //if there are no tiles beneath
+        if (s.getLevel() == 0)
+        {
+            canPlace = true;
+            return canPlace;
+        }
+
+            TileComponent tcOnBottom = s.getTopTileComponent();
+            int curLevel = s.getLevel();
+            UUID tileOnBottomID = tcOnBottom.getTile().getId();
+
+            ArrayList<Space> spaceNeighbors = this.getHexBoard().getNeighborsOfSpace(s);
+            //for each neighbor, check the tileComponent AT THE SAME LEVEL as tcOnBottom
+            //if there are multiple tileComponents, we must make a temporary stack to check
+
+            ArrayList<TileComponent> tcAtLevel = new ArrayList<TileComponent>();
+
+            for (int i = 0; i < spaceNeighbors.size(); i++)
+            {
+                //don't worry about those tile components surrounding you that are at a lower level
+
+                //this space has a stack of tile components of the same size as our present space
+                if (spaceNeighbors.get(i).getLevel() == curLevel)
+                {
+                    //add the tile component to the list of tile components at this level
+                    tcAtLevel.add(spaceNeighbors.get(i).getTopTileComponent());
+                }
+                else if (spaceNeighbors.get(i).getLevel() > curLevel)
+                {
+                    Stack<TileComponent> tempStack = new Stack<TileComponent>();
+                    for (int j = spaceNeighbors.get(i).getLevel(); j > curLevel; j--)
+                    {
+                        tempStack.push(spaceNeighbors.get(i).getLand().peek());
+                        spaceNeighbors.get(i).removeTopTileComponent();
+                    }
+                    tcAtLevel.add(spaceNeighbors.get(i).getTopTileComponent());
+                    for (int k = 0; k < tempStack.size(); k++)
+                    {
+                        spaceNeighbors.get(i).addTileComponent(tempStack.peek());
+                        tempStack.pop();
+                    }
+                }
+            }
+
+            if (tcAtLevel.size() == 0)
+            {
+                //there is a tile component beneath you, but none surrounding it
+                //must be a one-space land tile
+                canPlace = false;
+                return canPlace;
+            }
+
+            //check all tileComponents at that level
+            for (int i = 0; i < tcAtLevel.size(); i++)
+            {
+                if (tcOnBottom.getTile().getId() == tcAtLevel.get(i).getTile().getId())
+                {
+                    //two (at least) tile components with the same UUID
+                    //not a one-space land tile
+                    canPlace = true;
+                    return canPlace;
+                }
+            }
+
+        return canPlace;
+    }
+
+    public boolean checkDifferentTwoSpaceBeneath(List<Space> spaces)
+    {
+        boolean canPlace = false;
+
+        if (spaces.get(0).getTopTileComponent().getTile().getId() == spaces.get(1).getTopTileComponent().getTile().getId())
+        {
+            //there is at least a two-space land tile here
+            ArrayList<Space> neighborsOfTwoSpace = this.getHexBoard().getNeighborsOfSpace(spaces.get(0));
+            neighborsOfTwoSpace.remove(spaces.get(1));
+            for (Space s: this.getHexBoard().getNeighborsOfSpace(spaces.get(0)))
+            {
+                if (!neighborsOfTwoSpace.contains(s))
+                {
+                    neighborsOfTwoSpace.add(s);
+                }
+            }
+            //all of the neighbors of the two-space land tile is now in neighborsOfTwoSpace
+
+            int curLevel = spaces.get(0).getLevel();
+            UUID currentID = spaces.get(0).getTopTileComponent().getTile().getId();
+
+            ArrayList<TileComponent> tcAtLevel = new ArrayList<TileComponent>();
+
+            for (int i = 0; i < neighborsOfTwoSpace.size(); i++)
+            {
+                //don't worry about those tile components surrounding you that are at a lower level
+
+                if (neighborsOfTwoSpace.get(i).getLevel() == curLevel)
+                {
+                    tcAtLevel.add(neighborsOfTwoSpace.get(i).getTopTileComponent());
+                }
+                else if (neighborsOfTwoSpace.get(i).getLevel() > curLevel)
+                {
+                    Stack<TileComponent> tempStack = new Stack<TileComponent>();
+                    for (int j = neighborsOfTwoSpace.get(i).getLevel(); j > curLevel; j--)
+                    {
+                        tempStack.push(neighborsOfTwoSpace.get(i).getLand().peek());
+                        neighborsOfTwoSpace.get(i).removeTopTileComponent();
+                    }
+                    tcAtLevel.add(neighborsOfTwoSpace.get(i).getTopTileComponent());
+                    for (int k = 0; k < tempStack.size(); k++)
+                    {
+                        neighborsOfTwoSpace.get(i).addTileComponent(tempStack.peek());
+                        tempStack.pop();
+                    }
+                }
+            }
+
+            if (tcAtLevel.size() == 0)
+            {
+                //there is a tile component beneath you, but none surrounding it
+                //must be a one-space land tile
+                canPlace = false;
+                return canPlace;
+            }
+
+            //check all tileComponents at that level
+            for (int i = 0; i < tcAtLevel.size(); i++)
+            {
+                if (spaces.get(0).getTopTileComponent().getTile().getId() == tcAtLevel.get(i).getTile().getId())
+                {
+                    //a third tile component with the same UUID has been found
+                    //not a two-space land tile
+                    canPlace = true;
+                    return canPlace;
+                }
+            }
+        }
+        else
+        {
+            canPlace = true;
+        }
+
+        return canPlace;
+    }
+
+    public boolean checkDifferentThreeSpaceBeneath(List<Space> spaces)
+    {
+        boolean canPlace = true;
+
+        UUID idA = spaces.get(0).getTopTileComponent().getTile().getId();
+        UUID idB = spaces.get(1).getTopTileComponent().getTile().getId();
+        UUID idC = spaces.get(2).getTopTileComponent().getTile().getId();
+
+        if (idA == idB && idB == idC)
+        {
+            canPlace = false;
+        }
+
+        return canPlace;
     }
 
     public Space getSpaceFromID(int spaceID)

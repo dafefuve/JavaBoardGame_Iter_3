@@ -59,7 +59,7 @@ public class Space
 
     public Integer getLevel(){
         if(!land.empty())
-            return land.size();
+            return land.size() - 1;
         return 0;
     }
 
@@ -105,6 +105,11 @@ public class Space
     public int getId()
     {
         return this.id;
+    }
+
+    public Stack<TileComponent> getLand()
+    {
+        return this.land;
     }
 }
 
