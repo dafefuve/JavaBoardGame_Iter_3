@@ -41,6 +41,8 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
 
                 playerController.setItemCount("villageTile", remainingVillageCount - 1);
                 space.addTileComponent(villageToBePlaced);
+                String name = facade.getTurnController().getCurrentPlayer().getName();
+                facade.getViewController().setSingleVillageBlocks(remainingVillageCount - 1, name);
 
                 return true;
             }
