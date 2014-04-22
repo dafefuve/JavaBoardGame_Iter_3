@@ -94,7 +94,7 @@ public class GameSetupController {
         items.put("actionToken", 3);
         items.put("twoBlock", 5);
         items.put("riceTile", 3);
-        items.put("villageTile", 2);
+        items.put("villageTile", 100);
         items.put("actionPoints", 6);
         items.put("famePoints", 0);
 
