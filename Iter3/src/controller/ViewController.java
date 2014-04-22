@@ -114,4 +114,9 @@ public class ViewController {
         mainView.placeRiceTile();
     }
 
+    public void placeTwoBlock()
+    {
+        mainView.placeTwoBlock();
+    }
+
 }

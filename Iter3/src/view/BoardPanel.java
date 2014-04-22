@@ -35,6 +35,7 @@ public class BoardPanel extends JPanel
    private JScrollPane jsp;
    private JPanel panel;
    private boolean placing;
+   private boolean placingDouble;
    //private ViewHexVillage viewHexVillage;
 
    public BoardPanel()
@@ -957,6 +958,16 @@ public class BoardPanel extends JPanel
         this.repaint();
     }
 
+    public void placeDoubleTile()
+    {
+        beginDoublePlacement();
+        board.getStackAt(0, 0).pushIntoStack(new ViewHexVillage());
+        board.getStackAt(1, 0).pushIntoStack(new ViewHexRice());
+        this.repaint();
+    }
+
+    //Three block is village as pivot and two rice
+
     public void placeIrrigationTile()
     {
         board.getStackAt(0, 0).pushIntoStack(new ViewHexIrrigation());
@@ -967,6 +978,11 @@ public class BoardPanel extends JPanel
     public void beginPlacement()
     {
         placing = true;
+    }
+
+    public void beginDoublePlacement()
+    {
+        placingDouble = true;
     }
 
 
@@ -1338,6 +1354,35 @@ public class BoardPanel extends JPanel
     public int getCurrentRow()
     {
         return currentRow;
+    }
+
+    public void moveNorthDouble()
+    {
+        if(placingDouble)
+        {
+            int newRow;
+            int newCol;
+            ViewHex v;
+
+            newRow = currentRow - 1;
+            if(newRow < 0 )
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous space
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
+                //Select new space
+                currentRow = newRow;
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
+        }
     }
 
 
