@@ -44,6 +44,7 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
             {
                 gameController.setItem("irrigation", remainingIrrigationCount - 1);
                 space.addTileComponent(irrigationToBePlaced);
+                facade.getViewController().setIrrigationTiles(remainingIrrigationCount - 1);
                 commandCompletion = true;
             }
             else{

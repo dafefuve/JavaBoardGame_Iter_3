@@ -353,4 +353,9 @@ public class MainView extends JFrame
         ((PlayerView)playerPanel).changeTurn();
     }
 
+    public void setIrrigationTiles(int numIrrigation)
+    {
+        ((CommunalView)communalView).setIrrigationTiles(numIrrigation);
+    }
+
 }

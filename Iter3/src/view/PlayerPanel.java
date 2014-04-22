@@ -94,6 +94,6 @@ public class PlayerPanel extends JPanel
     public void setRiceBlocks(int numRiceBlocks)
     {
         this.numSingleRiceBlocks = numRiceBlocks;
-        singleVillageBlocks.setText("Single Rice Blocks: " + this.numSingleRiceBlocks);
+        singleRiceBlocks.setText("Single Rice Blocks: " + this.numSingleRiceBlocks);
     }
 }

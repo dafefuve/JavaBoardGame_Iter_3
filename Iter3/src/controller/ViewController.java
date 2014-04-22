@@ -160,10 +160,6 @@ public class ViewController {
         mainView.setThreeBlocks(numThreeBlocks);
     }
 
-    public void setIrrigationTiles(int numIrrigationTiles)
-    {
-        mainView.setIrrigationTiles(numIrrigationTiles)
-    }
 
     public void setLvl2PalaceTiles(int numLvl2PalaceTiles)
     {
@@ -181,4 +177,10 @@ public class ViewController {
     {
         mainView.changeTurn();
     }
+
+    public void setIrrigationTiles(int numIrrigationTiles)
+    {
+        mainView.setIrrigationTiles(numIrrigationTiles);
+    }
+
 }

@@ -110,4 +110,10 @@ public class CommunalView extends JPanel
 	{
 		threeSpaceTiles.setText("Three Space Tiles: " + numThreeSpaceTiles);
 	}
+
+    public void setIrrigationTiles(int numIrrigationTiles)
+    {
+        this.numIrrigationTiles = numIrrigationTiles;
+        irrigationTiles.setText("Irrigation Tiles: " + this.numIrrigationTiles);
+    }
 }

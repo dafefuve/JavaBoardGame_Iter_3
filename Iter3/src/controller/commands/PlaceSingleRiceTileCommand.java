@@ -42,6 +42,8 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
                 playerController.setItemCount("riceTile", remainingRiceCount - 1);
                 playerController.setItemCount("actionPoints", currentActionPoints -1 );
                 space.addTileComponent(riceToBePlaced);
+                String name = facade.getTurnController().getCurrentPlayer().getName();
+                facade.getViewController().setRiceBlocks(remainingRiceCount - 1, name);
                 commandCompletion = true;
             } else {
                 commandCompletion = false;
