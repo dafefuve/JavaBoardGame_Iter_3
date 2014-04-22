@@ -1173,6 +1173,7 @@ public class BoardPanel extends JPanel
 
     public void placeSingleVillageTile()
     {
+        placing = true;
         board.getStackAt(0, 0).pushIntoStack(new ViewHexVillage());
         this.repaint();
     }
@@ -1239,301 +1240,325 @@ public class BoardPanel extends JPanel
     }
     public void moveNorth()
     {
-        int newRow;
-        int newCol;
-        ViewHex v;
+        if(placing)
+        {
+            int newRow;
+            int newCol;
+            ViewHex v;
 
-        newRow = currentRow - 1;
-        if(newRow < 0 )
-        {
-            displayAlert("You cannot move out of bounds!", null);
+            newRow = currentRow - 1;
+            if(newRow < 0 )
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous space
+                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
+                //Select new space
+                currentRow = newRow;
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                adjustScroll();
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
         }
-        else
-        {
-            //Deselect previous space
-            v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-            board.getStackAt(currentRow, currentCol).popFromStack();
-            //Select new space
-            currentRow = newRow;
-            board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-            adjustScroll();
-            //Reflect changes made
-            this.repaint();
-        }
-        this.requestFocus();
+
     }
 
 
     public void moveNorthEast()
     {
-        int newRow;
-        int newCol;
-        ViewHex v;
-
-        if(currentCol % 2 == 0)
+        if(placing)
         {
-            newRow = currentRow - 1;
-            newCol = currentCol + 1;
+            int newRow;
+            int newCol;
+            ViewHex v;
 
-            if(newRow < 0 || newCol >= 19)
+            if(currentCol % 2 == 0)
             {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
+                newRow = currentRow - 1;
+                newCol = currentCol + 1;
+
+                if(newRow < 0 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
+
+                    //Update current col and row
+                    currentRow = newRow;
+                    currentCol = newCol;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
             }
             else
             {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                newRow = currentRow;
+                newCol = currentCol + 1;
 
-                //Update current col and row
-                currentRow = newRow;
-                currentCol = newCol;
+                if(newRow < 0 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
 
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Show changes
-                this.repaint();
+                    //Update current col since row didn't change
+                    currentCol = newCol;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
             }
+            this.requestFocus();
         }
-        else
-        {
-            newRow = currentRow;
-            newCol = currentCol + 1;
 
-            if(newRow < 0 || newCol >= 19)
-            {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
-            }
-            else
-            {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
-
-                //Update current col since row didn't change
-                currentCol = newCol;
-
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Display changes
-                this.repaint();
-            }
-        }
-        this.requestFocus();
     }
 
     public void moveSouthEast()
     {
-        int newRow;
-        int newCol;
-        ViewHex v;
-
-        if(currentCol % 2 == 0)
+        if(placing)
         {
-            newRow = currentRow;
-            newCol = currentCol + 1;
+            int newRow;
+            int newCol;
+            ViewHex v;
 
-            if(newCol >= 19)
+            if(currentCol % 2 == 0)
             {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
+                newRow = currentRow;
+                newCol = currentCol + 1;
+
+                if(newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
+                    currentCol = newCol;
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
             }
             else
             {
-                //Deselect previous space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
-                currentCol = newCol;
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Reflect changes made
-                this.repaint();
-            }
-        }
-        else
-        {
-            newRow = currentRow + 1;
-            newCol = currentCol + 1;
+                newRow = currentRow + 1;
+                newCol = currentCol + 1;
 
-            if(newRow >= 15 || newCol >= 19)
-            {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
-            }
-            else
-            {
-                //Deselect previous space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                if(newRow >= 15 || newCol >= 19)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect previous space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
 
-                currentCol = newCol;
-                currentRow = newRow;
+                    currentCol = newCol;
+                    currentRow = newRow;
 
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Reflect changes made
-                this.repaint();
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Reflect changes made
+                    this.repaint();
+                }
             }
+
+            this.requestFocus();
         }
 
-        this.requestFocus();
 
     }
 
     public void moveSouth()
     {
-        int newRow;
-        int newCol;
-
-        newRow = currentRow + 1;
-        if(newRow >= 15 )
+        if(placing)
         {
-            displayAlert("You cannot move out of bounds!", null);
-        }
-        else
-        {
-            //Deselect previous space
-            ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-            board.getStackAt(currentRow, currentCol).popFromStack();
-            //Select new space
-            currentRow = newRow;
+            int newRow;
+            int newCol;
 
-            board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-            adjustScroll();
-            //Reflect changes made
-            this.repaint();
+            newRow = currentRow + 1;
+            if(newRow >= 15 )
+            {
+                displayAlert("You cannot move out of bounds!", null);
+            }
+            else
+            {
+                //Deselect previous space
+                ViewHex v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                board.getStackAt(currentRow, currentCol).popFromStack();
+                //Select new space
+                currentRow = newRow;
+
+                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                adjustScroll();
+                //Reflect changes made
+                this.repaint();
+            }
+            this.requestFocus();
         }
-        this.requestFocus();
+
     }
 
     public void moveSouthWest()
     {
-        int newRow;
-        int newCol;
-        ViewHex v;
-
-        if(currentCol % 2 == 0)
+        if(placing)
         {
-            newRow = currentRow;
-            newCol = currentCol - 1;
+            int newRow;
+            int newCol;
+            ViewHex v;
 
-            if(newCol < 0 || newRow >= 15)
+            if(currentCol % 2 == 0)
             {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
+                newRow = currentRow;
+                newCol = currentCol - 1;
+
+                if(newCol < 0 || newRow >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
+
+                    //Update current col
+                    currentCol = newCol;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
             }
             else
             {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                newRow = currentRow + 1;
+                newCol = currentCol - 1;
 
-                //Update current col
-                currentCol = newCol;
+                if(newCol < 0 || newRow >= 15)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
 
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Show changes
-                this.repaint();
+                    //Update current row and col
+                    currentCol = newCol;
+                    currentRow = newRow;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
             }
+            this.requestFocus();
         }
-        else
-        {
-            newRow = currentRow + 1;
-            newCol = currentCol - 1;
 
-            if(newCol < 0 || newRow >= 15)
-            {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
-            }
-            else
-            {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
-
-                //Update current row and col
-                currentCol = newCol;
-                currentRow = newRow;
-
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Display changes
-                this.repaint();
-            }
-        }
-        this.requestFocus();
     }
 
     public void moveNorthWest()
     {
-        int newRow;
-        int newCol;
-        ViewHex v;
-
-        if(currentCol % 2 == 0)
+        if(placing)
         {
-            newRow = currentRow - 1;
-            newCol = currentCol - 1;
+            int newRow;
+            int newCol;
+            ViewHex v;
 
-            if(newRow < 0 || newCol < 0)
+            if(currentCol % 2 == 0)
             {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
+                newRow = currentRow - 1;
+                newCol = currentCol - 1;
+
+                if(newRow < 0 || newCol < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
+
+                    //Update current col and row
+                    currentRow = newRow;
+                    currentCol = newCol;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Show changes
+                    this.repaint();
+                }
             }
             else
             {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
+                newRow = currentRow;
+                newCol = currentCol - 1;
 
-                //Update current col and row
-                currentRow = newRow;
-                currentCol = newCol;
+                if(newRow < 0 || newCol < 0)
+                {
+                    displayAlert("You cannot move out of bounds!", null);
+                    return;
+                }
+                else
+                {
+                    //Deselect current space
+                    v = board.getStackAt(currentRow, currentCol).peekIntoStack();
+                    board.getStackAt(currentRow, currentCol).popFromStack();
 
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Show changes
-                this.repaint();
+                    //Update current col since row didn't change
+                    currentCol = newCol;
+
+                    //Select new space
+                    board.getStackAt(currentRow, currentCol).pushIntoStack(v);
+                    adjustScroll();
+                    //Display changes
+                    this.repaint();
+                }
             }
+            this.requestFocus();
         }
-        else
-        {
-            newRow = currentRow;
-            newCol = currentCol - 1;
 
-            if(newRow < 0 || newCol < 0)
-            {
-                displayAlert("You cannot move out of bounds!", null);
-                return;
-            }
-            else
-            {
-                //Deselect current space
-                v = board.getStackAt(currentRow, currentCol).peekIntoStack();
-                board.getStackAt(currentRow, currentCol).popFromStack();
-
-                //Update current col since row didn't change
-                currentCol = newCol;
-
-                //Select new space
-                board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
-                //Display changes
-                this.repaint();
-            }
-        }
-        this.requestFocus();
 
     }
 
