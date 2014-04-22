@@ -87,6 +87,7 @@ class activeState implements gameState {
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new PlaceTwoBlockAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0), new PlaceIrrigationTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlanningModeAction(stateManager, theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
 
@@ -184,17 +185,32 @@ class planningState implements gameState {
     @Override
     public void bindKeys()
     {
-        HashMap<KeyStroke, Action> planningActions = new HashMap<KeyStroke, Action>();
-        //TODO GET THIS WORKING!
-        //Movement
-        /*
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthPlanningAction(gameFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastPlanningAction(gameFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastPlanningAction(gameFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthPlanningAction(gameFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestPlanningAction(gameFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestPlanningAction(gameFacade));
+        HashMap<KeyStroke, AbstractAction> planningActions = new HashMap<KeyStroke, AbstractAction>();
 
+        //Stores all the actions and their associated keys for planningMode, then calls Facade and passes this map
+        //Let me know if I've missed any actions!!
+        //Movement
+
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), new MoveNorthAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_9, 0), new MoveNorthEastAction(theFacade));
+
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, 0), new MoveSouthEastAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0), new MoveSouthAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new MoveSouthWestAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, 0), new MoveNorthWestAction(theFacade));
+
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, 0), new PlaceVillageTileAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceRiceTileAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new PlaceTwoBlockAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0), new PlaceIrrigationTileAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), new UndoAction(theFacade));
+        //Needs statemanager to change state back to active
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0), new CommitPlanningAction(stateManager, theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, 0), new ExitPlanningAction(stateManager, theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
+        /*
         //Developer
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), new SwitchDeveloperPlanningAction(gameFacade));
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new MoveDeveloperPlanningAction(gameFacade));
@@ -208,9 +224,9 @@ class planningState implements gameState {
         //Etc
         //ChangeTurnPlanningAction will prompt user to end the planning mode (i.e., save or discard changes)
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnPlanningAction(gameFacade));
-
+*/
         theFacade.bindPlanningKeys(planningActions);
-        */
+
 
     }
 }

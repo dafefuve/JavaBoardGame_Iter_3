@@ -116,4 +116,9 @@ public class CommunalView extends JPanel
         this.numIrrigationTiles = numIrrigationTiles;
         irrigationTiles.setText("Irrigation Tiles: " + this.numIrrigationTiles);
     }
+
+    public void setPlanningMode()
+    {
+        modeLabel.setText("Current mode: Planning");
+    }
 }

@@ -2,6 +2,7 @@ package controller.commands;
 
 import controller.BoardController;
 import controller.Command;
+import controller.Facade;
 import controller.GameController;
 /*
 *created by Will
