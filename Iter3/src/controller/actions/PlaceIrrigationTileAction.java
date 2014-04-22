@@ -4,12 +4,13 @@ import controller.Command;
 import controller.Facade;
 import controller.commands.MovableCommands;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
  * Created by Horacio on 4/18/14.
  */
-public class PlaceIrrigationTileAction {
+public class PlaceIrrigationTileAction extends AbstractAction{
     private Facade facade;
 
     public PlaceIrrigationTileAction(Facade facade)
@@ -20,7 +21,7 @@ public class PlaceIrrigationTileAction {
     public void actionPerformed(ActionEvent e)
     {
         if(facade.getTempCommand().getTempCommand()==null){
-            //facade.getViewController().placeIrrigationTile();
+            facade.getViewController().placeIrrigationTile();
             MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
             facade.getTempCommand().setTempCommand(c);
         }
