@@ -31,7 +31,7 @@ public class Facade {
         commandStackController = new CommandStackController();
         festivalController = new FestivalController();
         gameController = new GameController();
-        planningController = new PlanningController();
+        planningController = new PlanningController(this);
         playerController = new PlayerController(this);
         replayController = new ReplayController();
         viewController = new ViewController();

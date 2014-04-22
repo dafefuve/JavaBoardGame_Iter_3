@@ -88,7 +88,7 @@ class activeState implements gameState {
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0), new PlaceIrrigationTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0), new ChangeTurnAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), new PlanningModeAction(stateManager, theFacade));
-        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteActionActive(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
 
 
@@ -208,7 +208,7 @@ class planningState implements gameState {
         //Needs statemanager to change state back to active
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0), new CommitPlanningAction(stateManager, theFacade));
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, 0), new ExitPlanningAction(stateManager, theFacade));
-        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
+        planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteActionPlanning(theFacade));
         planningActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
         /*
         //Developer

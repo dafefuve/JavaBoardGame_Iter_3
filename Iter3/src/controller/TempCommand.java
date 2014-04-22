@@ -18,18 +18,18 @@ public class TempCommand {
         tempCommand = c;
     }
     //Todo
-    public void execute(){
+    public boolean execute(){
 
 
             if(tempCommand.execute()) {
                 //notify the view if the execution failed
-                facade.getCommandStackController().push(tempCommand);
                 tempCommand = null;
                 facade.getViewController().endPlacement(false);
-
+                return true;
             }
             else{
                 facade.getViewController().endPlacement(true);
+                return false;
             }
     }
 

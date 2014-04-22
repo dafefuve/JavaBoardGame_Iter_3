@@ -36,7 +36,6 @@ public class PlanningController {
         //sends the commands to the commandStack after they are executed
         for (int i=1; i < temp.size(); i++){
             Command c = temp.get(temp.size() - i);
-            c.execute();
             facade.getCommandStackController().push(c);
         }
     }
