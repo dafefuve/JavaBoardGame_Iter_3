@@ -85,6 +85,7 @@ class activeState implements gameState {
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, 0), new PlaceVillageTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), new PlaceRiceTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), new PlaceTwoBlockAction(theFacade));
+        activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, 0), new PlaceIrrigationTileAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), new ExecuteAction(theFacade));
         activeActions.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new ExitBlockPlacementAction(theFacade));
 

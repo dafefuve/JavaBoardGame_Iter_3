@@ -33,7 +33,7 @@ public class PlayerPanel extends JPanel
 	public PlayerPanel(String s)
 	{
 		//Initialize the "model"
-		numSingleVillageBlocks = 3;
+		numSingleVillageBlocks = 2;
 		numSingleRiceBlocks = 3;
 		numTwoBlocks = 5;
 		numActionTokens = 3;
@@ -88,7 +88,7 @@ public class PlayerPanel extends JPanel
     public void setNumVillageBlocks(int numVillageBlocks)
     {
         this.numSingleVillageBlocks = numVillageBlocks;
-        singleVillageBlocks.setText("Single Village Blocks: " + this.numSingleVillageBlocks);
+        singleVillageBlocks.setText("Single Village Blocks: " + numVillageBlocks);
     }
 
     public void setRiceBlocks(int numRiceBlocks)

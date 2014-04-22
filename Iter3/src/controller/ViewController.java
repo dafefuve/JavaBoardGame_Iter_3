@@ -175,4 +175,9 @@ public class ViewController {
     }
 
     */
+
+    public void placeIrrigationTile()
+    {
+        mainView.placeIrrigationTile();
+    }
 }

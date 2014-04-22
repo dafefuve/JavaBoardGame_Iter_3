@@ -978,6 +978,7 @@ public class BoardPanel extends JPanel
 
     public void placeIrrigationTile()
     {
+        placing = true;
         board.getStackAt(0, 0).pushIntoStack(new ViewHexIrrigation());
         this.repaint();
     }
@@ -1536,6 +1537,8 @@ public class BoardPanel extends JPanel
             this.requestFocus();
         }
     }
+
+
 
 
 }

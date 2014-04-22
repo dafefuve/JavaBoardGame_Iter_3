@@ -26,7 +26,7 @@ public class PlayerView extends JPanel
 		for(int i = 0; i < players.length; i++)
 		{
 			JPanel currentPanel = new PlayerPanel("Player " + (i + 1));
-            hashMap.put("Player" + i, (PlayerPanel)currentPanel);
+            hashMap.put("Player" + (i+1), (PlayerPanel)currentPanel);
 			players[i] = currentPanel;
 			this.add(currentPanel);
 		}
