@@ -2,7 +2,7 @@ package view;
 
 import java.awt.Polygon;
 
-
+//TODO DELETE THIS CLASS
 public class BoardHex
 {
 	private static int ID = 0;

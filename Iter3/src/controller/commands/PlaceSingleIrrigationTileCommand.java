@@ -34,9 +34,6 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
             System.out.println("You're not placing on the board! Broke the rules!");
             //Here we will check if the target location is directly on the board, i.e the target space has no other tiles on it
         }
-        else if(true){
-            //It is illegal to place the tiles directly on the borders of the board, and here we check that
-        }
         else {
             gameController.getInventory().setItemCount("irrigationTile", count - 1);
             Space s = boardController.getSpaceFromID(location);
