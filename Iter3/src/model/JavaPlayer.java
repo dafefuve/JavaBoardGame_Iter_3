@@ -61,8 +61,8 @@ public class JavaPlayer extends Player{
     }
 
     public void addFamePoints(int amount){
-        int oldAmount = getItemCount("famePoint");
+        int oldAmount = getItemCount("famePoints");
         int total = oldAmount + amount;
-        setItemCount("famePoint",total);
+        setItemCount("famePoints",total);
     }
 }
