@@ -13,14 +13,10 @@ public class TileComponent {
     }
 
     public boolean sameTile(TileComponent other){
-        if(tile.equals(other.getTile()))
-            return true;
-        return false;
+       return tile.equals(other.getTile());
     }
     public boolean sameType(TileComponent other){
-        if(landType.equals(other.getLandType()))
-            return true;
-        return false;
+        return landType.equals(other.getLandType());
     }
     public Tile getTile() {
         return tile;
