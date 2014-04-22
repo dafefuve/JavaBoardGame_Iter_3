@@ -36,11 +36,10 @@ public class CommandController {
         //return null;
     }
 
-    public PlaceSingleIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){
+    public PlaceSingleIrrigationTileCommand placeIrrigationTileCommand(Facade facade){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceSingleIrrigationTileCommand command = new PlaceSingleIrrigationTileCommand(boardController);
-        //return command;
-        return null;
+        PlaceSingleIrrigationTileCommand command = new PlaceSingleIrrigationTileCommand(facade);
+        return command;
     }
 
     public PlaceSingleRiceTileCommand placeRiceTileCommand(Facade facade){

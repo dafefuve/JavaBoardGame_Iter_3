@@ -68,7 +68,7 @@ public class FestivalController {
 	}
 	public void scorePlayers(ArrayList<JavaPlayer> winners){
 		for(JavaPlayer p: list)
-			p.setItem("famePoints",p.getItem("famePoints")+level)
+			p.setItem("famePoints",p.getItemCount("famePoints")+level)
 	}
 	*/
 }
