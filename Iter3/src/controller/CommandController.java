@@ -47,11 +47,11 @@ public class CommandController {
         return command;
     }
 
-    public PlaceDeveloperCommand placeDeveloperCommand(BoardController boardController){
+    public PlaceDeveloperCommand placeDeveloperCommand(Facade facade){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceDeveloperCommand command = new PlaceDeveloperCommand(boardController);
-        //return command;
-        return null;
+        PlaceDeveloperCommand command = new PlaceDeveloperCommand(facade);
+        return command;
+       // return null;
     }
 
     public PlaceSinglePalaceTileCommand placePalaceTileCommand(BoardController boardController){

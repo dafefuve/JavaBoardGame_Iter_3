@@ -139,6 +139,7 @@ public class HexBoard
                 edgesForSpace.add(this.edges.get(i));
                 numEdgesFound++;
             }
+            i++;
         }
 
         return edgesForSpace;
