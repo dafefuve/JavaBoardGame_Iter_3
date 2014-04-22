@@ -29,9 +29,9 @@ public class CommandController {
         return null;
     }
 
-    public PlaceVillageTileCommand placeVillageTileCommand(Facade facade){
+    public PlaceSingleVillageTileCommand placeVillageTileCommand(Facade facade){
         //TODO this needs to be done, constructor needs the proper call
-        PlaceVillageTileCommand command = new PlaceVillageTileCommand(facade);
+        PlaceSingleVillageTileCommand command = new PlaceSingleVillageTileCommand(facade);
         return command;
         //return null;
     }
