@@ -11,8 +11,7 @@ public class GameController {
     private Game game;
 
     public GameController(){
-        //todo find the reference to Game
-        //this.game = game;
+
     }
 
     public List<JavaPlayer> getPlayers(){
@@ -41,6 +40,10 @@ public class GameController {
 
     public void setGame(Game game){
         this.game = game;
+    }
+
+    public void setPlayers(List<JavaPlayer> players){
+        game.setPlayers(players);
     }
 
     //Todo

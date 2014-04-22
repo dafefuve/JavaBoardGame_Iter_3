@@ -26,7 +26,7 @@ public class GameSetupController {
 
         //setting up the inventory for each player
         for (int i= 0; i < numPlayers; i++ ){
-            String name = "something"+(i+1);
+            String name = "Player"+(i+1);
             players.add(new JavaPlayer(name , createPlayerResources(gameInventory)));
         }
 
@@ -95,6 +95,7 @@ public class GameSetupController {
         items.put("twoBlock", 5);
         items.put("riceTile", 3);
         items.put("villageTile", 2);
+        items.put("actionPoints", 6);
         items.put("famePoints", 0);
 
         for(int i=0; i<3; i++){

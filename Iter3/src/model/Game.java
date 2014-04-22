@@ -29,6 +29,10 @@ public class Game {
         return players;
     }
 
+    public void setPlayers(List<JavaPlayer> players){
+        this.players = players;
+    }
+
     public GameInventory getInventory(){
         return inventory;
     }
