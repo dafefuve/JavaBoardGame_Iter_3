@@ -21,6 +21,7 @@ public class ExitPlanningAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         //Go back to active mode
+        facade.getPlanningController().exitPlanning();
         gameStateManager.setState(gameStateManager.getActiveState());
     }
 }

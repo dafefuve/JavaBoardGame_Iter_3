@@ -21,6 +21,7 @@ public class CommitPlanningAction extends AbstractAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        facade.getPlanningController().commitPlanning();
+        gameStateManager.setState(gameStateManager.getActiveState());
     }
 }
