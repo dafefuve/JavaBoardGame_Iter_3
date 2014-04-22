@@ -126,4 +126,35 @@ public class ViewController {
         mainView.placeTwoBlock();
     }
 
+    /*
+    public void setTwoBlocks(int numTwoBlocks, String playerName)
+    {
+        mainView.setTwoBlocks(numTwoBlocks, playerName);
+    }
+    public void setSingleVillageBlocks(numVillageBlocks, playerName)
+    {
+        mainView.setSingleVillageBlocks(numVillageBlocks, playerName);
+    }
+
+
+    public void setRiceBlocks(int numRiceBlocks, String playerName)
+    {
+        mainView.setRiceBlocks(numRiceBlocks, playerName);
+    }
+
+    public void setActionTokens(int numActionTokens, String playerName)
+    {
+        mainView.setActionTokens(numActionTokens, playerName);
+    }
+
+    public void setDevelopers(int numDevelopers, String playerName)
+    {
+        mainView.setDevelopers(numActionTokens, playerName);
+    }
+
+    public void setScore(int numDevelopers, String playerName)
+    {
+        mainView.setScore(
+    }
+    */
 }

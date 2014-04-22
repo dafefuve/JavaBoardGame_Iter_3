@@ -1025,6 +1025,7 @@ public class BoardPanel extends JPanel
 
     public void exitPlacement(){
         board.getStackAt(currentRow, currentCol).popFromStack();
+        endPlacement(false);
         this.repaint();
     }
     public void moveNorth()

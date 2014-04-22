@@ -221,6 +221,10 @@ public class MainView extends JFrame
         k = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "end placement");
         boardPanel.getActionMap().put("end placement",keyBindings.get(k));
+
+        k = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        boardPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(k, "escape placement");
+        boardPanel.getActionMap().put("escape placement",keyBindings.get(k));
     }
 
     public void registerPlanningKeyBindings(HashMap<KeyStroke, AbstractAction> keyBindings)
@@ -314,6 +318,11 @@ public class MainView extends JFrame
     public void placeTwoBlock()
     {
         boardPanel.placeDoubleTile();
+    }
+
+    public void setTwoBlocks(int numTwoBlocks)
+    {
+
     }
 
 }
