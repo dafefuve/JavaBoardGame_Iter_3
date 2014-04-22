@@ -1,7 +1,8 @@
 package controller.commands;
 
 import controller.BoardController;
-import controller.GameController;
+import controller.Facade;
+import controller.PlayerController;
 import model.LandType;
 import model.Space;
 import model.Tile;
@@ -12,45 +13,47 @@ import model.TileComponent;
  */
 public class PlaceSingleRiceTileCommand extends MovableCommands {
     private BoardController boardController;
-    private GameController gameController;
+    private PlayerController playerController;
+    private Facade facade;
     //private Space s;
     private int location;
-    public PlaceSingleRiceTileCommand(BoardController boardController, GameController gameController){
-        this.boardController=boardController;
-        this.gameController=gameController;
+    public PlaceSingleRiceTileCommand(Facade gameFacade){
+        boardController = gameFacade.getBoardController();
+        playerController = gameFacade.getPlayerController();
+        commandCompletion = false;
+        facade = gameFacade;
+        facade.getPlayerController().setCurrentPlayer(facade.getGameController().getPlayers().get(0));
+    }
+    public void setLocation(int newLocation){
+        this.location = newLocation;
     }
 
+
     public boolean execute(){
-    //TODO a method that finds the space that the cursor is currently hovering over
-    //TODO add a method in BoardController that places a singular tile onto a space on the board 
-    //TODO I assume there is a method in gameController that accesses the communal inventory
-        int remainingVillageCount = gameController.getInventory().getItemCount("riceTile");
-        if(remainingVillageCount<1){
-            System.out.println("No rice tiles left! Broke the rules!");
-            //then do thingie to notify player that they broke the rules
+
+        int remainingRiceCount = playerController.getInventory().getItemCount("riceTile");
+        Space space = boardController.getSpaceFromID(location);
+        TileComponent topTileComponentOfSpace = space.getTopTileComponent();
+        TileComponent riceToBePlaced = new TileComponent(new LandType("rice"), new Tile());
+        if(remainingRiceCount > 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation")){
+            playerController.setItemCount("riceTile", remainingRiceCount - 1);
+            space.addTileComponent(riceToBePlaced);
+            commandCompletion = true;
         }
         else {
-        //TODO I assume boardController has a sort of placeTile() method
-            gameController.getInventory().setItemCount("riceTile", remainingVillageCount - 1);
-            Space s = boardController.getSpaceFromID(location);
-            TileComponent tc = new TileComponent(new LandType("rice"), new Tile());
-            s.addTileComponent(tc);
-            return true;
+            commandCompletion = false;
         }
-        return false;
+        return commandCompletion;
     }
     public void undo(){
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
         //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
-        gameController.getInventory().setItemCount("riceTile", gameController.getInventory().getItemCount("riceTile") + 1);
+        playerController.getInventory().setItemCount("riceTile", playerController.getInventory().getItemCount("riceTile") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
 
     public String toString(){
         return null;
-    }
-    public void setLocation(int newLocation){
-        this.location = newLocation;
     }
     public int getLocation(int l){
         return location;
