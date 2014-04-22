@@ -3,6 +3,7 @@ package controller.commands;
 import controller.BoardController;
 import controller.Facade;
 import controller.GameController;
+import controller.PlayerController;
 import model.LandType;
 import model.Space;
 import model.Tile;
@@ -13,16 +14,18 @@ import model.TileComponent;
  */
 public class PlaceSingleIrrigationTileCommand extends MovableCommands {
     private BoardController boardController;
-
+    private PlayerController playerController;
     private GameController gameController;
     private Space space;
     private int location;
     private Facade facade;
     public PlaceSingleIrrigationTileCommand(Facade gameFacade){
         boardController = gameFacade.getBoardController();
+        playerController = gameFacade.getPlayerController();
         gameController = gameFacade.getGameController();
         facade = gameFacade;
         commandCompletion = false;
+        playerController.setCurrentPlayer();
     }
     public void setLocation(int newLocation){
        location = newLocation;
@@ -34,7 +37,7 @@ public class PlaceSingleIrrigationTileCommand extends MovableCommands {
         space = boardController.getSpaceFromID(location);
         TileComponent topTileComponentOfSpace = space.getTopTileComponent();
         TileComponent irrigationToBePlaced = new TileComponent( new LandType("irrigation"), new Tile());
-        int currentActionPoints = gameController.getItemCount("actionPoints");
+        int currentActionPoints = playerController.getItemCount("actionPoints");
 
         if(currentActionPoints > 0) {
             if (remainingIrrigationCount >= 0 && topTileComponentOfSpace.getLandType().equals("central"))
