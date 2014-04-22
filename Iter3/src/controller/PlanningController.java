@@ -44,6 +44,7 @@ public class PlanningController {
     public void exitPlanning(){
         for(int i = 0; i < planningStack.size(); i++){
             planningStack.pop().undo();
+
         }
     }
 }
