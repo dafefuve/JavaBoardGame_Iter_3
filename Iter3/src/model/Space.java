@@ -26,8 +26,8 @@ public class Space
         land = new Stack<TileComponent>();
         hasDeveloper = false;
 
-        row = 0;
-        column = 0;
+        row = -1;
+        column = 1;
         id = row*19 + column;   //assuming that there are 19 columns
     }
 
