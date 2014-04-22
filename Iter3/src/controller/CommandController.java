@@ -15,16 +15,16 @@ public class CommandController {
         return null;
     }
 
-    public PlaceTwoBlockCommand placeTwoBlockCommand(BoardController boardController){
+    public PlaceTwoTileCommand placeTwoBlockCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceTwoBlockCommand command = new PlaceTwoBlockCommand(boardController);
+        //PlaceTwoTileCommand command = new PlaceTwoTileCommand(boardController);
         //return command;
         return null;
     }
 
-    public PlaceThreeBlockCommand placeThreeBlockCommand(BoardController boardController){
+    public PlaceThreeTileCommand placeThreeBlockCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceThreeBlockCommand command = new PlaceThreeBlockCommand(boardController);
+        //PlaceThreeTileCommand command = new PlaceThreeTileCommand(boardController);
         //return command;
         return null;
     }
@@ -36,16 +36,16 @@ public class CommandController {
         //return null;
     }
 
-    public PlaceIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){
+    public PlaceSingleIrrigationTileCommand placeIrrigationTileCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceIrrigationTileCommand command = new PlaceIrrigationTileCommand(boardController);
+        //PlaceSingleIrrigationTileCommand command = new PlaceSingleIrrigationTileCommand(boardController);
         //return command;
         return null;
     }
 
-    public PlaceRiceTileCommand placeRiceTileCommand(BoardController boardController){
+    public PlaceSingleRiceTileCommand placeRiceTileCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlaceRiceTileCommand command = new PlaceRiceTileCommand(boardController);
+        //PlaceSingleRiceTileCommand command = new PlaceSingleRiceTileCommand(boardController);
         //return command;
         return null;
     }
@@ -57,9 +57,9 @@ public class CommandController {
         return null;
     }
 
-    public PlacePalaceTileCommand placePalaceTileCommand(BoardController boardController){
+    public PlaceSinglePalaceTileCommand placePalaceTileCommand(BoardController boardController){
         //TODO this needs to be done, constructor needs the proper call
-        //PlacePalaceTileCommand command = new PlacePalaceTileCommand(boardController);
+        //PlaceSinglePalaceTileCommand command = new PlaceSinglePalaceTileCommand(boardController);
         //return command;
         return null;
     }

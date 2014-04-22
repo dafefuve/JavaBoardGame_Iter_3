@@ -1,9 +1,8 @@
 package controller.commands;
 
 import controller.BoardController;
-import controller.Command;
 import controller.GameController;
-
+//TODO might want wo delete this class
 /*
  * Created by Will
  */
