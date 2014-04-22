@@ -62,8 +62,8 @@ public class MainView extends JFrame
 
 
         boardPanel = new BoardPanel();
-        //jsp = new JScrollPane(boardPanel);
-        mainPanel.add(boardPanel);
+        jsp = new JScrollPane(boardPanel);
+        mainPanel.add(jsp);
 
         JPanel bottomPane = new JPanel();
         bottomPane.setLayout(new BoxLayout(bottomPane, BoxLayout.Y_AXIS));
@@ -244,31 +244,37 @@ public class MainView extends JFrame
     public void moveNorth()
     {
         boardPanel.moveNorth();
+        adjustScroll();
     }
 
     public void moveNorthEast()
     {
         boardPanel.moveNorthEast();
+        adjustScroll();
     }
 
     public void moveSouthEast()
     {
         boardPanel.moveSouthEast();
+        adjustScroll();
     }
 
     public void moveSouth()
     {
         boardPanel.moveSouth();
+        adjustScroll();
     }
 
     public void moveSouthWest()
     {
         boardPanel.moveSouthWest();
+        adjustScroll();
     }
 
     public void moveNorthWest()
     {
         boardPanel.moveNorthWest();
+        adjustScroll();
     }
 
     public void endPlacement(boolean invalidPlacement)
@@ -283,6 +289,22 @@ public class MainView extends JFrame
     public void placeRiceTile()
     {
         boardPanel.placeSingleRiceTile();
+    }
+
+    public void adjustScroll()
+    {
+        //Scroll the panel based on what row we are on
+        if(boardPanel.getCurrentRow() > 9)
+        {
+            JScrollBar verticalBar = jsp.getVerticalScrollBar();
+            verticalBar.setValue(verticalBar.getMaximum ());
+        }
+        else
+        {
+            JScrollBar verticalBar = jsp.getVerticalScrollBar();
+            verticalBar.setValue(0);
+        }
+
     }
 
 }

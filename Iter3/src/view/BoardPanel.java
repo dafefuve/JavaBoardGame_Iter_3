@@ -62,7 +62,7 @@ public class BoardPanel extends JPanel
            }
        }
 
-       jsp = new JScrollPane(this);
+       //jsp = new JScrollPane(this);
 
    }
 
@@ -160,7 +160,7 @@ public class BoardPanel extends JPanel
                 //Select new space
                 currentRow = newRow;
                 board.setSelectedAt(currentRow, currentCol);
-                adjustScroll();
+
                 //Reflect changes made
                 this.repaint();
             }
@@ -191,7 +191,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -216,7 +216,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -244,7 +244,7 @@ public class BoardPanel extends JPanel
                     currentCol = newCol;
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Reflect changes made
                     this.repaint();
                 }
@@ -269,7 +269,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Reflect changes made
                     this.repaint();
                 }
@@ -293,7 +293,7 @@ public class BoardPanel extends JPanel
                 currentRow = newRow;
 
                 board.setSelectedAt(currentRow, currentCol);
-                adjustScroll();
+
                 //Reflect changes made
                 this.repaint();
             }
@@ -321,7 +321,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -347,7 +347,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -377,7 +377,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -402,7 +402,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.setSelectedAt(currentRow, currentCol);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -925,7 +925,7 @@ public class BoardPanel extends JPanel
                 JOptionPane.WARNING_MESSAGE);
     }
 
-    public void adjustScroll()
+   /* public void adjustScroll()
     {
         //Scroll the panel based on what row we are on
         if(currentRow > 9)
@@ -940,114 +940,8 @@ public class BoardPanel extends JPanel
         }
 
     }
-/*
-    public void drawLevel(Graphics2D g, BoardHex hex)
-    {
-        g.setFont(new Font("Helvetica", Font.BOLD, 16));
-        g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(hex.getLevel()), hex.getCenterX(), hex.getCenterY());
-    }
-
-    public void setUpMainLand()
-    {
-        //Set highland tiles
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 19; j++) {
-                theBoard[i][j].getBoardHex().setMountain();
-            }
-        }
-
-        //Set lowland tiles
-        for (int i = 8; i < 15; i++) {
-            for (int j = 0; j < 19; j++) {
-                theBoard[i][j].getBoardHex().setLowlands();
-            }
-        }
-
-        //Hardcode awkward board shape
-        theBoard[1][4].getBoardHex().resetMountain();
-        theBoard[1][7].getBoardHex().resetMountain();
-        theBoard[1][10].getBoardHex().resetMountain();
-        theBoard[1][13].getBoardHex().resetMountain();
-        theBoard[2][4].getBoardHex().resetMountain();
-        theBoard[2][5].getBoardHex().resetMountain();
-        theBoard[2][7].getBoardHex().resetMountain();
-        theBoard[2][8].getBoardHex().resetMountain();
-        theBoard[2][10].getBoardHex().resetMountain();
-        theBoard[2][11].getBoardHex().resetMountain();
-        theBoard[2][13].getBoardHex().resetMountain();
-        theBoard[2][14].getBoardHex().resetMountain();
-
-
-        //Set mainland tiles
-        for (int i = 3; i < 4; i++) {
-            for (int j = 3; j < 17; j++) {
-                theBoard[i][j].getBoardHex().resetMountain();
-            }
-        }
-
-        for (int i = 4; i < 5; i++) {
-            for (int j = 1; j < 18; j++) {
-                theBoard[i][j].getBoardHex().resetMountain();
-            }
-        }
-
-        for (int i = 5; i < 6; i++) {
-            for (int j = 2; j < 18; j++) {
-                theBoard[i][j].getBoardHex().resetMountain();
-            }
-        }
-
-        for (int i = 6; i < 7; i++) {
-            for (int j = 1; j < 18; j++) {
-                theBoard[i][j].getBoardHex().resetMountain();
-            }
-        }
-
-        for (int i = 7; i < 8; i++) {
-            for (int j = 2; j < 18; j++) {
-                theBoard[i][j].getBoardHex().resetMountain();
-            }
-        }
-
-        for (int i = 8; i < 9; i++) {
-            for (int j = 3; j < 16; j++) {
-                theBoard[i][j].getBoardHex().resetLowlands();
-            }
-        }
-
-        for (int i = 9; i < 10; i++) {
-            for (int j = 3; j < 17; j++) {
-                theBoard[i][j].getBoardHex().resetLowlands();
-            }
-        }
-
-        for (int i = 10; i < 11; i++) {
-            for (int j = 3; j < 16; j++) {
-                theBoard[i][j].getBoardHex().resetLowlands();
-            }
-        }
-
-        for (int i = 11; i < 12; i++) {
-            for (int j = 4; j < 14; j++) {
-                theBoard[i][j].getBoardHex().resetLowlands();
-            }
-        }
-
-        theBoard[12][5].getBoardHex().resetLowlands();
-        theBoard[12][6].getBoardHex().resetLowlands();
-        theBoard[12][7].getBoardHex().resetLowlands();
-        theBoard[12][9].getBoardHex().resetLowlands();
-        theBoard[12][11].getBoardHex().resetLowlands();
-        theBoard[12][12].getBoardHex().resetLowlands();
-        theBoard[12][13].getBoardHex().resetLowlands();
-        theBoard[13][5].getBoardHex().resetLowlands();
-        theBoard[12][6].getBoardHex().resetLowlands();
-        theBoard[13][11].getBoardHex().resetLowlands();
-        theBoard[13][12].getBoardHex().resetLowlands();
-
-    }
     */
+
 
     public void placeSingleVillageTile()
     {
@@ -1138,7 +1032,7 @@ public class BoardPanel extends JPanel
                 //Select new space
                 currentRow = newRow;
                 board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
+
                 //Reflect changes made
                 this.repaint();
             }
@@ -1178,7 +1072,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -1204,7 +1098,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -1240,7 +1134,7 @@ public class BoardPanel extends JPanel
                     currentCol = newCol;
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Reflect changes made
                     this.repaint();
                 }
@@ -1266,7 +1160,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Reflect changes made
                     this.repaint();
                 }
@@ -1299,7 +1193,7 @@ public class BoardPanel extends JPanel
                 currentRow = newRow;
 
                 board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                adjustScroll();
+
                 //Reflect changes made
                 this.repaint();
             }
@@ -1337,7 +1231,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -1364,7 +1258,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -1404,7 +1298,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Show changes
                     this.repaint();
                 }
@@ -1430,7 +1324,7 @@ public class BoardPanel extends JPanel
 
                     //Select new space
                     board.getStackAt(currentRow, currentCol).pushIntoStack(v);
-                    adjustScroll();
+
                     //Display changes
                     this.repaint();
                 }
@@ -1439,6 +1333,11 @@ public class BoardPanel extends JPanel
         }
 
 
+    }
+
+    public int getCurrentRow()
+    {
+        return currentRow;
     }
 
 
