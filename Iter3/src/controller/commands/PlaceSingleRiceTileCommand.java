@@ -58,6 +58,7 @@ public class PlaceSingleRiceTileCommand extends MovableCommands {
         //TODO implement a method in BoardController that removes a developer/block/tile from a selected space
         //The aforementioned method could be a general method that "purges" the space and completely removes any piece/top tile on it, or a method that removes a piece on the board
         playerController.getInventory().setItemCount("riceTile", playerController.getInventory().getItemCount("riceTile") + 1);
+        playerController.getInventory().setItemCount("actionPoints", playerController.getInventory().getItemCount("actionPoints") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
 

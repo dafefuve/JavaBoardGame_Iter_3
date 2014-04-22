@@ -57,6 +57,7 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
     }
     public void undo(){
         playerController.setItemCount("villageTile", playerController.getItemCount("villageTile") + 1);
+        playerController.getInventory().setItemCount("actionPoints", playerController.getInventory().getItemCount("actionPoints") + 1);
         boardController.getSpaceFromID(location).removeTopTileComponent();
     }
 
