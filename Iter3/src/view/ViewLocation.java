@@ -16,8 +16,8 @@ public class ViewLocation
 
     public ViewLocation(int newRow, int newCol)
     {
-        viewRow = 14;
-        viewCol = 18;
+        viewRow = newRow;
+        viewCol = newCol;
     }
 
     public int getViewRow()

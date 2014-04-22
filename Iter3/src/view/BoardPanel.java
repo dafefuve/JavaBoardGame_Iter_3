@@ -482,8 +482,6 @@ public class BoardPanel extends JPanel
         beginPlacement();
         board.getStackAt(0, 0).pushIntoStack(new ViewHexVillage());
         board.getStackAt(1, 0).pushIntoStack(new ViewHexRice());
-        auxHexagons.get(0).setViewRow(1);
-        auxHexagons.get(0).setViewCol(0);
         this.repaint();
     }
 
@@ -558,9 +556,6 @@ public class BoardPanel extends JPanel
             int newCol;
             ViewHex v;
 
-            System.out.println("MVL: (" + mainViewLocation.getViewRow() + ", " + mainViewLocation.getViewCol() +")");
-            System.out.println("VL: (" + auxHexagons.get(0).getViewRow() + ", " + auxHexagons.get(0).getViewCol() +")");
-
             //newRow = mainViewLocation.getViewRow() - 1;
             int minAuxRow = 14;
             if (auxHexagons.size()>0)
@@ -576,21 +571,17 @@ public class BoardPanel extends JPanel
             else
             {
                 //Reassign main space
-                System.out.println("MVL: (" + mainViewLocation.getViewRow() + ", " + mainViewLocation.getViewCol() +")");
                 v = board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).peekIntoStack();
                 board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).popFromStack();
                 mainViewLocation.setViewRow(newRow);
-                System.out.println("MVL: (" + mainViewLocation.getViewRow() + ", " + mainViewLocation.getViewCol() +")");
                 board.getStackAt(mainViewLocation.getViewRow(), mainViewLocation.getViewCol()).pushIntoStack(v);
 
                 //Reassign aux spaces
                 for (ViewLocation viewloc : auxHexagons)
                 {
-                    System.out.println("VL: (" + viewloc.getViewRow() + ", " + viewloc.getViewCol() +")");
                     ViewHex vh = board.getStackAt(viewloc.getViewRow(), viewloc.getViewCol()).peekIntoStack();
                     board.getStackAt(viewloc.getViewRow(), viewloc.getViewCol()).popFromStack();
                     viewloc.setViewRow(viewloc.getViewRow()-1);
-                    System.out.println("VL: (" + viewloc.getViewRow() + ", " + viewloc.getViewCol() +")");
                     board.getStackAt(viewloc.getViewRow(), viewloc.getViewCol()).pushIntoStack(vh);
                 }
 
