@@ -395,19 +395,23 @@ public class BoardController
         {
             //tile component on bottom
             TileComponent tcOnBottom = s.getTopTileComponent();
+            //System.out.println("tcOnBottom Tile ID: " + tcOnBottom.getTile().getId());
             //the current level of the stack
             int curLevel = s.getLevel();
+            //System.out.println("current Level of the space " + curLevel);
             //the UUID of the tile component
             UUID tileOnBottomID = tcOnBottom.getTile().getId();
+            //System.out.println("UUID of tileOnBottom: " + tileOnBottomID);
 
             //all the neighbors of Space s
             ArrayList<Space> spaceNeighbors = this.getHexBoard().getNeighborsOfSpace(s);
+            //System.out.println("Space neighbors size: " + spaceNeighbors.size());
             //for each neighbor, check the tileComponent AT THE SAME LEVEL as tcOnBottom
             //if there are multiple tileComponents, we must make a temporary stack to check
 
             ArrayList<TileComponent> tcAtLevel = new ArrayList<TileComponent>();
 
-            System.out.println("Space neighbors size: " + spaceNeighbors.size());
+            //System.out.println("Space neighbors size: " + spaceNeighbors.size());
             for (int i = 0; i < spaceNeighbors.size(); i++)
             {
                 //don't worry about those tile components surrounding you that are at a lower level
@@ -457,6 +461,8 @@ public class BoardController
                     }
                 }
             }
+            tcAtLevel.clear();
+            spaceNeighbors.clear();
         }
         return canPlace;
     }
@@ -555,58 +561,83 @@ public class BoardController
 
     public boolean willSurroundIrrigationTile(Space s)
     {
+        System.out.println("Inside will surround irrigation tile");
         boolean willSurround = false;
+        System.out.println("willSurround: " + willSurround);
 
         //find irrigation space in question
         ArrayList<Space> neighbors = this.getHexBoard().getNeighborsOfSpace(s);
+        System.out.println("neighbors.size(): " + neighbors.size());
         Space irrigationSpace = new Space();
+        System.out.println("Going to for loop");
         for (int i = 0; i < neighbors.size(); i++)
         {
-            if (neighbors.get(i).getTopTileComponent().getLandType().equals("Irrigation"))
+            //System.out.println("i: " + i);
+            if (neighbors.get(i).getTopTileComponent().getLandType().equals("irrigation"))
             {
                 irrigationSpace = neighbors.get(i);
+                System.out.println("Irrigation space ID: " + irrigationSpace.getId());
             }
         }
 
         //no irrigation space was found
+        System.out.println();
         if (irrigationSpace.getId() == -1)
         {
+            System.out.println("Irrigation space ID: " + irrigationSpace.getId());
             willSurround = false;
+            System.out.println("willSurround: " + willSurround);
             return willSurround;
         }
 
         //find all of the neighbors of the irrigation space
         ArrayList<Space> neighborsOfIrrigation = this.getHexBoard().getNeighborsOfSpace(irrigationSpace);
+        System.out.println("neighborsOfIrrigation.size(): " + neighborsOfIrrigation.size());
         //number of village tiles surrounding it, and a Space that doesn't not have a village
-        int numVillageTiles = 0; Space noVillage = new Space();
+        int numVillageTiles = 0; Space noVillage = s;
+        System.out.println("numOfVillageTiles: " + numVillageTiles);
+        System.out.println("noVillage ID: " + noVillage.getId());
 
+        System.out.println("Going to second for loop");
         //check all of the neighbors
         for (int i = 0; i < neighborsOfIrrigation.size(); i++)
         {
+            //System.out.println("otherI: " + i);
             //if a village is found
-            if (neighborsOfIrrigation.get(i).getTopTileComponent().getLandType().equals("Village"))
+            if (neighborsOfIrrigation.get(i).getTopTileComponent().getLandType().equals("village"))
             {
                 //increment the number of village tiles
                 numVillageTiles++;
+                System.out.println("numVillageTiles: " + numVillageTiles);
             }
             else
             {
                 //this is the space which may eventually surround the irrigation space
                 noVillage = neighborsOfIrrigation.get(i);
+                System.out.println("noVillage may surround, ID: " + noVillage.getId());
             }
         }
 
         //any less than 5, need two village tiles to surround irrigation space
         //if there are six, the irrigation tile has already been surrounded
-        if (numVillageTiles == 5)
+        System.out.println("Decision Point");
+        System.out.println("NumVillageTiles: " + numVillageTiles);
+        if (numVillageTiles == 6)
         {
+            System.out.println("Inside first if statement");
+            System.out.println("noVillage ID: " + noVillage.getId());
+            System.out.println("s ID: " + s.getId());
             if (noVillage.equals(s))
             {
                 //this will surround the irrigation
                 willSurround = true;
+                System.out.println("willSurround 1: " + willSurround);
                 return willSurround;
             }
+            System.out.println("willSurround 2: " + willSurround);
         }
+
+        System.out.println("willSurround FINAL: " + willSurround);
 
         return willSurround;
     }
