@@ -1,6 +1,5 @@
 package controller.actions;
 
-import controller.Command;
 import controller.Facade;
 import controller.commands.MovableCommands;
 
@@ -22,7 +21,7 @@ public class PlaceIrrigationTileAction extends AbstractAction{
     {
         if(facade.getTempCommand().getTempCommand()==null){
             facade.getViewController().placeIrrigationTile();
-            MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade.getBoardController());
+            MovableCommands c = facade.getCommandController().placeIrrigationTileCommand(facade);
             facade.getTempCommand().setTempCommand(c);
         }
     }

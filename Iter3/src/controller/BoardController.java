@@ -52,6 +52,12 @@ public class BoardController
         }
     }
 
+    public void updateEdges(Space s)
+    {
+        ArrayList<Edge> edgesOfNeighbors = this.getHexBoard().getEdgesForSpace(s);
+        this.addWeightsToEdges(edgesOfNeighbors);
+    }
+
     public void establishDistances(Space startSpace)
     {
         ArrayList<Space> pathOfSpaces;

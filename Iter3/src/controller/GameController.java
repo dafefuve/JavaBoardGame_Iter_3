@@ -22,7 +22,7 @@ public class GameController {
         game.setItem(item,count);
     }
 
-    public Integer getItem(String item){
+    public Integer getItemCount(String item){
         return game.getItem(item);
     }
 
