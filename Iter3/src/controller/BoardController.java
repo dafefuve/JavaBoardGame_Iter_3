@@ -538,6 +538,64 @@ public class BoardController
         return canPlace;
     }
 
+    public boolean willSurroundIrrigationTile(Space s)
+    {
+        boolean willSurround = false;
+
+        //find irrigation space in question
+        ArrayList<Space> neighbors = this.getHexBoard().getNeighborsOfSpace(s);
+        Space irrigationSpace = new Space();
+        for (int i = 0; i < neighbors.size(); i++)
+        {
+            if (neighbors.get(i).getTopTileComponent().getLandType().equals("Irrigation"))
+            {
+                irrigationSpace = neighbors.get(i);
+            }
+        }
+
+        //no irrigation space was found
+        if (irrigationSpace.getId() == -1)
+        {
+            willSurround = false;
+            return willSurround;
+        }
+
+        //find all of the neighbors of the irrigation space
+        ArrayList<Space> neighborsOfIrrigation = this.getHexBoard().getNeighborsOfSpace(irrigationSpace);
+        //number of village tiles surrounding it, and a Space that doesn't not have a village
+        int numVillageTiles = 0; Space noVillage = new Space();
+
+        //check all of the neighbors
+        for (int i = 0; i < neighborsOfIrrigation.size(); i++)
+        {
+            //if a village is found
+            if (neighborsOfIrrigation.get(i).getTopTileComponent().getLandType().equals("Village"))
+            {
+                //increment the number of village tiles
+                numVillageTiles++;
+            }
+            else
+            {
+                //this is the space which may eventually surround the irrigation space
+                noVillage = neighborsOfIrrigation.get(i);
+            }
+        }
+
+        //any less than 5, need two village tiles to surround irrigation space
+        //if there are six, the irrigation tile has already been surrounded
+        if (numVillageTiles == 5)
+        {
+            if (noVillage.equals(s))
+            {
+                //this will surround the irrigation
+                willSurround = true;
+                return willSurround;
+            }
+        }
+
+        return willSurround;
+    }
+
     public Space getSpaceFromID(int spaceID)
     {
         return this.getHexBoard().getSpaces().get(spaceID);
