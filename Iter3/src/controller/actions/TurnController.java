@@ -22,7 +22,7 @@ public class TurnController {
 
     public void changeTurn(){
         currentPlayer.addFamePoints(turnFamePoints);
-        System.out.println(currentPlayer.getItemCount("actionPoints"));
+        currentPlayer.setItemCount("actionPoints",6);
         List<JavaPlayer> players = facade.getGameController().getPlayers();
         players.add(players.remove(0));
         facade.getGameController().setPlayers(players);
