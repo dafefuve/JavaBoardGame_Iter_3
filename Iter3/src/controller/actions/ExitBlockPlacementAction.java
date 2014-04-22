@@ -24,7 +24,9 @@ public class ExitBlockPlacementAction extends AbstractAction {
         if(facade.getTempCommand().getTempCommand()!=null){
             facade.getTempCommand().setTempCommand(null);
             facade.getViewController().exitPlacement();
-            System.out.println("this program just doesnt like u");
+
+        }else{
+            //change state to pause menu
         }
 
     }

@@ -45,7 +45,6 @@ public class CommandController {
 
     public PlaceSingleRiceTileCommand placeRiceTileCommand(Facade facade){
         PlaceSingleRiceTileCommand command = new PlaceSingleRiceTileCommand(facade);
-
         return command;
     }
 
