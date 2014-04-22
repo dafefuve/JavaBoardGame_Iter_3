@@ -37,11 +37,8 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         int currentActionPoints = playerController.getItemCount("actionPoints");
         if(currentActionPoints > 0) {
 
-<<<<<<< HEAD
-            if (remainingVillageCount > 0 && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
-=======
+
             if (remainingVillageCount > 0 && boardController.checkDifferentOneSpaceBeneath(space) && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
->>>>>>> FETCH_HEAD
 
                 playerController.setItemCount("villageTile", remainingVillageCount - 1);
                 space.addTileComponent(villageToBePlaced);
