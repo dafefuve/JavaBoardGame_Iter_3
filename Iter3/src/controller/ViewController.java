@@ -109,4 +109,9 @@ public class ViewController {
         mainView.exitPlacement();
     }
 
+    public void placeRiceTile()
+    {
+        mainView.placeRiceTile();
+    }
+
 }

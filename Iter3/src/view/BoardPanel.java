@@ -139,7 +139,7 @@ public class BoardPanel extends JPanel
        }
    }
 
- 
+
     public void highlightSpace(int key)
     {
         int newRow;
