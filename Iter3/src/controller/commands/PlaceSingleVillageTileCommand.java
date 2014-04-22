@@ -37,14 +37,15 @@ public class PlaceSingleVillageTileCommand extends MovableCommands {
         int currentActionPoints = playerController.getItemCount("actionPoints");
         if(currentActionPoints > 0) {
 
-            if (remainingVillageCount > 0 && !boardController.checkDifferentOneSpaceBeneath(space) && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
+            if (remainingVillageCount > 0 && boardController.checkDifferentOneSpaceBeneath(space) && !topTileComponentOfSpace.getLandType().equals("highland") && !topTileComponentOfSpace.getLandType().equals("lowland") && !topTileComponentOfSpace.getLandType().equals("irrigation") && space.getDeveloper() == null && space.getPalace() == null) {
 
                 playerController.setItemCount("villageTile", remainingVillageCount - 1);
                 space.addTileComponent(villageToBePlaced);
                 String name = facade.getTurnController().getCurrentPlayer().getName();
                 facade.getViewController().setSingleVillageBlocks(remainingVillageCount - 1, name);
+                playerController.setItemCount("actionPoints",currentActionPoints-1);
 //                if(boardController.willSurroundIrrigationTile(space))
-//                    playerController.addFamePoints(space);
+//                    facade.getTurnController().addFamePoints(3);
 
                 return true;
             }
